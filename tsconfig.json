@@ -2,6 +2,7 @@
   "compilerOptions": {
       "outDir": "./lib",
       "module": "commonjs",
+      "lib": ["es6", "dom"],
       // "allowJs": true,
       "sourceMap": true,
       "declaration": true,
@@ -11,7 +12,9 @@
       "noImplicitThis": true,
       // "noImplicitAny": true,
       "strictNullChecks": true,
-      "target": "es5"
+      "target": "es5",
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true
   },
-  "include": ["./ts-src/**/*"]
+  "include": ["./ts-src/**/*", "./types/**/*"]
 }
