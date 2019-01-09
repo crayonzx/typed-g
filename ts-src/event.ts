@@ -1,4 +1,4 @@
-const Util = require('./util/index');
+import Util = require('./util/index');
 
 const Event = function(type, event, bubbles, cancelable) {
   this.type = type;  // 事件类型

@@ -1,4 +1,4 @@
-const Util = require('../../util/index');
+import Util = require('../../util/index');
 
 // 是否未改变
 function isUnchanged(m) {

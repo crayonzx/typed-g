@@ -1,7 +1,7 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
-const ArcMath = require('./math/arc');
-const Arrow = require('./util/arrow');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
+import ArcMath = require('./math/arc');
+import Arrow = require('./util/arrow');
 
 function _getArcX(x, radius, angle) {
   return x + (radius * Math.cos(angle));

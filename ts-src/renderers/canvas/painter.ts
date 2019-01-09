@@ -1,5 +1,5 @@
-const Util = require('../../util');
-const renderUtil = require('./util');
+import Util = require('../../util');
+import renderUtil = require('./util');
 
 const SHAPE_ATTRS = [
   'fillStyle',

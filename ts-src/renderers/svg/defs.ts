@@ -1,12 +1,12 @@
 /**
  * Created by Elaine on 2018/5/9.
  */
-const Util = require('../../util/index');
-const Gradient = require('./defs/gradient');
-const Shadow = require('./defs/shadow');
-const Arrow = require('./defs/arrow');
-const Clip = require('./defs/clip');
-const Pattern = require('./defs/pattern');
+import Util = require('../../util/index');
+import Gradient = require('./defs/gradient');
+import Shadow = require('./defs/shadow');
+import Arrow = require('./defs/arrow');
+import Clip = require('./defs/clip');
+import Pattern = require('./defs/pattern');
 
 class Defs {
   constructor(canvas) {

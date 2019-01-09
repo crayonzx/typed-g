@@ -1,4 +1,4 @@
-const Util = require('../util/index');
+import Util = require('../util/index');
 
 const regexTags = /[MLHVQTCSAZ]([^MLHVQTCSAZ]*)/ig;
 const regexDot = /[^\s\,]+/ig;

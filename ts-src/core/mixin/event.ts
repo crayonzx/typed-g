@@ -1,5 +1,5 @@
-const Util = require('../../util/index');
-const Event = require('../../event');
+import Util = require('../../util/index');
+import Event = require('../../event');
 const EVENTS = [
   'click',
   'mousedown',

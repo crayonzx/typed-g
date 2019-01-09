@@ -1,8 +1,8 @@
-const Util = require('../../util/index');
-const Inside = require('./inside');
-const Cubic = require('../math/cubic');
-const Quadratic = require('../math/quadratic');
-const Ellipse = require('../math/ellipse');
+import Util = require('../../util/index');
+import Inside = require('./inside');
+import Cubic = require('../math/cubic');
+import Quadratic = require('../math/quadratic');
+import Ellipse = require('../math/ellipse');
 const vec3 = Util.vec3;
 const mat3 = Util.mat3;
 

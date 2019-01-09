@@ -1,7 +1,7 @@
-const Util = require('../util/index');
-const isPointInPath = require('./mixin/isPointInPath');
-const Element = require('./element');
-const Inside = require('../shapes/util/inside');
+import Util = require('../util/index');
+import isPointInPath = require('./mixin/isPointInPath');
+import Element = require('./element');
+import Inside = require('../shapes/util/inside');
 
 const Shape = function(cfg) {
   Shape.superclass.constructor.call(this, cfg);

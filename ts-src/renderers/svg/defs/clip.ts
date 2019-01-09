@@ -1,7 +1,7 @@
 /**
  * Created by Elaine on 2018/5/14.
  */
-const Util = require('../../../util/index');
+import Util = require('../../../util/index');
 
 class Clip {
   constructor(cfg) {

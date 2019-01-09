@@ -1,8 +1,8 @@
-const Util = require('./util/index');
-const Event = require('./core/mixin/event');
-const Group = require('./core/group');
-const Timeline = require('./core/mixin/timeline');
-const renderers = require('./renderers/index');
+import Util = require('./util/index');
+import Event = require('./core/mixin/event');
+import Group = require('./core/group');
+import Timeline = require('./core/mixin/timeline');
+import renderers = require('./renderers/index');
 
 const Canvas = function(cfg) {
   Canvas.superclass.constructor.call(this, cfg);

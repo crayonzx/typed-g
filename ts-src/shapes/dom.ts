@@ -1,5 +1,5 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
 
 const Dom = function(cfg) {
   Dom.superclass.constructor.call(this, cfg);

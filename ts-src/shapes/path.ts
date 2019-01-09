@@ -1,10 +1,10 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
-const PathSegment = require('./util/path-segment');
-const Format = require('../util/format');
-const Arrow = require('./util/arrow');
-const PathUtil = require('../util/path');
-const CubicMath = require('./math/cubic');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
+import PathSegment = require('./util/path-segment');
+import Format = require('../util/format');
+import Arrow = require('./util/arrow');
+import PathUtil = require('../util/path');
+import CubicMath = require('./math/cubic');
 
 const Path = function(cfg) {
   Path.superclass.constructor.call(this, cfg);

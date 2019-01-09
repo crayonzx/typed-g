@@ -1,7 +1,7 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
-const Arrow = require('./util/arrow');
-const LineMath = require('./math/line');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
+import Arrow = require('./util/arrow');
+import LineMath = require('./math/line');
 
 const Line = function(cfg) {
   Line.superclass.constructor.call(this, cfg);

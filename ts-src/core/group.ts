@@ -1,6 +1,6 @@
-const Util = require('../util/index');
-const Element = require('./element');
-const Shape = require('../shapes/index');
+import Util = require('../util/index');
+import Element = require('./element');
+import Shape = require('../shapes/index');
 const SHAPE_MAP = {}; // 缓存图形类型
 const INDEX = '_INDEX';
 

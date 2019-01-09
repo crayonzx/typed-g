@@ -1,4 +1,4 @@
-const Shape = require('../core/shape');
+import Shape = require('../core/shape');
 Shape.Arc = require('./arc');
 Shape.Circle = require('./circle');
 Shape.Dom = require('./dom');

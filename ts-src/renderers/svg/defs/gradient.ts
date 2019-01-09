@@ -1,7 +1,7 @@
 /**
  * Created by Elaine on 2018/5/9.
  */
-const Util = require('../../../util/index');
+import Util = require('../../../util/index');
 
 const regexLG = /^l\s*\(\s*([\d.]+)\s*\)\s*(.*)/i;
 const regexRG = /^r\s*\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)\s*(.*)/i;

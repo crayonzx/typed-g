@@ -1,7 +1,7 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
-const Format = require('../util/format');
-const PathSegment = require('./util/path-segment');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
+import Format = require('../util/format');
+import PathSegment = require('./util/path-segment');
 
 const Marker = function(cfg) {
   Marker.superclass.constructor.call(this, cfg);

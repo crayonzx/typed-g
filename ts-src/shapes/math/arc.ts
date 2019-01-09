@@ -1,4 +1,4 @@
-const Util = require('../../util/index');
+import Util = require('../../util/index');
 
 function circlePoint(cx, cy, r, angle) {
   return {

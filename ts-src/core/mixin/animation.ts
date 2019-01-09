@@ -1,4 +1,4 @@
-const Util = require('../../util/index');
+import Util = require('../../util/index');
 
 const ReservedProps = { delay: 'delay', rotate: 'rotate' };
 const colorRalaredProps = { fill: 'fill', stroke: 'stroke', fillStyle: 'fillStyle', strokeStyle: 'strokeStyle' };

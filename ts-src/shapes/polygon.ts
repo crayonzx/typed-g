@@ -1,5 +1,5 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
 
 const Polygon = function(cfg) {
   Polygon.superclass.constructor.call(this, cfg);

@@ -1,4 +1,4 @@
-const CommonUtil = require('./common');
+import CommonUtil = require('./common');
 const Util = {};
 
 CommonUtil.merge(Util, CommonUtil, {

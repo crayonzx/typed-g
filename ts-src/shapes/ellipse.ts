@@ -1,5 +1,5 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
 
 const Ellipse = function(cfg) {
   Ellipse.superclass.constructor.call(this, cfg);

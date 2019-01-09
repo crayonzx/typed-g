@@ -1,7 +1,7 @@
 
-const Util = require('../util/index');
-const Event = require('../event');
-const EventEmitter = require('./event-emitter');
+import Util = require('../util/index');
+import Event = require('../event');
+import EventEmitter = require('./event-emitter');
 
 const PROPOGATE_EVENTS = [
   'click',

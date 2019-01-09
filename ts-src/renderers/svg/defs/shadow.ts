@@ -1,7 +1,7 @@
 /**
  * Created by Elaine on 2018/5/10.
  */
-const Util = require('../../../util/index');
+import Util = require('../../../util/index');
 
 const ATTR_MAP = {
   shadowColor: 'color',

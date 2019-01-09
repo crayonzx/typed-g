@@ -1,7 +1,8 @@
-const Util = require('../../util');
-const { parseRadius } = require('../../util/format');
-const Marker = require('../../shapes/marker');
-const Defs = require('./defs');
+import Util = require('../../util');
+import Format = require('../../util/format');
+import Marker = require('../../shapes/marker');
+import Defs = require('./defs');
+const { parseRadius } = Format
 
 const SHAPE_TO_TAGS = {
   rect: 'path',

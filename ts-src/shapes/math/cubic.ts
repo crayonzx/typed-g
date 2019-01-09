@@ -1,4 +1,4 @@
-const Util = require('../../util/index');
+import Util = require('../../util/index');
 const vec2 = Util.vec2;
 
 function cubicAt(p0, p1, p2, p3, t) {

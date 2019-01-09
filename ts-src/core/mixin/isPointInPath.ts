@@ -1,5 +1,5 @@
-const Util = require('../../util/index');
-const Inside = require('../../shapes/util/inside');
+import Util = require('../../util/index');
+import Inside = require('../../shapes/util/inside');
 
 const mathUtl = {
   arc: require('../../shapes/math/arc') as typeof import('../../shapes/math/arc'),

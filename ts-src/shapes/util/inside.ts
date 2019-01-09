@@ -1,7 +1,7 @@
-const Line = require('../math/line');
-const Quadratic = require('../math/quadratic');
-const Cubic = require('../math/cubic');
-const Arc = require('../math/arc');
+import Line = require('../math/line');
+import Quadratic = require('../math/quadratic');
+import Cubic = require('../math/cubic');
+import Arc = require('../math/arc');
 
 export = {
   line(x1, y1, x2, y2, lineWidth, x, y) {

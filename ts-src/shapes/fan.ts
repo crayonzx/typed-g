@@ -1,6 +1,6 @@
-const Util = require('../util/index');
-const Shape = require('../core/shape');
-const ArcMath = require('./math/arc');
+import Util = require('../util/index');
+import Shape = require('../core/shape');
+import ArcMath = require('./math/arc');
 
 const Fan = function(cfg) {
   Fan.superclass.constructor.call(this, cfg);

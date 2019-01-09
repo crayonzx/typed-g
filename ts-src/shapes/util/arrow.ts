@@ -1,5 +1,5 @@
-const Format = require('../../util/format');
-const PathSegment = require('../util/path-segment');
+import Format = require('../../util/format');
+import PathSegment = require('../util/path-segment');
 
 const PI = Math.PI;
 const sin = Math.sin;

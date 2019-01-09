@@ -1,4 +1,4 @@
-const Util = require('../util/common');
+import Util = require('../util/common');
 
 const slice = Array.prototype.slice;
 

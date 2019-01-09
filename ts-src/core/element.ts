@@ -1,8 +1,8 @@
-const Util = require('../util/index');
-const Attribute = require('./mixin/attribute');
-const Transform = require('./mixin/transform');
-const Animate = require('./mixin/animation');
-const EventEmitter = require('./advanced-event-emitter');
+import Util = require('../util/index');
+import Attribute = require('./mixin/attribute');
+import Transform = require('./mixin/transform');
+import Animate = require('./mixin/animation');
+import EventEmitter = require('./advanced-event-emitter');
 
 const Element = function(cfg) {
   this._cfg = {

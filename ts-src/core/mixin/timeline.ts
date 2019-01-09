@@ -1,8 +1,9 @@
-const Util = require('../../util/index');
-const PathUtil = require('../../util/path');
-const d3Timer = require('d3-timer');
-const d3Ease = require('d3-ease');
-const { interpolate, interpolateArray } = require('d3-interpolate'); // 目前整体动画只需要数值和数组的差值计算
+import Util = require('../../util/index');
+import PathUtil = require('../../util/path');
+import d3Timer = require('d3-timer');
+import d3Ease = require('d3-ease');
+import d3Interpolate = require('d3-interpolate'); // 目前整体动画只需要数值和数组的差值计算
+const { interpolate, interpolateArray } = d3Interpolate;
 
 const Timeline = function(canvas) {
   // 待执行动画的队列
