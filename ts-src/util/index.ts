@@ -1,7 +1,7 @@
 import CommonUtil = require('./common');
 const Util = {};
 
-CommonUtil.merge(Util, CommonUtil, {
+export = CommonUtil.merge(Util, CommonUtil, {
   mixin(c, mixins) {
     const Param = c.CFG ? 'CFG' : 'ATTRS';
     if (c && mixins) {
@@ -20,4 +20,4 @@ CommonUtil.merge(Util, CommonUtil, {
   }
 });
 
-export = Util;
+// export = Util;
