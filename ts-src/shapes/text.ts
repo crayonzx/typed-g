@@ -240,4 +240,4 @@ Util.augment(CText, {
   }
 });
 
-module.exports = CText;
+export = CText;

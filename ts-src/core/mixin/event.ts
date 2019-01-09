@@ -17,7 +17,7 @@ let preShape = null;
 let mousedown = null;
 let dragging = null;
 
-module.exports = {
+export = {
   registerEvent() {
     const self = this;
     const el = this.get('el');

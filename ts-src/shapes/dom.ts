@@ -30,4 +30,4 @@ Util.augment(Dom, {
   }
 });
 
-module.exports = Dom;
+export = Dom;

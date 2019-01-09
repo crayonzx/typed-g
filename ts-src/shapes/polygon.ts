@@ -81,4 +81,4 @@ Util.augment(Polygon, {
   }
 });
 
-module.exports = Polygon;
+export = Polygon;

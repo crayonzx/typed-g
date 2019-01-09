@@ -153,4 +153,4 @@ Util.augment(CImage, {
   }
 });
 
-module.exports = CImage;
+export = CImage;

@@ -275,4 +275,4 @@ Util.augment(Path, {
   }
 });
 
-module.exports = Path;
+export = Path;

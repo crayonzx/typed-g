@@ -21,7 +21,7 @@ function multiple(m1, m2) {
   }
 }
 
-module.exports = {
+export = {
   initTransform() {},
   resetMatrix() {
     this.attr('matrix', [ 1, 0, 0, 0, 1, 0, 0, 0, 1 ]);

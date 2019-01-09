@@ -1,6 +1,6 @@
 const Util = require('../../util/index');
 
-module.exports = {
+export = {
   canFill: false,
   canStroke: false,
   initAttrs(attrs) {

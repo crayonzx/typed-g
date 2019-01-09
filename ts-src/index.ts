@@ -1,4 +1,4 @@
-module.exports = {
+export = {
   Canvas: require('./canvas'),
   Group: require('./core/group'),
   Shape: require('./core/shape'),

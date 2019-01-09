@@ -89,7 +89,7 @@ function quadraticExtrema(p0, p1, p2) {
   return [];
 }
 
-module.exports = {
+export = {
   at: quadraticAt,
   projectPoint(x1, y1, x2, y2, x3, y3, x, y) {
     const rst = {};

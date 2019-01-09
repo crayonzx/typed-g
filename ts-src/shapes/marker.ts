@@ -130,4 +130,4 @@ Util.augment(Marker, {
   }
 });
 
-module.exports = Marker;
+export = Marker;

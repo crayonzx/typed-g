@@ -169,4 +169,4 @@ Util.augment(Timeline, {
   }
 });
 
-module.exports = Timeline;
+export = Timeline;

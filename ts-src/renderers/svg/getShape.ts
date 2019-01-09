@@ -10,7 +10,7 @@ const TAG_MAP = {
   image: 'image'
 };
 
-module.exports = function getShape(x, y, e) {
+export = function getShape(x, y, e) {
   let target = e.target || e.srcElement;
   if (!TAG_MAP[target.tagName]) {
     let parent = target.parentNode;

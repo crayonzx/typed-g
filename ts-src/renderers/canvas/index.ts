@@ -1,3 +1,3 @@
-module.exports = {
+export = {
   painter: require('./painter')
 };

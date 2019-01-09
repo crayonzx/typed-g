@@ -3,7 +3,7 @@ const Quadratic = require('../math/quadratic');
 const Cubic = require('../math/cubic');
 const Arc = require('../math/arc');
 
-module.exports = {
+export = {
   line(x1, y1, x2, y2, lineWidth, x, y) {
     const box = Line.box(x1, y1, x2, y2, lineWidth);
 

@@ -58,7 +58,7 @@ function checkExistedAttrs(animators, animator) {
   return animators;
 }
 
-module.exports = {
+export = {
   /**
    * 执行动画
    * @param  {Object}   toProps  动画最终状态

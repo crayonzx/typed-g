@@ -1,4 +1,4 @@
-module.exports = {
+export = {
   canvas: require('./canvas'),
   svg: require('./svg')
 };

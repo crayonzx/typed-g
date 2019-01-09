@@ -87,4 +87,4 @@ class Defs {
   }
 }
 
-module.exports = Defs;
+export = Defs;

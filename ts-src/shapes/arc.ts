@@ -113,4 +113,4 @@ Util.augment(Arc, {
   }
 });
 
-module.exports = Arc;
+export = Arc;

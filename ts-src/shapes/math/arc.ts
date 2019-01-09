@@ -130,7 +130,7 @@ function arcBox(cx, cy, r, startAngle, endAngle, clockwise) {
   };
 }
 
-module.exports = {
+export = {
   nearAngle,
   projectPoint(cx, cy, r, startAngle, endAngle, clockwise, x, y) {
     const rst = {};

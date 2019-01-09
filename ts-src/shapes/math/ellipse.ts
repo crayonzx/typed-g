@@ -1,4 +1,4 @@
-module.exports = {
+export = {
   xAt(psi, rx, ry, cx, t) {
     return rx * Math.cos(psi) * Math.cos(t) - ry * Math.sin(psi) * Math.sin(t) + cx;
   },

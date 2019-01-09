@@ -199,4 +199,4 @@ Util.augment(Canvas, Event, {
   }
 });
 
-module.exports = Canvas;
+export = Canvas;

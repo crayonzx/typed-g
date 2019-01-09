@@ -1,6 +1,6 @@
 const vec2 = require('../../util/index').vec2;
 
-module.exports = {
+export = {
   at(p1, p2, t) {
     return (p2 - p1) * t + p1;
   },

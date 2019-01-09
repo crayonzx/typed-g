@@ -44,5 +44,5 @@ class Pattern {
   }
 }
 
-module.exports = Pattern;
+export = Pattern;
 

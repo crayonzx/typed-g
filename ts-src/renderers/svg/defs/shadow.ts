@@ -66,5 +66,5 @@ class Shadow {
   }
 }
 
-module.exports = Shadow;
+export = Shadow;
 

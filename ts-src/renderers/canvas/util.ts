@@ -146,7 +146,7 @@ function parsePattern(color, self, context) {
   return pattern;
 }
 
-module.exports = {
+export = {
   parsePath(path) {
     path = path || [];
     if (Util.isArray(path)) {

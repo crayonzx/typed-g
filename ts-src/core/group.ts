@@ -456,4 +456,4 @@ Util.augment(Group, {
   }
 });
 
-module.exports = Group;
+export = Group;

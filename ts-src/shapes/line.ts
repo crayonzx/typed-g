@@ -63,4 +63,4 @@ Util.augment(Line, {
   }
 });
 
-module.exports = Line;
+export = Line;

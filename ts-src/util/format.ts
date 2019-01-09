@@ -3,7 +3,7 @@ const Util = require('../util/index');
 const regexTags = /[MLHVQTCSAZ]([^MLHVQTCSAZ]*)/ig;
 const regexDot = /[^\s\,]+/ig;
 
-module.exports = {
+export = {
   parseRadius(radius) {
     let r1 = 0,
       r2 = 0,

@@ -92,4 +92,4 @@ Util.augment(EventEmitter, {
   }
 });
 
-module.exports = EventEmitter;
+export = EventEmitter;

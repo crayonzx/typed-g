@@ -118,7 +118,7 @@ function _addCustomizedArrow(ctx, attrs, x1, y1, x2, y2, isStart) {
   ctx.restore();
 }
 
-module.exports = {
+export = {
   addStartArrow(ctx, attrs, x1, y1, x2, y2) {
     if (typeof attrs.startArrow === 'object') {
       _addCustomizedArrow(ctx, attrs, x1, y1, x2, y2, true);

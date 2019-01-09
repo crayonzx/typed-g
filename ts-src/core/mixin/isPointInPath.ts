@@ -356,7 +356,7 @@ const shapes = {
   text
 };
 
-module.exports = {
+export = {
   isPointInPath(x, y) {
     const shape = shapes[this.type];
     if (shape) {

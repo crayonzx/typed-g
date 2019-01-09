@@ -12,5 +12,5 @@ Shape.Polygon = require('./polygon');
 Shape.Polyline = require('./polyline');
 Shape.Rect = require('./rect');
 Shape.Text = require('./text');
-module.exports = Shape;
+export = Shape;
 

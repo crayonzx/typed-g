@@ -61,5 +61,5 @@ class Arrow {
   }
 }
 
-module.exports = Arrow;
+export = Arrow;
 

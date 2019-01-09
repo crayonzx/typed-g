@@ -32,4 +32,4 @@ Util.augment(Event, {
   }
 });
 
-module.exports = Event;
+export = Event;

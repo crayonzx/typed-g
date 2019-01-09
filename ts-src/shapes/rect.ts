@@ -74,4 +74,4 @@ Util.augment(Rect, {
   }
 });
 
-module.exports = Rect;
+export = Rect;

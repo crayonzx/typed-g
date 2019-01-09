@@ -116,5 +116,5 @@ class Gradient {
   }
 }
 
-module.exports = Gradient;
+export = Gradient;
 

@@ -65,4 +65,4 @@ Util.augment(Ellipse, {
   }
 });
 
-module.exports = Ellipse;
+export = Ellipse;

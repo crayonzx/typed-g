@@ -92,4 +92,4 @@ Util.augment(Fan, {
   }
 });
 
-module.exports = Fan;
+export = Fan;

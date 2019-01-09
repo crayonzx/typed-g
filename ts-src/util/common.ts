@@ -1,4 +1,4 @@
-module.exports = {
+export = {
   isFunction: require('@antv/util/lib/type/is-function'),
   isObject: require('@antv/util/lib/type/is-object'),
   isBoolean: require('@antv/util/lib/type/is-boolean'),

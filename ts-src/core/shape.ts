@@ -156,4 +156,4 @@ Util.augment(Shape, isPointInPath, {
   }
 });
 
-module.exports = Shape;
+export = Shape;

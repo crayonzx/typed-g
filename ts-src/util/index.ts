@@ -20,4 +20,4 @@ CommonUtil.merge(Util, CommonUtil, {
   }
 });
 
-module.exports = Util;
+export = Util;

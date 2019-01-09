@@ -204,4 +204,4 @@ Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
   getBBox() {}
 });
 
-module.exports = Element;
+export = Element;

@@ -1,20 +1,24 @@
 {
   "compilerOptions": {
-      "outDir": "./lib",
-      "module": "commonjs",
-      "lib": ["es6", "dom"],
-      // "allowJs": true,
-      "sourceMap": true,
-      "declaration": true,
-      "experimentalDecorators": true,
-      "forceConsistentCasingInFileNames": true,
-      "noImplicitReturns": true,
-      "noImplicitThis": true,
-      // "noImplicitAny": true,
-      "strictNullChecks": true,
-      "target": "es5",
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true
+    "rootDir": "ts-src",
+    "outDir": "./lib",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    // "allowJs": true,
+    "sourceMap": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    // "noImplicitAny": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "plugins": [{
+      "name": "typescript-tslint-plugin",
+      "configFile": "../tslint.json",
+    }]
   },
-  "include": ["./ts-src/**/*", "./types/**/*"]
 }

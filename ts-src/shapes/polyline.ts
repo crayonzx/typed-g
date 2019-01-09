@@ -172,4 +172,4 @@ Util.augment(Polyline, {
   }
 });
 
-module.exports = Polyline;
+export = Polyline;

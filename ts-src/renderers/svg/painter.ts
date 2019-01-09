@@ -661,4 +661,4 @@ class Painter {
   }
 }
 
-module.exports = Painter;
+export = Painter;

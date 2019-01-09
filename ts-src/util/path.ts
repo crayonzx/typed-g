@@ -1330,7 +1330,7 @@ const formatPath = function(fromPath, toPath) {
   return fromPath;
 };
 
-module.exports = {
+export = {
   parsePathString,
   parsePathArray,
   pathTocurve,

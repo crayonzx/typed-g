@@ -634,4 +634,4 @@ Util.augment(PathSegment, {
   }
 });
 
-module.exports = PathSegment;
+export = PathSegment;

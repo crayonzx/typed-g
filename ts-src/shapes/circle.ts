@@ -48,4 +48,4 @@ Util.augment(Circle, {
   }
 });
 
-module.exports = Circle;
+export = Circle;

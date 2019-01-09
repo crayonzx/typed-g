@@ -39,4 +39,4 @@ Util.augment(AdvancedEE, EventEmitter, {
   }
 });
 
-module.exports = AdvancedEE;
+export = AdvancedEE;
