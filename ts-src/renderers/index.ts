@@ -1,4 +1,4 @@
 export = {
-  canvas: require('./canvas'),
-  svg: require('./svg')
+  canvas: require('./canvas') as typeof import('./canvas'),
+  svg: require('./svg') as typeof import('./svg')
 };

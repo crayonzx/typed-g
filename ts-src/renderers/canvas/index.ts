@@ -1,3 +1,3 @@
 export = {
-  painter: require('./painter')
+  painter: require('./painter') as typeof import('./painter')
 };

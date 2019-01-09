@@ -72,7 +72,7 @@ const ANCHOR_MAP = {
   end: 'end'
 };
 
-class Painter {
+export = class Painter {
   constructor(dom) {
     if (!dom) {
       return null;
@@ -661,4 +661,4 @@ class Painter {
   }
 }
 
-export = Painter;
+// export = Painter;

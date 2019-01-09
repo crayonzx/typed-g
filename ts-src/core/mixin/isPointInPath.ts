@@ -2,9 +2,9 @@ const Util = require('../../util/index');
 const Inside = require('../../shapes/util/inside');
 
 const mathUtl = {
-  arc: require('../../shapes/math/arc'),
-  ellipse: require('../../shapes/math/ellipse'),
-  line: require('../../shapes/math/line')
+  arc: require('../../shapes/math/arc') as typeof import('../../shapes/math/arc'),
+  ellipse: require('../../shapes/math/ellipse') as typeof import('../../shapes/math/ellipse'),
+  line: require('../../shapes/math/line') as typeof import('../../shapes/math/line')
 };
 
 const canvas = Util.createDom('<canvas width="500" height="500"></canvas>');

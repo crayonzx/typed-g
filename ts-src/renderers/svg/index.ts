@@ -1,4 +1,4 @@
 export = {
-  painter: require('./painter'),
-  getShape: require('./getShape')
+  painter: require('./painter') as typeof import('./painter'),
+  getShape: require('./getShape') as typeof import('./getShape')
 };
