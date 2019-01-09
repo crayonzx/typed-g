@@ -39,7 +39,14 @@ declare module '@antv/util/lib/clone' {
   export = clone;
 }
 declare module '@antv/util/lib/deep-mix' {
-  const deepMix: <T, U>(dist: T, src: U, level: number, max: number) => T & U;
+  namespace deepMix {
+    export interface DeepMix {
+      <T, U>(dist: T, src: U): T & U;
+      <T, U1, U2>(dist: T, src1: U1, src2: U2): T & U1 & U2;
+      <T, U1, U2, U3>(dist: T, src1: U1, src2: U2, src3: U3): T & U1 & U2 & U3;
+    }
+  }
+  const deepMix: deepMix.DeepMix;
   export = deepMix;
 }
 declare module '@antv/util/lib/mix' {
