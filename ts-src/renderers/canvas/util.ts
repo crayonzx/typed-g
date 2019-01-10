@@ -172,7 +172,7 @@ export = {
       return path;
     }
   },
-  parseStyle(color, self, context) {
+  parseStyle(color:string, self, context) {
     if (Util.isString(color)) {
       if (color[1] === '(' || color[2] === '(') {
         if (color[0] === 'l') { // regexLG.test(color)

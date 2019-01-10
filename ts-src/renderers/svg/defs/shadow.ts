@@ -19,7 +19,7 @@ const SHADOW_DIMENSION = {
 
 };
 
-class Shadow {
+export = class Shadow {
   constructor(cfg) {
     this.type = 'filter';
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
@@ -55,9 +55,9 @@ class Shadow {
     return this;
   }
   _parseShadow(config, el) {
-    const child = `<feDropShadow 
-      dx="${config.dx || 0}" 
-      dy="${config.dy || 0}" 
+    const child = `<feDropShadow
+      dx="${config.dx || 0}"
+      dy="${config.dy || 0}"
       stdDeviation="${config.blur ? config.blur / 10 : 0}"
       flood-color="${config.color ? config.color : '#000'}"
       flood-opacity="${config.opacity ? config.opacity : 1}"
@@ -66,5 +66,5 @@ class Shadow {
   }
 }
 
-export = Shadow;
+// export = Shadow;
 

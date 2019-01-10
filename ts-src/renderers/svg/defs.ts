@@ -8,7 +8,7 @@ import Arrow = require('./defs/arrow');
 import Clip = require('./defs/clip');
 import Pattern = require('./defs/pattern');
 
-class Defs {
+export = class Defs {
   constructor(canvas) {
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
     const id = Util.uniqueId('defs_');
@@ -46,7 +46,7 @@ class Defs {
     item.canvas = this.canvas;
     item.parent = this;
   }
-  getDefaultArrow(attrs, name) {
+  getDefaultArrow(attrs, name:string) {
     const stroke = attrs.stroke || attrs.strokeStyle;
     if (this.defaultArrow[stroke]) {
       return this.defaultArrow[stroke].id;
@@ -62,7 +62,7 @@ class Defs {
     this.add(gradient);
     return gradient.id;
   }
-  addArrow(attrs, name) {
+  addArrow(attrs, name:string) {
     const arrow = new Arrow(attrs, name);
     this.el.appendChild(arrow.el);
     return arrow.id;
@@ -87,4 +87,4 @@ class Defs {
   }
 }
 
-export = Defs;
+// export = Defs;
