@@ -24,37 +24,37 @@ const CFG = {
    * 画布宽度
    * @type {Number}
    */
-  widthCanvas: null,
+  widthCanvas: null as any as number,
   /**
    * 画布高度
    * @type {Number}
    */
-  heightCanvas: null,
+  heightCanvas: null as any as number,
   /**
    * CSS宽
    * @type {String}
    */
-  widthStyle: null,
+  widthStyle: null as any as string,
   /**
    * CSS高
    * @type {String}
    */
-  heightStyle: null,
+  heightStyle: null as any as string,
   /**
    * 容器DOM
    * @type {Object}
    */
-  containerDOM: null,
+  containerDOM: null as any as object,
   /**
    * 当前Canvas的DOM
    * @type {Object}
    */
-  canvasDOM: null,
+  canvasDOM: null as any as object,
   /**
    * 屏幕像素比
    * @type {Number}
    */
-  pixelRatio: null,
+  pixelRatio: null as any as number,
   /**
    * 渲染器，默认是canvas
    * @type {String}
