@@ -53,9 +53,9 @@ function initClassCfgs(c) {
   Util.merge(c._cfg, c.CFG);
 }
 
-Util.extend(Group, Element);
+const Group1 = Util.extend(Group, Element);
 
-Util.augment(Group, {
+const Group2 = Util.augment(Group1, {
   isGroup: true,
   type: 'group',
   canFill: true,
@@ -67,7 +67,7 @@ Util.augment(Group, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape(type, cfg) {
+  addShape(type:string, cfg) {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
@@ -95,7 +95,7 @@ Util.augment(Group, {
    * @param  {Object} cfg 配置项
    * @return {Object} rst 图组
    */
-  addGroup(param, cfg) {
+  addGroup(param:function|object|undefined, cfg) {
     const canvas = this.get('canvas');
     let rst;
     cfg = Util.merge({}, cfg);
@@ -129,7 +129,7 @@ Util.augment(Group, {
    * @param  {Shape} backShape 背景图形
    * @return {Object} 背景层对象
    */
-  renderBack(padding, attrs) {
+  renderBack(padding:number[], attrs) {
     let backShape = this.get('backShape');
     const innerBox = this.getBBox();
     // const parent = this.get('parent'); // getParent
@@ -215,7 +215,7 @@ Util.augment(Group, {
     const children = this.get('children');
     return children.indexOf(item) > -1;
   },
-  getChildByIndex(index) {
+  getChildByIndex(index:number) {
     const children = this.get('children');
     return children[index];
   },
@@ -294,7 +294,7 @@ Util.augment(Group, {
     box.height = box.maxY - box.minY;
     return box;
   },
-  getCount() {
+  getCount():number {
     return this.get('children').length;
   },
   sort() {
@@ -400,7 +400,7 @@ Util.augment(Group, {
     });
     return rst;
   },
-  getShape(x, y) {
+  getShape(x:number, y:number) {
     const self = this;
     const clip = self._attrs.clip;
     const children = self._cfg.children;
@@ -456,4 +456,4 @@ Util.augment(Group, {
   }
 });
 
-export = Group;
+export = Group2;

@@ -58,7 +58,7 @@ export = {
       }
     }
   },
-  _getEventObj(type, e, point, target) {
+  _getEventObj(type:string, e, point, target) {
     const event = new Event(type, e, true, true);
     event.x = point.x;
     event.y = point.y;
@@ -68,7 +68,7 @@ export = {
     event.target = target;
     return event;
   },
-  _triggerEvent(type, e) {
+  _triggerEvent(type:string, e) {
     const point = this.getPointByClient(e.clientX, e.clientY);
     let shape = this.getShape(point.x, point.y, e);
     const el = this.get('el');
@@ -132,7 +132,7 @@ export = {
       el.style.cursor = shape.attr('cursor') || 'default';
     }
   },
-  _emitEvent(type, evt, point, shape) {
+  _emitEvent(type:string, evt, point, shape) {
     const event = this._getEventObj(type, evt, point, shape);
     const emitShape = this._getEmitter(shape, evt);
     emitShape && emitShape.emit(type, event);

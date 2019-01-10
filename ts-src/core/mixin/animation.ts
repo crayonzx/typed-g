@@ -67,7 +67,7 @@ export = {
    * @param  {Function} callback 动画执行后的回调
    * @param  {Number}   delay    动画延迟时间
    */
-  animate(toProps, duration, easing, callback, delay = 0) {
+  animate(toProps, duration:number, easing:(() => void)|string, callback:(() => void)|number|null, delay = 0) {
     const self = this;
     self.set('animating', true);
     let timeline = self.get('timeline');

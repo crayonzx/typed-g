@@ -59,7 +59,7 @@ export = {
       [ 't', x, y ]
     ]);
   },
-  move(x, y) {
+  move(x:number, y:number) {
     const cx = this.get('x') || 0; // 当前的x
     const cy = this.get('y') || 0; // 当前的y
     this.translate(x - cx, y - cy);

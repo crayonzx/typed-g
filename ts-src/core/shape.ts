@@ -30,7 +30,7 @@ function _cloneArrayAttr(arr) {
   return result;
 }
 
-Util.augment(Shape, isPointInPath, {
+const Shape1 = Util.augment(Shape, isPointInPath, {
   isShape: true,
   drawInner(context) {
     const self = this;
@@ -73,7 +73,7 @@ Util.augment(Shape, isPointInPath, {
    * @param {Number} y y坐标
    * @return {Boolean} 是否在图形中
    */
-  isHit(x, y) {
+  isHit(x:number, y:number):boolean {
     const self = this;
     const v = [ x, y, 1 ];
     self.invert(v); // canvas
@@ -104,7 +104,7 @@ Util.augment(Shape, isPointInPath, {
     return null;
   },
   // 获取拾取时线的宽度，需要考虑附加的线的宽度
-  getHitLineWidth() {
+  getHitLineWidth():number {
     const attrs = this._attrs;
     // if (!attrs.stroke) {
     //   return 0;
@@ -156,4 +156,4 @@ Util.augment(Shape, isPointInPath, {
   }
 });
 
-export = Shape;
+export = Shape1;

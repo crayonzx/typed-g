@@ -357,7 +357,7 @@ const shapes = {
 };
 
 export = {
-  isPointInPath(x, y) {
+  isPointInPath(x:number, y:number) {
     const shape = shapes[this.type];
     if (shape) {
       return shape.call(this, x, y);

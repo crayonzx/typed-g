@@ -3,7 +3,7 @@ import Util = require('../../util/index');
 export = {
   canFill: false,
   canStroke: false,
-  initAttrs(attrs) {
+  initAttrs(this:Element, attrs:any):Element {
     this._attrs = {
       opacity: 1,
       fillOpacity: 1,
@@ -27,7 +27,7 @@ export = {
    * @param  {*} value 属性值
    * @return {*} 属性值
    */
-  attr(name, value) {
+  attr(name:string|object, value) {
     const self = this;
     if (arguments.length === 0) {
       return self._attrs;
@@ -49,7 +49,7 @@ export = {
     }
     return self._attrs[name];
   },
-  _setAttr(name, value) {
+  _setAttr(name:string, value) {
     const self = this;
     const attrs = this._attrs;
     attrs[name] = value;
