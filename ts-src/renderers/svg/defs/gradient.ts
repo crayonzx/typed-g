@@ -94,7 +94,7 @@ function parseRadialGradient(color, self) {
   self.innerHTML = addStop(steps);
 }
 
-class Gradient {
+export = class Gradient {
   constructor(cfg) {
     let el = null;
     const id = Util.uniqueId('gradient_');
@@ -116,5 +116,5 @@ class Gradient {
   }
 }
 
-export = Gradient;
+// export = Gradient;
 
