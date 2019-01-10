@@ -89,6 +89,9 @@ declare module '@antv/util/lib/augment' {
     <T, U>(dist: T, src: U): T & U;
     <T, U1, U2>(dist: T, src1: U1, src2: U2): T & U1 & U2;
     <T, U1, U2, U3>(dist: T, src1: U1, src2: U2, src3: U3): T & U1 & U2 & U3;
+    <T, U1, U2, U3, U4>(dist: T, src1: U1, src2: U2, src3: U3, src4: U4): T & U1 & U2 & U3 & U4;
+    <T, U1, U2, U3, U4, U5>(dist: T, src1: U1, src2: U2, src3: U3, src4: U4, src5: U5): T & U1 & U2 & U3 & U4 & U5;
+    <T, U1, U2, U3, U4, U5, U6>(dist: T, src1: U1, src2: U2, src3: U3, src4: U4, src5: U5, src6: U6): T & U1 & U2 & U3 & U4 & U5 & U6;
   };
   export = augment;
 }

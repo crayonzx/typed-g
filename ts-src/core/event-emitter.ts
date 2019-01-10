@@ -14,7 +14,7 @@ function indexOfCallback(events, callback) {
 
 const EventEmitter = function() {};
 
-Util.augment(EventEmitter, {
+const EventEmitter1 = Util.augment(EventEmitter, {
   on(evt, callback, one) {
     const self = this;
     if (!Util.isFunction(callback)) {
@@ -92,4 +92,4 @@ Util.augment(EventEmitter, {
   }
 });
 
-export = EventEmitter;
+export = EventEmitter1;

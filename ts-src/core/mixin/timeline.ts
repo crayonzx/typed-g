@@ -105,7 +105,7 @@ function update(shape, animator, elapsed) {
   return false;
 }
 
-Util.augment(Timeline, {
+const Timeline1 = Util.augment(Timeline, {
   initTimer() {
     const self = this;
     let isFinished = false;
@@ -150,7 +150,7 @@ Util.augment(Timeline, {
   removeAnimator(index) {
     this._animators.splice(index, 1);
   },
-  isAnimating() {
+  isAnimating():boolean {
     return !!this._animators.length;
   },
   stop() {
@@ -170,4 +170,4 @@ Util.augment(Timeline, {
   }
 });
 
-export = Timeline;
+export = Timeline1;

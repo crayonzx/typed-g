@@ -4,7 +4,7 @@ import Transform = require('./mixin/transform');
 import Animate = require('./mixin/animation');
 import EventEmitter = require('./advanced-event-emitter');
 
-const Element = function(cfg) {
+const Element = function(cfg:Partial<typeof CFG>) {
   this._cfg = {
     zIndex: 0,
     capture: true,
@@ -19,12 +19,12 @@ const Element = function(cfg) {
   this.init(); // 类型初始化
 };
 
-Element.CFG = {
+const CFG = {
   /**
    * 唯一标示
    * @type {Number}
    */
-  id: null,
+  id: null as any as number,
   /**
    * Z轴的层叠关系，Z值越大离用户越近
    * @type {Number}
@@ -66,7 +66,9 @@ Element.CFG = {
   destroyed: false
 };
 
-Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
+Element.CFG = CFG
+
+const Element1 = Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
   init() {
     this.setSilent('animable', true);
     this.setSilent('animating', false); // 初始时不处于动画状态
@@ -82,7 +84,7 @@ Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
   getDefaultCfg() {
     return {};
   },
-  set(name, value) {
+  set(name: string, value) {
     if (name === 'zIndex' && this._beforeSetZIndex) {
       this._beforeSetZIndex(value);
     }
@@ -93,10 +95,10 @@ Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
     return this;
   },
   // deprecated
-  setSilent(name, value) {
+  setSilent(name: string, value) {
     this._cfg[name] = value;
   },
-  get(name) {
+  get(name: string) {
     return this._cfg[name];
   },
   show() {
@@ -170,7 +172,7 @@ Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
       parentNode.insertBefore(el, parentNode.firstChild);
     }
   },
-  _beforeSetZIndex(zIndex) {
+  _beforeSetZIndex(zIndex: number): number {
     const parent = this._cfg.parent;
     this._cfg.zIndex = zIndex;
     if (!Util.isNil(parent)) {
@@ -194,7 +196,7 @@ Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
     this.attr(attrs);
     return attrs;
   },
-  setZIndex(zIndex) {
+  setZIndex(zIndex: number) {
     this._cfg.zIndex = zIndex;
     return this._beforeSetZIndex(zIndex);
   },
@@ -204,4 +206,4 @@ Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
   getBBox() {}
 });
 
-export = Element;
+export = Element1;
