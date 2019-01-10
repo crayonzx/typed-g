@@ -90,7 +90,7 @@ const PathSegment = function(item, preSegment, isLast) {
   this.init(item, preSegment);
 };
 
-Util.augment(PathSegment, {
+const PathSegment1 = Util.augment(toClass(PathSegment), {
   init(item, preSegment) {
     const command = item[0];
     preSegment = preSegment || {
@@ -634,4 +634,4 @@ Util.augment(PathSegment, {
   }
 });
 
-export = PathSegment;
+export = PathSegment1;

@@ -22,7 +22,7 @@ const PROPOGATE_EVENTS = [
 
 const AdvancedEE = function() {};
 
-const AdvancedEE1 = Util.augment(AdvancedEE, EventEmitter, {
+const AdvancedEE1 = Util.augment(toClass(AdvancedEE), EventEmitter, {
   emit(evt, e) {
     const args = arguments;
     EventEmitter.prototype.emit.apply(this, args);

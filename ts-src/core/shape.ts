@@ -4,12 +4,12 @@ import Element = require('./element');
 import Inside = require('../shapes/util/inside');
 
 const Shape = function(cfg) {
-  Shape.superclass.constructor.call(this, cfg);
+  Shape1.superclass.constructor.call(this, cfg);
 };
 
 Shape.ATTRS = {};
 
-Util.extend(Shape, Element);
+const Shape1 = Util.extend(Shape, Element);
 
 const ARRAY_ATTRS = {
   matrix: 'matrix',
@@ -30,7 +30,7 @@ function _cloneArrayAttr(arr) {
   return result;
 }
 
-const Shape1 = Util.augment(Shape, isPointInPath, {
+const Shape2 = Util.augment(Shape1, isPointInPath, {
   isShape: true,
   drawInner(context) {
     const self = this;
@@ -156,4 +156,4 @@ const Shape1 = Util.augment(Shape, isPointInPath, {
   }
 });
 
-export = Shape1;
+export = Shape2;

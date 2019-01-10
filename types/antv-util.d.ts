@@ -39,21 +39,18 @@ declare module '@antv/util/lib/clone' {
   export = clone;
 }
 declare module '@antv/util/lib/deep-mix' {
-  const deepMix: {
-    <T, U>(dist: T, src: U): T & U;
-    <T, U1, U2>(dist: T, src1: U1, src2: U2): T & U1 & U2;
-    <T, U1, U2, U3>(dist: T, src1: U1, src2: U2, src3: U3): T & U1 & U2 & U3;
-  };
+  const deepMix: <T, U1, U2, U3>(
+    dist: T,
+    src1: U1,
+    src2?: U2,
+    src3?: U3
+  ) => Overwrite<T, U1, U2, U3>;
   export = deepMix;
 }
 declare module '@antv/util/lib/mix' {
   const mix: (dist: any, src1?: any, src2?: any, src3?: any) => any;
   export = mix;
 }
-// declare module '@antv/util/lib/deep-mix'{
-//   const merge: <T, U>(dist: T, src: U, lever: number, max: number) => T & U;
-//   export = merge;
-// }
 declare module '@antv/util/lib/string/upper-first' {
   const upperFirst: (value: string) => string;
   export = upperFirst;
@@ -61,7 +58,10 @@ declare module '@antv/util/lib/string/upper-first' {
 declare module '@antv/util/lib/each' {
   const each: {
     <T>(elements: T[], func: (value: T, index: number) => boolean | void): void;
-    <T extends object>(elements: T, func: <K extends keyof T>(value: T[K], key: K) => boolean | void): void;
+    <T extends object>(
+      elements: T,
+      func: <K extends keyof T>(value: T[K], key: K) => boolean | void
+    ): void;
   };
   export = each;
 }
@@ -74,25 +74,36 @@ declare module '@antv/util/lib/to-array' {
   export = toArray;
 }
 declare module '@antv/util/lib/extend' {
-  const extend: <T, U, V, W>(
+  const extend: <T extends FunctionType, U extends NewFunctionType, V, W>(
     subclass: T,
     superclass: U,
     overrides?: V,
-    staticOverrides?: W,
-  ) => T & U & V & W & {
-    superclass: U
-  };
+    staticOverrides?: W
+  ) => {
+    new (...args: ArgsType<T>): Overwrite<NewReturnType<U>, T, V>;
+    superclass: ProtoType<U>;
+  } & (W extends null | undefined ? {} : W);
   export = extend;
 }
 declare module '@antv/util/lib/augment' {
-  const augment: {
-    <T, U>(dist: T, src: U): T & U;
-    <T, U1, U2>(dist: T, src1: U1, src2: U2): T & U1 & U2;
-    <T, U1, U2, U3>(dist: T, src1: U1, src2: U2, src3: U3): T & U1 & U2 & U3;
-    <T, U1, U2, U3, U4>(dist: T, src1: U1, src2: U2, src3: U3, src4: U4): T & U1 & U2 & U3 & U4;
-    <T, U1, U2, U3, U4, U5>(dist: T, src1: U1, src2: U2, src3: U3, src4: U4, src5: U5): T & U1 & U2 & U3 & U4 & U5;
-    <T, U1, U2, U3, U4, U5, U6>(dist: T, src1: U1, src2: U2, src3: U3, src4: U4, src5: U5, src6: U6): T & U1 & U2 & U3 & U4 & U5 & U6;
-  };
+  const augment: <T extends NewFunctionType, U1, U2, U3, U4, U5, U6>(
+    dist: T,
+    src1: U1,
+    src2?: U2,
+    src3?: U3,
+    src4?: U4,
+    src5?: U5,
+    src6?: U6
+  ) => (new (...args: ArgsType<T>) => Overwrite<
+    ProtoType<T>,
+    ProtoType<U1>,
+    ProtoType<U2>,
+    ProtoType<U3>,
+    ProtoType<U4>,
+    ProtoType<U5>,
+    ProtoType<U6>
+  >) &
+    T;
   export = augment;
 }
 declare module '@antv/util/lib/array/pull' {
