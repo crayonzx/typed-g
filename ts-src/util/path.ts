@@ -3,14 +3,16 @@ const SPACES = '\x09\x0a\x0b\x0c\x0d\x20\xa0\u1680\u180e\u2000\u2001\u2002\u2003
 const PATH_COMMAND = new RegExp('([a-z])[' + SPACES + ',]*((-?\\d*\\.?\\d*(?:e[\\-+]?\\d+)?[' + SPACES + ']*,?[' + SPACES + ']*)+)', 'ig');
 const PATH_VALUES = new RegExp('(-?\\d*\\.?\\d*(?:e[\\-+]?\\d+)?)[' + SPACES + ']*,?[' + SPACES + ']*', 'ig');
 
+type NumStr = number | string;
+
 // Parses given path string into an array of arrays of path segments
-const parsePathString = function(pathString) {
+const parsePathString = function(pathString: string | any[]) {
   if (!pathString) {
     return null;
   }
 
   if (typeof pathString === typeof []) {
-    return pathString;
+    return pathString as any[];
   }
   const paramCounts = {
     a: 7,
@@ -27,7 +29,7 @@ const parsePathString = function(pathString) {
     u: 3,
     z: 0
   };
-  const data = [];
+  const data = [] as any[];
 
   String(pathString).replace(PATH_COMMAND, function(a, b, c) {
     const params = [];
@@ -59,8 +61,8 @@ const parsePathString = function(pathString) {
 };
 
 // http://schepers.cc/getting-to-the-point
-const catmullRom2bezier = function(crp, z) {
-  const d = [];
+const catmullRom2bezier = function(crp: NumStr[], z: boolean) {
+  const d = [] as any[];
   for (let i = 0, iLen = crp.length; iLen - 2 * !z > i; i += 2) {
     const p = [{
       x: +crp[i - 2],
@@ -119,8 +121,8 @@ const catmullRom2bezier = function(crp, z) {
   return d;
 };
 
-const ellipsePath = function(x, y, rx, ry, a) {
-  let res = [];
+const ellipsePath = function(x: NumStr, y: NumStr, rx: NumStr, ry: NumStr, a?: NumStr) {
+  let res: any[] = [];
   if (a === null && ry === null) {
     ry = rx;
   }
@@ -150,7 +152,7 @@ const ellipsePath = function(x, y, rx, ry, a) {
   return res;
 };
 
-const pathToAbsolute = function(pathArray) {
+const pathToAbsolute = function(pathArray: string | any[]) {
   pathArray = parsePathString(pathArray);
 
   if (!pathArray || !pathArray.length) {
@@ -158,7 +160,7 @@ const pathToAbsolute = function(pathArray) {
       [ 'M', 0, 0 ]
     ];
   }
-  let res = [];
+  let res = [] as any[];
   let x = 0;
   let y = 0;
   let mx = 0;
@@ -397,7 +399,7 @@ const a2c = function(x1, y1, rx, ry, angle, large_arc_flag, sweep_flag, x2, y2, 
 
 };
 
-const pathTocurve = function(path, path2) {
+const pathTocurve = function(path: string | any[], path2?: string | any[]) {
   const p = pathToAbsolute(path);
   const p2 = path2 && pathToAbsolute(path2);
   const attrs = {
@@ -558,7 +560,7 @@ const pathTocurve = function(path, path2) {
 };
 
 const p2s = /,?([a-z]),?/gi;
-const parsePathArray = function(path) {
+const parsePathArray = function(path: []) {
   return path.join(',').replace(p2s, '$1');
 };
 
@@ -708,7 +710,7 @@ const isPointInsideBBox = function(bbox, x, y) {
     y <= bbox.y + bbox.height;
 };
 
-const rectPath = function(x, y, w, h, r) {
+const rectPath = function(x: NumStr, y: NumStr, w: NumStr, h: NumStr, r?: NumStr) {
   if (r) {
     return [
       [ 'M', +x + (+r), y ],
@@ -721,7 +723,7 @@ const rectPath = function(x, y, w, h, r) {
       [ 'l', 0, r * 2 - h ],
       [ 'a', r, r, 0, 0, 1, r, -r ],
       [ 'z' ]
-    ];
+    ] as any[];
   }
   const res = [
     [ 'M', x, y ],
@@ -729,7 +731,7 @@ const rectPath = function(x, y, w, h, r) {
     [ 'l', 0, h ],
     [ 'l', -w, 0 ],
     [ 'z' ]
-  ];
+  ] as any[] & { parsePathArray: typeof parsePathArray };
   res.parsePathArray = parsePathArray;
   return res;
 };
@@ -1050,14 +1052,14 @@ const splitSegment = function(start, end, count) {
   return segments;
 };
 
-const fillPath = function(source, target) {
+const fillPath = function(source: any[], target: any[]) {
   if (source.length === 1) {
     return source;
   }
   const sourceLen = source.length - 1;
   const targetLen = target.length - 1;
   const ratio = sourceLen / targetLen;
-  const segmentsToFill = [];
+  const segmentsToFill = [] as any[];
   if (source.length === 1 && source[0][0] === 'M') {
     for (let i = 0; i < targetLen - sourceLen; i++) {
       source.push(source[0]);
@@ -1068,7 +1070,7 @@ const fillPath = function(source, target) {
     const index = Math.floor(ratio * i);
     segmentsToFill[index] = (segmentsToFill[index] || 0) + 1;
   }
-  const filled = segmentsToFill.reduce((filled, count, i) => {
+  const filled: any[] = segmentsToFill.reduce((filled, count, i) => {
     if (i === sourceLen) {
       return filled.concat(source[sourceLen]);
     }
@@ -1115,7 +1117,7 @@ function getMinDiff(del, add, modify) {
  * https://en.wikipedia.org/wiki/Levenshtein_distance
  * 计算两条path的编辑距离
  */
-const levenshteinDistance = function(source, target) {
+const levenshteinDistance = function(source: any[], target: any[]) {
   const sourceLen = source.length;
   const targetLen = target.length;
   let sourceSegment,

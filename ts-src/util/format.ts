@@ -4,7 +4,7 @@ const regexTags = /[MLHVQTCSAZ]([^MLHVQTCSAZ]*)/ig;
 const regexDot = /[^\s\,]+/ig;
 
 export = {
-  parseRadius(radius) {
+  parseRadius(radius: number | number[] ) {
     let r1 = 0,
       r2 = 0,
       r3 = 0,
@@ -35,10 +35,10 @@ export = {
       r4
     };
   },
-  parsePath(path) {
+  parsePath(path: string | any[]) {
     path = path || [];
     if (Util.isArray(path)) {
-      return path;
+      return path as [];
     }
 
     if (Util.isString(path)) {
