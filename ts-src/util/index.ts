@@ -1,5 +1,5 @@
 import CommonUtil = require('./common');
-const Util = {};
+const Util = {} as typeof CommonUtil;
 
 export = CommonUtil.merge(Util, CommonUtil, {
   mixin(c, mixins) {

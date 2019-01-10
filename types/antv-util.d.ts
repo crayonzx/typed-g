@@ -1,29 +1,29 @@
 declare module '@antv/util/lib/type/is-function' {
-  const isFunction: (value: any) => boolean;
+  const isFunction: (value: any) => value is (...args: any[]) => any;
   export = isFunction;
 }
 declare module '@antv/util/lib/type/is-object' {
-  const isObject: (value: any) => boolean;
+  const isObject: <T extends object>(value: any) => value is T;
   export = isObject;
 }
 declare module '@antv/util/lib/type/is-boolean' {
-  const isBoolean: (value: any) => boolean;
+  const isBoolean: (value: any) => value is boolean;
   export = isBoolean;
 }
 declare module '@antv/util/lib/type/is-nil' {
-  const isNil: (value: any) => boolean;
+  const isNil: (value: any) => value is null;
   export = isNil;
 }
 declare module '@antv/util/lib/type/is-string' {
-  const isString: (value: any) => boolean;
+  const isString: (value: any) => value is string;
   export = isString;
 }
 declare module '@antv/util/lib/type/is-array' {
-  const isArray: (value: any) => boolean;
+  const isArray: <T = any>(value: any) => value is T[];
   export = isArray;
 }
 declare module '@antv/util/lib/type/is-number' {
-  const isNumber: (value: any) => boolean;
+  const isNumber: (value: any) => value is number;
   export = isNumber;
 }
 declare module '@antv/util/lib/is-empty' {
@@ -39,14 +39,11 @@ declare module '@antv/util/lib/clone' {
   export = clone;
 }
 declare module '@antv/util/lib/deep-mix' {
-  namespace deepMix {
-    export interface DeepMix {
-      <T, U>(dist: T, src: U): T & U;
-      <T, U1, U2>(dist: T, src1: U1, src2: U2): T & U1 & U2;
-      <T, U1, U2, U3>(dist: T, src1: U1, src2: U2, src3: U3): T & U1 & U2 & U3;
-    }
-  }
-  const deepMix: deepMix.DeepMix;
+  const deepMix: {
+    <T, U>(dist: T, src: U): T & U;
+    <T, U1, U2>(dist: T, src1: U1, src2: U2): T & U1 & U2;
+    <T, U1, U2, U3>(dist: T, src1: U1, src2: U2, src3: U3): T & U1 & U2 & U3;
+  };
   export = deepMix;
 }
 declare module '@antv/util/lib/mix' {
@@ -62,7 +59,10 @@ declare module '@antv/util/lib/string/upper-first' {
   export = upperFirst;
 }
 declare module '@antv/util/lib/each' {
-  const each: (elements: any, func: any) => void;
+  const each: {
+    <T>(elements: T[], func: (value: T, index: number) => boolean | void): void;
+    <T extends object>(elements: T, func: <K extends keyof T>(value: T[K], key: K) => boolean | void): void;
+  };
   export = each;
 }
 declare module '@antv/util/lib/is-equal' {
