@@ -12,9 +12,9 @@ Circle.ATTRS = {
   lineWidth: 1
 };
 
-Util.extend(Circle, Shape);
+const Circle1 = Util.extend(Circle, Shape);
 
-Util.augment(Circle, {
+const Circle2 = Util.augment(Circle1, {
   canFill: true,
   canStroke: true,
   type: 'circle',
@@ -48,4 +48,4 @@ Util.augment(Circle, {
   }
 });
 
-export = Circle;
+export = Circle2;

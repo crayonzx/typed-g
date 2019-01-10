@@ -17,9 +17,9 @@ Line.ATTRS = {
   endArrow: false
 };
 
-Util.extend(Line, Shape);
+const Line1 = Util.extend(Line, Shape);
 
-Util.augment(Line, {
+const Line2 = Util.augment(Line1, {
   canStroke: true,
   type: 'line',
   getDefaultAttrs() {
@@ -63,4 +63,4 @@ Util.augment(Line, {
   }
 });
 
-export = Line;
+export = Line2;

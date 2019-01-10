@@ -1,12 +1,12 @@
 import Util = require('../../util/index');
 const vec2 = Util.vec2;
 
-function cubicAt(p0, p1, p2, p3, t) {
+function cubicAt(p0: number, p1: number, p2: number, p3: number, t: number) {
   const onet = 1 - t;
   return onet * onet * (onet * p3 + 3 * t * p2) + t * t * (t * p0 + 3 * onet * p1);
 }
 
-function cubicDerivativeAt(p0, p1, p2, p3, t) {
+function cubicDerivativeAt(p0: number, p1: number, p2: number, p3: number, t: number) {
   const onet = 1 - t;
   return 3 * (
     ((p1 - p0) * onet + 2 * (p2 - p1) * t) * onet +
@@ -14,7 +14,7 @@ function cubicDerivativeAt(p0, p1, p2, p3, t) {
   );
 }
 
-function cubicProjectPoint(x1, y1, x2, y2, x3, y3, x4, y4, x, y, out) {
+function cubicProjectPoint(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number, x: number, y: number, out) {
   let t;
   let interval = 0.005;
   let d = Infinity;
@@ -86,11 +86,11 @@ function cubicProjectPoint(x1, y1, x2, y2, x3, y3, x4, y4, x, y, out) {
   return Math.sqrt(d);
 }
 
-function cubicExtrema(p0, p1, p2, p3) {
+function cubicExtrema(p0: number, p1: number, p2: number, p3: number) {
   const a = 3 * p0 - 9 * p1 + 9 * p2 - 3 * p3;
   const b = 6 * p1 - 12 * p2 + 6 * p3;
   const c = 3 * p2 - 3 * p3;
-  const extrema = [];
+  const extrema = [] as number[];
   let t1;
   let t2;
   let discSqrt;
@@ -121,13 +121,13 @@ function cubicExtrema(p0, p1, p2, p3) {
   return extrema;
 }
 
-function base3(t, p1, p2, p3, p4) {
+function base3(t: number, p1: number, p2: number, p3: number, p4: number) {
   const t1 = -3 * p1 + 9 * p2 - 9 * p3 + 3 * p4;
   const t2 = t * t1 + 6 * p1 - 12 * p2 + 6 * p3;
   return t * t2 - 3 * p1 + 3 * p2;
 }
 
-function cubiclLen(x1, y1, x2, y2, x3, y3, x4, y4, z) {
+function cubiclLen(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number, z) {
   if (Util.isNil(z)) {
     z = 1;
   }
@@ -151,8 +151,8 @@ function cubiclLen(x1, y1, x2, y2, x3, y3, x4, y4, z) {
 export = {
   at: cubicAt,
   derivativeAt: cubicDerivativeAt,
-  projectPoint(x1, y1, x2, y2, x3, y3, x4, y4, x, y) {
-    const rst = {};
+  projectPoint(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number, x: number, y: number) {
+    const rst = {} as any;
     cubicProjectPoint(x1, y1, x2, y2, x3, y3, x4, y4, x, y, rst);
     return rst;
   },

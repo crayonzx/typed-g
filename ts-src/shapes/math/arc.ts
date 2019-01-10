@@ -1,13 +1,13 @@
 import Util = require('../../util/index');
 
-function circlePoint(cx, cy, r, angle) {
+function circlePoint(cx: number, cy: number, r: number, angle: number) {
   return {
     x: Math.cos(angle) * r + cx,
     y: Math.sin(angle) * r + cy
   };
 }
 
-function angleNearTo(angle, min, max, out) {
+function angleNearTo(angle: number, min: number, max: number, out?: boolean) {
   let v1;
   let v2;
   if (out) {
@@ -26,7 +26,7 @@ function angleNearTo(angle, min, max, out) {
   return v1 > v2 ? max : min;
 }
 
-function nearAngle(angle, startAngle, endAngle, clockwise) {
+function nearAngle(angle: number, startAngle: number, endAngle: number, clockwise) {
   let plus = 0;
   if (endAngle - startAngle >= Math.PI * 2) {
     plus = Math.PI * 2;
@@ -58,7 +58,7 @@ function nearAngle(angle, startAngle, endAngle, clockwise) {
   return angleNearTo(angle, endAngle, startAngle);
 }
 
-function arcProjectPoint(cx, cy, r, startAngle, endAngle, clockwise, x, y, out) {
+function arcProjectPoint(cx: number, cy: number, r: number, startAngle: number, endAngle: number, clockwise, x, y, out) {
   const v = [ x, y ];
   const v0 = [ cx, cy ];
   const v1 = [ 1, 0 ];
@@ -132,7 +132,7 @@ function arcBox(cx, cy, r, startAngle, endAngle, clockwise) {
 
 export = {
   nearAngle,
-  projectPoint(cx, cy, r, startAngle, endAngle, clockwise, x, y) {
+  projectPoint(cx: number, cy: number, r: number, startAngle: number, endAngle: number, clockwise, x, y): any {
     const rst = {};
     arcProjectPoint(cx, cy, r, startAngle, endAngle, clockwise, x, y, rst);
     return rst;

@@ -10,9 +10,9 @@ Polygon.ATTRS = {
   lineWidth: 1
 };
 
-Util.extend(Polygon, Shape);
+const Polygon1 = Util.extend(Polygon, Shape);
 
-Util.augment(Polygon, {
+const Polygon2 = Util.augment(Polygon1, {
   canFill: true,
   canStroke: true,
   type: 'polygon',
@@ -81,4 +81,4 @@ Util.augment(Polygon, {
   }
 });
 
-export = Polygon;
+export = Polygon2;

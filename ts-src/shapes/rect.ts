@@ -16,9 +16,9 @@ Rect.ATTRS = {
   lineWidth: 1
 };
 
-Util.extend(Rect, Shape);
+const Rect1 = Util.extend(Rect, Shape);
 
-Util.augment(Rect, {
+const Rect2 = Util.augment(Rect1, {
   canFill: true,
   canStroke: true,
   type: 'rect',
@@ -75,4 +75,4 @@ Util.augment(Rect, {
   }
 });
 
-export = Rect;
+export = Rect2;

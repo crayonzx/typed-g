@@ -17,9 +17,9 @@ Fan.ATTRS = {
   lineWidth: 1
 };
 
-Util.extend(Fan, Shape);
+const Fan1 = Util.extend(Fan, Shape);
 
-Util.augment(Fan, {
+const Fan2 = Util.augment(Fan1, {
   canFill: true,
   canStroke: true,
   type: 'fan',
@@ -92,4 +92,4 @@ Util.augment(Fan, {
   }
 });
 
-export = Fan;
+export = Fan2;

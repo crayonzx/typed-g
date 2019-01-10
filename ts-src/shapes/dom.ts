@@ -5,9 +5,9 @@ const Dom = function(cfg) {
   Dom.superclass.constructor.call(this, cfg);
 };
 
-Util.extend(Dom, Shape);
+const Dom1 = Util.extend(Dom, Shape);
 
-Util.augment(Dom, {
+const Dom2 = Util.augment(Dom1, {
   canFill: true,
   canStroke: true,
   type: 'dom',
@@ -30,4 +30,4 @@ Util.augment(Dom, {
   }
 });
 
-export = Dom;
+export = Dom2;

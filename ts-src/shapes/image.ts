@@ -17,9 +17,9 @@ CImage.ATTRS = {
   sheight: null
 };
 
-Util.extend(CImage, Shape);
+const CImage1 = Util.extend(CImage, Shape);
 
-Util.augment(CImage, {
+const CImage2 = Util.augment(CImage1, {
   type: 'image',
   isHitBox() {
     return false;
@@ -153,4 +153,4 @@ Util.augment(CImage, {
   }
 });
 
-export = CImage;
+export = CImage2;

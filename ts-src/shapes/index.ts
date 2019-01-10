@@ -13,4 +13,3 @@ Shape.Polyline = require('./polyline');
 Shape.Rect = require('./rect');
 Shape.Text = require('./text');
 export = Shape;
-

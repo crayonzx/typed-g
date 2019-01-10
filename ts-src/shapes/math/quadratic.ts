@@ -1,12 +1,12 @@
 import Util = require('../../util/index');
 const vec2 = Util.vec2;
 
-function quadraticAt(p0, p1, p2, t) {
+function quadraticAt(p0: number, p1: number, p2: number, t: number) {
   const onet = 1 - t;
   return onet * (onet * p0 + 2 * t * p1) + t * t * p2;
 }
 
-function quadraticProjectPoint(x1, y1, x2, y2, x3, y3, x, y, out) {
+function quadraticProjectPoint(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x, y, out) {
   let t;
   let interval = 0.005;
   let d = Infinity;
@@ -77,7 +77,7 @@ function quadraticProjectPoint(x1, y1, x2, y2, x3, y3, x, y, out) {
 }
 
 
-function quadraticExtrema(p0, p1, p2) {
+function quadraticExtrema(p0: number, p1: number, p2: number) {
   const a = p0 + p2 - 2 * p1;
   if (Util.isNumberEqual(a, 0)) {
     return [ 0.5 ];
@@ -91,8 +91,8 @@ function quadraticExtrema(p0, p1, p2) {
 
 export = {
   at: quadraticAt,
-  projectPoint(x1, y1, x2, y2, x3, y3, x, y) {
-    const rst = {};
+  projectPoint(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x, y) {
+    const rst = {} as any;
     quadraticProjectPoint(x1, y1, x2, y2, x3, y3, x, y, rst);
     return rst;
   },

@@ -13,9 +13,9 @@ Ellipse.ATTRS = {
   lineWidth: 1
 };
 
-Util.extend(Ellipse, Shape);
+const Ellipse1 = Util.extend(Ellipse, Shape);
 
-Util.augment(Ellipse, {
+const Ellipse2 = Util.augment(Ellipse1, {
   canFill: true,
   canStroke: true,
   type: 'ellipse',
@@ -65,4 +65,4 @@ Util.augment(Ellipse, {
   }
 });
 
-export = Ellipse;
+export = Ellipse2;

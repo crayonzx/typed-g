@@ -1,10 +1,10 @@
 const { vec2 } = require('../../util/index') as typeof import('../../util/index');
 
 export = {
-  at(p1, p2, t) {
+  at(p1: number, p2: number, t: number) {
     return (p2 - p1) * t + p1;
   },
-  pointDistance(x1, y1, x2, y2, x, y) {
+  pointDistance(x1: number, y1: number, x2: number, y2: number, x: number, y: number) {
     const d = [ x2 - x1, y2 - y1 ];
     if (vec2.exactEquals(d, [ 0, 0 ])) {
       return NaN;
@@ -15,7 +15,7 @@ export = {
     const a = [ x - x1, y - y1 ];
     return Math.abs(vec2.dot(a, u));
   },
-  box(x1, y1, x2, y2, lineWidth) {
+  box(x1: number, y1: number, x2: number, y2: number, lineWidth: number) {
     const halfWidth = lineWidth / 2;
     const minX = Math.min(x1, x2);
     const maxX = Math.max(x1, x2);
@@ -29,7 +29,7 @@ export = {
       maxY: maxY + halfWidth
     };
   },
-  len(x1, y1, x2, y2) {
+  len(x1: number, y1: number, x2: number, y2: number) {
     return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
   }
 };

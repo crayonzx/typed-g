@@ -10,7 +10,7 @@ function _getArcY(y, radius, angle) {
   return y + (radius * Math.sin(angle));
 }
 
-const Arc = function(cfg) {
+const Arc = function(cfg: any) {
   Arc.superclass.constructor.call(this, cfg);
 };
 
@@ -26,9 +26,9 @@ Arc.ATTRS = {
   endArrow: false
 };
 
-Util.extend(Arc, Shape);
+const Arc1 = Util.extend(Arc, Shape);
 
-Util.augment(Arc, {
+const Arc2 = Util.augment(Arc1, {
   canStroke: true,
   type: 'arc',
   getDefaultAttrs() {
@@ -113,4 +113,4 @@ Util.augment(Arc, {
   }
 });
 
-export = Arc;
+export = Arc2;

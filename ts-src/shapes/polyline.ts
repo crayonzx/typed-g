@@ -15,9 +15,9 @@ Polyline.ATTRS = {
   tCache: null
 };
 
-Util.extend(Polyline, Shape);
+const Polyline1 = Util.extend(Polyline, Shape);
 
-Util.augment(Polyline, {
+const Polyline2 = Util.augment(Polyline1, {
   canStroke: true,
   type: 'polyline',
   tCache: null, // 缓存各点的t
@@ -172,4 +172,4 @@ Util.augment(Polyline, {
   }
 });
 
-export = Polyline;
+export = Polyline2;

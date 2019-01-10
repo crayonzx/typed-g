@@ -17,9 +17,9 @@ Path.ATTRS = {
   endArrow: false
 };
 
-Util.extend(Path, Shape);
+const Path1 = Util.extend(Path, Shape);
 
-Util.augment(Path, {
+const Path2 = Util.augment(Path1, {
   canFill: true,
   canStroke: true,
   type: 'path',
@@ -275,4 +275,4 @@ Util.augment(Path, {
   }
 });
 
-export = Path;
+export = Path2;

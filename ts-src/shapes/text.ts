@@ -20,9 +20,9 @@ CText.ATTRS = {
   textArr: null
 };
 
-Util.extend(CText, Shape);
+const CText1 = Util.extend(CText, Shape);
 
-Util.augment(CText, {
+const CText2 = Util.augment(CText1, {
   canFill: true,
   canStroke: true,
   type: 'text',
@@ -240,4 +240,4 @@ Util.augment(CText, {
   }
 });
 
-export = CText;
+export = CText2;

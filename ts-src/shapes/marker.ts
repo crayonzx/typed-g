@@ -64,9 +64,9 @@ Marker.ATTRS = {
   lineWidth: 1
 };
 
-Util.extend(Marker, Shape);
+const Marker1 = Util.extend(Marker, Shape);
 
-Util.augment(Marker, {
+const Marker2 = Util.augment(Marker1, {
   type: 'marker',
   canFill: true,
   canStroke: true,
@@ -130,4 +130,4 @@ Util.augment(Marker, {
   }
 });
 
-export = Marker;
+export = Marker2;
