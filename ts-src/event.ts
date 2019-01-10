@@ -14,7 +14,7 @@ const Event = function(type, event, bubbles, cancelable) {
 };
 
 
-Util.augment(Event, {
+const Event1 = Util.augment(Event, {
   preventDefault() {
     this.defaultPrevented = this.cancelable && true;
   },
@@ -32,4 +32,4 @@ Util.augment(Event, {
   }
 });
 
-export = Event;
+export = Event1;

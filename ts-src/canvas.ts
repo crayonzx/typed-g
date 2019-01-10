@@ -136,7 +136,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
     const height = this.get('height');
     return height * pixelRatio;
   },
-  changeSize(width, height) {
+  changeSize(width:number, height:number) {
     const pixelRatio = this.get('pixelRatio');
     const widthCanvas = width * pixelRatio;
     const heightCanvas = height * pixelRatio;
@@ -155,7 +155,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
    * @param  {Number} clientY 窗口y坐标
    * @return {Object} canvas坐标
    */
-  getPointByClient(clientX, clientY) {
+  getPointByClient(clientX:number, clientY:number) {
     const el = this.get('el');
     const pixelRatio = this.get('pixelRatio') || 1;
     const bbox = el.getBoundingClientRect();
@@ -164,7 +164,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
       y: (clientY - bbox.top) * pixelRatio
     };
   },
-  getClientByPoint(x, y) {
+  getClientByPoint(x:number, y:number) {
     const el = this.get('el');
     const bbox = el.getBoundingClientRect();
     const pixelRatio = this.get('pixelRatio') || 1;
@@ -176,7 +176,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
   draw() {
     this._cfg.painter.draw(this);
   },
-  getShape(x, y, e) {
+  getShape(x:number, y:number, e) {
     if (arguments.length === 3 && this._cfg.renderer.getShape) {
       return this._cfg.renderer.getShape.call(this, x, y, e);
     }
