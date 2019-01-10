@@ -4,22 +4,22 @@ import Group = require('./core/group');
 import Timeline = require('./core/mixin/timeline');
 import renderers = require('./renderers/index');
 
-const Canvas = function(cfg) {
+const Canvas = function(cfg: Partial<typeof CFG>) {
   Canvas.superclass.constructor.call(this, cfg);
 };
 
-Canvas.CFG = {
+const CFG = {
   eventEnable: true,
   /**
    * 像素宽度
    * @type {Number}
    */
-  width: null,
+  width: null as any as number,
   /**
    * 像素高度
    * @type {Number}
    */
-  height: null,
+  height: null as any as number,
   /**
    * 画布宽度
    * @type {Number}
@@ -61,12 +61,13 @@ Canvas.CFG = {
    */
   renderer: 'canvas'
 };
+Canvas.CFG = CFG;
 
-Util.extend(Canvas, Group);
+const Canvas1 = Util.extend(Canvas, Group);
 
-Util.augment(Canvas, Event, {
+const Canvas2 = Util.augment(Canvas1, Event, {
   init() {
-    Canvas.superclass.init.call(this);
+    Canvas1.superclass.init.call(this);
     this._setGlobalParam();
     this._setContainer();
     this._initPainter();
@@ -195,8 +196,8 @@ Util.augment(Canvas, Event, {
       containerDOM.removeChild(canvasDOM);
     }
     cfg.timeline.stop();
-    Canvas.superclass.destroy.call(this);
+    Canvas1.superclass.destroy.call(this);
   }
 });
 
-export = Canvas;
+export = Canvas2;

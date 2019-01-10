@@ -74,16 +74,22 @@ declare module '@antv/util/lib/to-array' {
   export = toArray;
 }
 declare module '@antv/util/lib/extend' {
-  const extend: (
-    subclass: any,
-    superclass: any,
-    overrides: any,
-    staticOverrides: any,
-  ) => any;
+  const extend: <T, U, V, W>(
+    subclass: T,
+    superclass: U,
+    overrides?: V,
+    staticOverrides?: W,
+  ) => T & U & V & W & {
+    superclass: U
+  };
   export = extend;
 }
 declare module '@antv/util/lib/augment' {
-  const augment: (c: any, ...args: any[]) => void;
+  const augment: {
+    <T, U>(dist: T, src: U): T & U;
+    <T, U1, U2>(dist: T, src1: U1, src2: U2): T & U1 & U2;
+    <T, U1, U2, U3>(dist: T, src1: U1, src2: U2, src3: U3): T & U1 & U2 & U3;
+  };
   export = augment;
 }
 declare module '@antv/util/lib/array/pull' {

@@ -1,4 +1,4 @@
-import vec2 = require('../../util/index').vec2;
+const { vec2 } = require('../../util/index') as typeof import('../../util/index');
 
 export = {
   at(p1, p2, t) {
