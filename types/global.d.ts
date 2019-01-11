@@ -1,12 +1,13 @@
 declare global {
-  const toClass: <T extends FunctionType>(cls: T) => ToClassType<T>;
-
-  type ToClassType<T extends FunctionType> = new (...args: ArgsType<T>) => T;
+  type ToClassType<T extends TwoFunctionTypes> = T extends NewFunctionType
+    ? T
+    : new (...args: ArgsType<T>) => T;
 
   type FunctionType = (...args: any[]) => any;
   type NewFunctionType = new (...args: any[]) => any;
+  type TwoFunctionTypes = FunctionType | NewFunctionType;
 
-  type ArgsType<T> = T extends (...args: infer U) => any
+  type ArgsType<T extends TwoFunctionTypes> = T extends (...args: infer U) => any
     ? U
     : T extends new (...args: infer U) => any
     ? U

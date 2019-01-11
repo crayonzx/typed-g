@@ -74,19 +74,19 @@ declare module '@antv/util/lib/to-array' {
   export = toArray;
 }
 declare module '@antv/util/lib/extend' {
-  const extend: <T extends FunctionType, U extends NewFunctionType, V, W>(
+  const extend: <T extends TwoFunctionTypes, U extends NewFunctionType, V, W>(
     subclass: T,
     superclass: U,
     overrides?: V,
     staticOverrides?: W
   ) => {
-    new (...args: ArgsType<T>): Overwrite<NewReturnType<U>, T, V>;
+    new (...args: ArgsType<ToClassType<T>>): Overwrite<NewReturnType<U>, ToClassType<T>, V>;
     superclass: ProtoType<U>;
   } & (W extends null | undefined ? {} : W);
   export = extend;
 }
 declare module '@antv/util/lib/augment' {
-  const augment: <T extends NewFunctionType, U1, U2, U3, U4, U5, U6>(
+  const augment: <T extends TwoFunctionTypes, U1, U2, U3, U4, U5, U6>(
     dist: T,
     src1: U1,
     src2?: U2,
@@ -94,8 +94,8 @@ declare module '@antv/util/lib/augment' {
     src4?: U4,
     src5?: U5,
     src6?: U6
-  ) => (new (...args: ArgsType<T>) => Overwrite<
-    ProtoType<T>,
+  ) => (new (...args: ArgsType<ToClassType<T>>) => Overwrite<
+    ProtoType<ToClassType<T>>,
     ProtoType<U1>,
     ProtoType<U2>,
     ProtoType<U3>,
@@ -103,7 +103,7 @@ declare module '@antv/util/lib/augment' {
     ProtoType<U5>,
     ProtoType<U6>
   >) &
-    T;
+    ToClassType<T>;
   export = augment;
 }
 declare module '@antv/util/lib/array/pull' {

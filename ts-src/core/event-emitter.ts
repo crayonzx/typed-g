@@ -14,7 +14,7 @@ function indexOfCallback(events, callback) {
 
 const EventEmitter = function() {};
 
-const EventEmitter1 = Util.augment(toClass(EventEmitter), {
+const EventEmitter1 = Util.augment(EventEmitter, {
   on(evt, callback, one) {
     const self = this;
     if (!Util.isFunction(callback)) {

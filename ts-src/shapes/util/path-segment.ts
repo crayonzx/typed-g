@@ -90,7 +90,7 @@ const PathSegment = function(item, preSegment, isLast) {
   this.init(item, preSegment);
 };
 
-const PathSegment1 = Util.augment(toClass(PathSegment), {
+const PathSegment1 = Util.augment(PathSegment, {
   init(item, preSegment) {
     const command = item[0];
     preSegment = preSegment || {

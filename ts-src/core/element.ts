@@ -68,7 +68,7 @@ const CFG = {
 
 Element.CFG = CFG;
 
-const Element1 = Util.augment(toClass(Element), Attribute, Transform, EventEmitter, Animate, {
+const Element1 = Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
   init() {
     this.setSilent('animable', true);
     this.setSilent('animating', false); // 初始时不处于动画状态
