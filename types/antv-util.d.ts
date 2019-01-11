@@ -82,7 +82,7 @@ declare module '@antv/util/lib/extend' {
   ) => {
     new (...args: ArgsType<ToClassType<T>>): Overwrite<NewReturnType<U>, ToClassType<T>, V>;
     superclass: ProtoType<U>;
-  } & (W extends null | undefined ? {} : W);
+  } & ExcludeFunctionType<W extends null | undefined ? {} : W>;
   export = extend;
 }
 declare module '@antv/util/lib/augment' {
@@ -103,7 +103,7 @@ declare module '@antv/util/lib/augment' {
     ProtoType<U5>,
     ProtoType<U6>
   >) &
-    ToClassType<T>;
+    ExcludeFunctionType<ToClassType<T>>;
   export = augment;
 }
 declare module '@antv/util/lib/array/pull' {
