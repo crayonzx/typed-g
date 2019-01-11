@@ -3,7 +3,7 @@ import Util = require('../../util/index');
 export = {
   canFill: false,
   canStroke: false,
-  initAttrs(this:Element, attrs:any):Element {
+  initAttrs(attrs) {
     this._attrs = {
       opacity: 1,
       fillOpacity: 1,
