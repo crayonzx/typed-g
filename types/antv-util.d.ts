@@ -79,8 +79,12 @@ declare module '@antv/util/lib/extend' {
     superclass: U,
     overrides?: V,
     staticOverrides?: W
-  ) => {
-    new (...args: ArgsType<ToClassType<T>>): Overwrite<NewReturnType<U>, ToClassType<T>, V>;
+  ) => ExcludeFunctionType<ToClassType<T>> & {
+    new (...args: ArgsType<ToClassType<T>>): Overwrite<
+      NewReturnType<U>,
+      NewReturnType<ToClassType<T>>,
+      V
+    >;
     superclass: ProtoType<U>;
   } & ExcludeFunctionType<W extends null | undefined ? {} : W>;
   export = extend;
