@@ -1,3 +1,4 @@
+import Painter from './painter';
 export = {
-  painter: require('./painter') as typeof import('./painter')
+  painter: require('./painter') as typeof Painter
 };

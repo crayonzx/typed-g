@@ -1,4 +1,9 @@
-export = {
-  canvas: require('./canvas') as typeof import('./canvas'),
-  svg: require('./svg') as typeof import('./svg')
+const Renderers: {
+  canvas: typeof import('./canvas');
+  svg: typeof import('./svg');
+} = {
+  canvas: require('./canvas'),
+  svg: require('./svg')
 };
+
+export = Renderers;
