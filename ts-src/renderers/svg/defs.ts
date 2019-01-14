@@ -8,7 +8,7 @@ import Arrow = require('./defs/arrow');
 import Clip = require('./defs/clip');
 import Pattern = require('./defs/pattern');
 
-export = class Defs {
+class Defs {
   constructor(canvas) {
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
     const id = Util.uniqueId('defs_');
@@ -87,4 +87,4 @@ export = class Defs {
   }
 }
 
-// export = Defs;
+export = Defs;

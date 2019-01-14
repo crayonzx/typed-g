@@ -3,7 +3,7 @@
  */
 import Util = require('../../../util/index');
 
-export = class Arrow {
+class Arrow {
   constructor(attrs, type:string) {
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
     const id = Util.uniqueId('marker_');
@@ -61,5 +61,5 @@ export = class Arrow {
   }
 }
 
-// export = Arrow;
+export = Arrow;
 

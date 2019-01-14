@@ -5,7 +5,7 @@ import Util = require('../../../util/index');
 
 const regexPR = /^p\s*\(\s*([axyn])\s*\)\s*(.*)/i;
 
-export = class Pattern {
+class Pattern {
   constructor(cfg) {
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
     el.setAttribute('patternUnits', 'userSpaceOnUse');
@@ -44,5 +44,5 @@ export = class Pattern {
   }
 }
 
-// export = Pattern;
+export = Pattern;
 

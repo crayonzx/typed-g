@@ -3,7 +3,7 @@
  */
 import Util = require('../../../util/index');
 
-export = class Clip {
+class Clip {
   constructor(cfg) {
     this.type = 'clip';
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
@@ -25,4 +25,4 @@ export = class Clip {
   }
 }
 
-// export = Clip;
+export = Clip;

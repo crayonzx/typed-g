@@ -19,7 +19,7 @@ const SHADOW_DIMENSION = {
 
 };
 
-export = class Shadow {
+class Shadow {
   constructor(cfg) {
     this.type = 'filter';
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
@@ -66,5 +66,5 @@ export = class Shadow {
   }
 }
 
-// export = Shadow;
+export = Shadow;
 

@@ -20,7 +20,7 @@ const SHAPE_ATTRS = [
   'lineDashOffset'
 ];
 
-export = class Painter {
+class Painter {
   constructor(dom) {
     if (!dom) {
       return null;
@@ -141,4 +141,4 @@ export = class Painter {
   }
 }
 
-// export = Painter;
+export = Painter;
