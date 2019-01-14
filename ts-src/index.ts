@@ -1,24 +1,47 @@
-export = {
-  Canvas: require('./canvas') as typeof import('./canvas'),
-  Group: require('./core/group') as typeof import('./core/group'),
-  Shape: require('./core/shape') as typeof import('./core/shape'),
-  Arc: require('./shapes/arc') as typeof import('./shapes/arc'),
-  Circle: require('./shapes/circle') as typeof import('./shapes/circle'),
-  Dom: require('./shapes/dom') as typeof import('./shapes/dom'),
-  Ellipse: require('./shapes/ellipse') as typeof import('./shapes/ellipse'),
-  Fan: require('./shapes/fan') as typeof import('./shapes/fan'),
-  Image: require('./shapes/image') as typeof import('./shapes/image'),
-  Line: require('./shapes/line') as typeof import('./shapes/line'),
-  Marker: require('./shapes/marker') as typeof import('./shapes/marker'),
-  Path: require('./shapes/path') as typeof import('./shapes/path'),
-  Polygon: require('./shapes/polygon') as typeof import('./shapes/polygon'),
-  Polyline: require('./shapes/polyline') as typeof import('./shapes/polyline'),
-  Rect: require('./shapes/rect') as typeof import('./shapes/rect'),
-  Text: require('./shapes/text') as typeof import('./shapes/text'),
-  PathSegment: require('./shapes/util/path-segment') as typeof import('./shapes/util/path-segment'),
-  PathUtil: require('./util/path') as typeof import('./util/path'),
-  Event: require('./event') as typeof import('./event'),
-  EventEmitter: require('./core/event-emitter') as typeof import('./core/event-emitter'),
+const G: {
+  Canvas: typeof import('./canvas');
+  Group: typeof import('./core/group');
+  Shape: typeof import('./core/shape');
+  Arc: typeof import('./shapes/arc');
+  Circle: typeof import('./shapes/circle');
+  Dom: typeof import('./shapes/dom');
+  Ellipse: typeof import('./shapes/ellipse');
+  Fan: typeof import('./shapes/fan');
+  Image: typeof import('./shapes/image');
+  Line: typeof import('./shapes/line');
+  Marker: typeof import('./shapes/marker');
+  Path: typeof import('./shapes/path');
+  Polygon: typeof import('./shapes/polygon');
+  Polyline: typeof import('./shapes/polyline');
+  Rect: typeof import('./shapes/rect');
+  Text: typeof import('./shapes/text');
+  PathSegment: typeof import('./shapes/util/path-segment');
+  PathUtil: typeof import('./util/path');
+  Event: typeof import('./event');
+  EventEmitter: typeof import('./core/event-emitter');
+  version: string;
+} = {
+  Canvas: require('./canvas'),
+  Group: require('./core/group'),
+  Shape: require('./core/shape'),
+  Arc: require('./shapes/arc'),
+  Circle: require('./shapes/circle'),
+  Dom: require('./shapes/dom'),
+  Ellipse: require('./shapes/ellipse'),
+  Fan: require('./shapes/fan'),
+  Image: require('./shapes/image'),
+  Line: require('./shapes/line'),
+  Marker: require('./shapes/marker'),
+  Path: require('./shapes/path'),
+  Polygon: require('./shapes/polygon'),
+  Polyline: require('./shapes/polyline'),
+  Rect: require('./shapes/rect'),
+  Text: require('./shapes/text'),
+  PathSegment: require('./shapes/util/path-segment'),
+  PathUtil: require('./util/path'),
+  Event: require('./event'),
+  EventEmitter: require('./core/event-emitter'),
   // version, etc.
   version: '3.4.0-beta.3'
 };
+export = G;
