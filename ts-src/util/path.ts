@@ -11,8 +11,8 @@ const parsePathString = function(pathString: string | any[]) {
     return null;
   }
 
-  if (typeof pathString === typeof []) {
-    return pathString as any[];
+  if (typeof pathString === 'object' /** typeof [] */) {
+    return pathString;
   }
   const paramCounts = {
     a: 7,
@@ -29,7 +29,7 @@ const parsePathString = function(pathString: string | any[]) {
     u: 3,
     z: 0
   };
-  const data = [] as any[];
+  const data: any[] = [];
 
   String(pathString).replace(PATH_COMMAND, function(a, b, c) {
     const params = [];
@@ -62,7 +62,7 @@ const parsePathString = function(pathString: string | any[]) {
 
 // http://schepers.cc/getting-to-the-point
 const catmullRom2bezier = function(crp: NumStr[], z: boolean) {
-  const d = [] as any[];
+  const d: any[] = [];
   for (let i = 0, iLen = crp.length; iLen - 2 * !z > i; i += 2) {
     const p = [{
       x: +crp[i - 2],
@@ -160,7 +160,7 @@ const pathToAbsolute = function(pathArray: string | any[]) {
       [ 'M', 0, 0 ]
     ];
   }
-  let res = [] as any[];
+  let res: any[] = [];
   let x = 0;
   let y = 0;
   let mx = 0;

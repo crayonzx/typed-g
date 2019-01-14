@@ -38,7 +38,7 @@ export = {
   parsePath(path: string | any[]) {
     path = path || [];
     if (Util.isArray(path)) {
-      return path as [];
+      return path;
     }
 
     if (Util.isString(path)) {

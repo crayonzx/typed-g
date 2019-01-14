@@ -10,7 +10,7 @@ function _getArcY(y, radius, angle) {
   return y + (radius * Math.sin(angle));
 }
 
-const Arc = function(cfg: any) {
+const Arc = function(cfg) {
   Arc.superclass.constructor.call(this, cfg);
 };
 

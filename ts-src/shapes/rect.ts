@@ -1,7 +1,6 @@
 import Util = require('../util/index');
-import Format = require('../util/format');
+const { parseRadius } = require('../util/format') as typeof import('../util/format');
 import Shape = require('../core/shape');
-const { parseRadius } = Format
 
 const Rect = function(cfg) {
   Rect.superclass.constructor.call(this, cfg);
