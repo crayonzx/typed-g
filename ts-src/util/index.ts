@@ -1,3 +1,5 @@
+import '../../types';
+
 import CommonUtil = require('./common');
 const Util = {} as typeof CommonUtil;
 
