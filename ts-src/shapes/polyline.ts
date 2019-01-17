@@ -3,11 +3,11 @@ import Shape = require('../core/shape');
 import Arrow = require('./util/arrow');
 import LineMath = require('./math/line');
 
-const Polyline = function(cfg) {
+const Polyline0 = function(cfg) {
   Polyline.superclass.constructor.call(this, cfg);
 };
 
-Polyline.ATTRS = {
+Polyline0.ATTRS = {
   points: null,
   lineWidth: 1,
   startArrow: false,
@@ -15,7 +15,7 @@ Polyline.ATTRS = {
   tCache: null
 };
 
-const Polyline1 = Util.extend(Polyline, Shape);
+const Polyline1 = Util.extend(Polyline0, Shape);
 
 const Polyline2 = Util.augment(Polyline1, {
   canStroke: true,
@@ -172,4 +172,5 @@ const Polyline2 = Util.augment(Polyline1, {
   }
 });
 
-export = Polyline2;
+class Polyline extends Polyline2 {}
+export = Polyline;

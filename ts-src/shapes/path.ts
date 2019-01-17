@@ -6,18 +6,18 @@ import Arrow = require('./util/arrow');
 import PathUtil = require('../util/path');
 import CubicMath = require('./math/cubic');
 
-const Path = function(cfg) {
+const Path0 = function(cfg) {
   Path.superclass.constructor.call(this, cfg);
 };
 
-Path.ATTRS = {
+Path0.ATTRS = {
   path: null,
   lineWidth: 1,
   startArrow: false,
   endArrow: false
 };
 
-const Path1 = Util.extend(Path, Shape);
+const Path1 = Util.extend(Path0, Shape);
 
 const Path2 = Util.augment(Path1, {
   canFill: true,
@@ -275,4 +275,5 @@ const Path2 = Util.augment(Path1, {
   }
 });
 
-export = Path2;
+class Path extends Path2 {}
+export = Path;

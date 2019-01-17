@@ -3,13 +3,13 @@ import isPointInPath = require('./mixin/isPointInPath');
 import Element = require('./element');
 import Inside = require('../shapes/util/inside');
 
-const Shape = function(cfg) {
+const Shape0 = function(cfg) {
   Shape1.superclass.constructor.call(this, cfg);
 };
 
-Shape.ATTRS = {};
+Shape0.ATTRS = {};
 
-const Shape1 = Util.extend(Shape, Element);
+const Shape1 = Util.extend(Shape0, Element);
 
 const ARRAY_ATTRS = {
   matrix: 'matrix',
@@ -156,4 +156,5 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
   }
 });
 
-export = Shape2;
+class Shape extends Shape2 {}
+export = Shape;

@@ -1,18 +1,18 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const Circle = function(cfg) {
+const Circle0 = function(cfg) {
   Circle.superclass.constructor.call(this, cfg);
 };
 
-Circle.ATTRS = {
+Circle0.ATTRS = {
   x: 0,
   y: 0,
   r: 0,
   lineWidth: 1
 };
 
-const Circle1 = Util.extend(Circle, Shape);
+const Circle1 = Util.extend(Circle0, Shape);
 
 const Circle2 = Util.augment(Circle1, {
   canFill: true,
@@ -48,4 +48,5 @@ const Circle2 = Util.augment(Circle1, {
   }
 });
 
-export = Circle2;
+class Circle extends Circle2 {}
+export = Circle;

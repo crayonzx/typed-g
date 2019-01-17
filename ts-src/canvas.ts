@@ -4,7 +4,7 @@ import Group = require('./core/group');
 import Timeline = require('./core/mixin/timeline');
 import renderers = require('./renderers/index');
 
-const Canvas = function(cfg: Partial<typeof CFG>) {
+const Canvas0 = function(cfg: Partial<typeof CFG>) {
   Canvas.superclass.constructor.call(this, cfg);
 };
 
@@ -61,9 +61,9 @@ const CFG = {
    */
   renderer: 'canvas'
 };
-Canvas.CFG = CFG;
+Canvas0.CFG = CFG;
 
-const Canvas1 = Util.extend(Canvas, Group);
+const Canvas1 = Util.extend(Canvas0, Group);
 
 const Canvas2 = Util.augment(Canvas1, Event, {
   init() {
@@ -200,4 +200,6 @@ const Canvas2 = Util.augment(Canvas1, Event, {
   }
 });
 
-export = Canvas2;
+import Event_ from './event'; // Fix: 'Event' from external module but cannot be named
+class Canvas extends Canvas2 {}
+export = Canvas;

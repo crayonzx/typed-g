@@ -1,6 +1,6 @@
 import Util = require('./util/index');
 
-const Event = function(type, event, bubbles, cancelable) {
+const Event0 = function(type, event, bubbles, cancelable) {
   this.type = type;  // 事件类型
   this.target = null; // 目标
   this.currentTarget = null; // 当前目标
@@ -14,7 +14,7 @@ const Event = function(type, event, bubbles, cancelable) {
 };
 
 
-const Event1 = Util.augment(Event, {
+const Event1 = Util.augment(Event0, {
   preventDefault() {
     this.defaultPrevented = this.cancelable && true;
   },
@@ -32,4 +32,5 @@ const Event1 = Util.augment(Event, {
   }
 });
 
-export = Event1;
+class Event extends Event1 {}
+export = Event;

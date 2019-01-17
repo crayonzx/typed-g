@@ -1,16 +1,16 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const Polygon = function(cfg) {
+const Polygon0 = function(cfg) {
   Polygon.superclass.constructor.call(this, cfg);
 };
 
-Polygon.ATTRS = {
+Polygon0.ATTRS = {
   points: null,
   lineWidth: 1
 };
 
-const Polygon1 = Util.extend(Polygon, Shape);
+const Polygon1 = Util.extend(Polygon0, Shape);
 
 const Polygon2 = Util.augment(Polygon1, {
   canFill: true,
@@ -81,4 +81,5 @@ const Polygon2 = Util.augment(Polygon1, {
   }
 });
 
-export = Polygon2;
+class Polygon extends Polygon2 {}
+export = Polygon;

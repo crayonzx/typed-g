@@ -4,7 +4,7 @@ import Transform = require('./mixin/transform');
 import Animate = require('./mixin/animation');
 import EventEmitter = require('./advanced-event-emitter');
 
-const Element = function(cfg:Partial<typeof CFG>) {
+const Element0 = function(cfg:Partial<typeof CFG>) {
   this._cfg = {
     zIndex: 0,
     capture: true,
@@ -66,9 +66,9 @@ const CFG = {
   destroyed: false
 };
 
-Element.CFG = CFG;
+Element0.CFG = CFG;
 
-const Element1 = Util.augment(Element, Attribute, Transform, EventEmitter, Animate, {
+const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Animate, {
   init() {
     this.setSilent('animable', true);
     this.setSilent('animating', false); // 初始时不处于动画状态
@@ -206,4 +206,5 @@ const Element1 = Util.augment(Element, Attribute, Transform, EventEmitter, Anima
   getBBox() {}
 });
 
-export = Element1;
+class Element extends Element1 {}
+export = Element;

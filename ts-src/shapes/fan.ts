@@ -2,11 +2,11 @@ import Util = require('../util/index');
 import Shape = require('../core/shape');
 import ArcMath = require('./math/arc');
 
-const Fan = function(cfg) {
+const Fan0 = function(cfg) {
   Fan.superclass.constructor.call(this, cfg);
 };
 
-Fan.ATTRS = {
+Fan0.ATTRS = {
   x: 0,
   y: 0,
   rs: 0,
@@ -17,7 +17,7 @@ Fan.ATTRS = {
   lineWidth: 1
 };
 
-const Fan1 = Util.extend(Fan, Shape);
+const Fan1 = Util.extend(Fan0, Shape);
 
 const Fan2 = Util.augment(Fan1, {
   canFill: true,
@@ -92,4 +92,5 @@ const Fan2 = Util.augment(Fan1, {
   }
 });
 
-export = Fan2;
+class Fan extends Fan2 {}
+export = Fan;

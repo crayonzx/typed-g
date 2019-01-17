@@ -1,11 +1,11 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const Dom = function(cfg) {
+const Dom0 = function(cfg) {
   Dom.superclass.constructor.call(this, cfg);
 };
 
-const Dom1 = Util.extend(Dom, Shape);
+const Dom1 = Util.extend(Dom0, Shape);
 
 const Dom2 = Util.augment(Dom1, {
   canFill: true,
@@ -30,4 +30,5 @@ const Dom2 = Util.augment(Dom1, {
   }
 });
 
-export = Dom2;
+class Dom extends Dom2 {}
+export = Dom;

@@ -2,11 +2,11 @@ import Util = require('../util/index');
 const { parseRadius } = require('../util/format') as typeof import('../util/format');
 import Shape = require('../core/shape');
 
-const Rect = function(cfg) {
+const Rect0 = function(cfg) {
   Rect.superclass.constructor.call(this, cfg);
 };
 
-Rect.ATTRS = {
+Rect0.ATTRS = {
   x: 0,
   y: 0,
   width: 0,
@@ -15,7 +15,7 @@ Rect.ATTRS = {
   lineWidth: 1
 };
 
-const Rect1 = Util.extend(Rect, Shape);
+const Rect1 = Util.extend(Rect0, Shape);
 
 const Rect2 = Util.augment(Rect1, {
   canFill: true,
@@ -74,4 +74,5 @@ const Rect2 = Util.augment(Rect1, {
   }
 });
 
-export = Rect2;
+class Rect extends Rect2 {}
+export = Rect;

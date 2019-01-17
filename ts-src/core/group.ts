@@ -29,7 +29,7 @@ function find(children, x, y) {
   return rst;
 }
 
-const Group = function(cfg) {
+const Group0 = function(cfg) {
   Group.superclass.constructor.call(this, cfg);
   this.set('children', []);
   this.set('tobeRemoved', []);
@@ -53,7 +53,7 @@ function initClassCfgs(c) {
   Util.merge(c._cfg, c.CFG);
 }
 
-const Group1 = Util.extend(Group, Element);
+const Group1 = Util.extend(Group0, Element);
 
 const Group2 = Util.augment(Group1, {
   isGroup: true,
@@ -456,4 +456,5 @@ const Group2 = Util.augment(Group1, {
   }
 });
 
-export = Group2;
+class Group extends Group2 {}
+export = Group;

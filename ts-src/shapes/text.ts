@@ -1,11 +1,11 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const CText = function(cfg) {
+const CText0 = function(cfg) {
   CText.superclass.constructor.call(this, cfg);
 };
 
-CText.ATTRS = {
+CText0.ATTRS = {
   x: 0,
   y: 0,
   text: null,
@@ -20,7 +20,7 @@ CText.ATTRS = {
   textArr: null
 };
 
-const CText1 = Util.extend(CText, Shape);
+const CText1 = Util.extend(CText0, Shape);
 
 const CText2 = Util.augment(CText1, {
   canFill: true,
@@ -240,4 +240,5 @@ const CText2 = Util.augment(CText1, {
   }
 });
 
-export = CText2;
+class CText extends CText2 {}
+export = CText;

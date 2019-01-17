@@ -3,11 +3,11 @@ import Shape = require('../core/shape');
 import Format = require('../util/format');
 import PathSegment = require('./util/path-segment');
 
-const Marker = function(cfg) {
+const Marker0 = function(cfg) {
   Marker.superclass.constructor.call(this, cfg);
 };
 
-Marker.Symbols = {
+Marker0.Symbols = {
   // 圆
   circle(x, y, r) {
     return [
@@ -59,12 +59,12 @@ Marker.Symbols = {
   }
 };
 
-Marker.ATTRS = {
+Marker0.ATTRS = {
   path: null,
   lineWidth: 1
 };
 
-const Marker1 = Util.extend(Marker, Shape);
+const Marker1 = Util.extend(Marker0, Shape);
 
 const Marker2 = Util.augment(Marker1, {
   type: 'marker',
@@ -130,4 +130,5 @@ const Marker2 = Util.augment(Marker1, {
   }
 });
 
-export = Marker2;
+class Marker extends Marker2 {}
+export = Marker;

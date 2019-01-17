@@ -20,9 +20,9 @@ const PROPOGATE_EVENTS = [
   'drop'
 ];
 
-const AdvancedEE = function() {};
+const AdvancedEE0 = function() {};
 
-const AdvancedEE1 = Util.augment(AdvancedEE, EventEmitter, {
+const AdvancedEE1 = Util.augment(AdvancedEE0, EventEmitter, {
   emit(evt, e) {
     const args = arguments;
     EventEmitter.prototype.emit.apply(this, args);
@@ -39,4 +39,5 @@ const AdvancedEE1 = Util.augment(AdvancedEE, EventEmitter, {
   }
 });
 
-export = AdvancedEE1;
+class AdvancedEE extends AdvancedEE1 {}
+export = AdvancedEE;

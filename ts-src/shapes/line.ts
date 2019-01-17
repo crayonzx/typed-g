@@ -3,11 +3,11 @@ import Shape = require('../core/shape');
 import Arrow = require('./util/arrow');
 import LineMath = require('./math/line');
 
-const Line = function(cfg) {
+const Line0 = function(cfg) {
   Line.superclass.constructor.call(this, cfg);
 };
 
-Line.ATTRS = {
+Line0.ATTRS = {
   x1: 0,
   y1: 0,
   x2: 0,
@@ -17,7 +17,7 @@ Line.ATTRS = {
   endArrow: false
 };
 
-const Line1 = Util.extend(Line, Shape);
+const Line1 = Util.extend(Line0, Shape);
 
 const Line2 = Util.augment(Line1, {
   canStroke: true,
@@ -63,4 +63,5 @@ const Line2 = Util.augment(Line1, {
   }
 });
 
-export = Line2;
+class Line extends Line2 {}
+export = Line;

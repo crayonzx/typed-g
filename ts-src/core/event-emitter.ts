@@ -12,9 +12,9 @@ function indexOfCallback(events, callback) {
   return -1;
 }
 
-const EventEmitter = function() {};
+const EventEmitter0 = function() {};
 
-const EventEmitter1 = Util.augment(EventEmitter, {
+const EventEmitter1 = Util.augment(EventEmitter0, {
   on(evt, callback, one) {
     const self = this;
     if (!Util.isFunction(callback)) {
@@ -92,4 +92,5 @@ const EventEmitter1 = Util.augment(EventEmitter, {
   }
 });
 
-export = EventEmitter1;
+class EventEmitter extends EventEmitter1 {}
+export = EventEmitter;
