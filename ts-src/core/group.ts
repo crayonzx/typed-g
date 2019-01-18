@@ -73,7 +73,7 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape(type:string, cfg) {
+  addShape(type: string, cfg: ShapeConfigs) {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
