@@ -201,5 +201,6 @@ const Canvas2 = Util.augment(Canvas1, Event, {
 });
 
 import Event_ from './event'; // Fix: 'Event' from external module but cannot be named
+import GShape from './core/shape'; // Fix: Same as above
 class Canvas extends Canvas2 {}
 export = Canvas;

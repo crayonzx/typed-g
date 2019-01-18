@@ -4,11 +4,7 @@ import Shape = require('../shapes/index');
 const SHAPE_MAP = {}; // 缓存图形类型
 const INDEX = '_INDEX';
 
-interface ShapeConfigs {
-  attrs: any;
-  zIndex?: number;
-  capture?: boolean;
-}
+import GShape from './shape';
 
 function getComparer(compare) {
   return function(left, right) {
@@ -73,7 +69,11 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape(type: string, cfg: ShapeConfigs) {
+  addShape(type: string, cfg: {
+    attrs: any;
+    zIndex?: number;
+    capture?: boolean;
+  }): GShape {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
@@ -101,7 +101,7 @@ const Group2 = Util.augment(Group1, {
    * @param  {Object} cfg 配置项
    * @return {Object} rst 图组
    */
-  addGroup(param:function|object|undefined, cfg) {
+  addGroup(param?: (...args: any[]) => any | object, cfg?: object): Group {
     const canvas = this.get('canvas');
     let rst;
     cfg = Util.merge({}, cfg);
