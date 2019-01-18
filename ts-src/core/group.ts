@@ -4,6 +4,12 @@ import Shape = require('../shapes/index');
 const SHAPE_MAP = {}; // 缓存图形类型
 const INDEX = '_INDEX';
 
+interface ShapeConfigs {
+  attrs: any;
+  zIndex?: number;
+  capture?: boolean;
+}
+
 function getComparer(compare) {
   return function(left, right) {
     const result = compare(left, right);
@@ -226,7 +232,7 @@ const Group2 = Util.augment(Group1, {
     const lastIndex = this.get('children').length - 1;
     return this.getChildByIndex(lastIndex);
   },
-  getBBox() {
+  getBBox(): { minX: number, minY: number, maxX: number, maxY: number, x: number, y: number, width: number, height: number } {
     const self = this;
     let minX = Infinity;
     let maxX = -Infinity;
