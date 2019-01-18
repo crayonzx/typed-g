@@ -24,6 +24,16 @@ namespace G {
     lineDash: number | number[];
   }
 
+  export interface TextStyle extends Style {
+    fontStyle: 'normal' | 'italic' | 'oblique';
+    fontVariant: 'normal' | 'small-caps';
+    fontWeight: string;
+    fontSize: number;
+    fontFamily: string;
+    textAlign: 'center' | 'end' | 'left' | 'right' | 'start';
+    textBaseline: 'top' | 'middle' | 'bottom' | 'alphabetic' | 'hanging';
+  }
+
   export interface BBox {
     centerX?: number;
     centerY?: number;
