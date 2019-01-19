@@ -17,7 +17,7 @@ const Circle1 = Util.extend(Circle0, Shape);
 const Circle2 = Util.augment(Circle1, {
   canFill: true,
   canStroke: true,
-  type: 'circle',
+  type: 'circle' as 'circle',
   getDefaultAttrs() {
     return {
       lineWidth: 1

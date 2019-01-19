@@ -21,7 +21,7 @@ const Line1 = Util.extend(Line0, Shape);
 
 const Line2 = Util.augment(Line1, {
   canStroke: true,
-  type: 'line',
+  type: 'line' as 'line',
   getDefaultAttrs() {
     return {
       lineWidth: 1,

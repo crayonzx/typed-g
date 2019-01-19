@@ -15,7 +15,7 @@ const Polygon1 = Util.extend(Polygon0, Shape);
 const Polygon2 = Util.augment(Polygon1, {
   canFill: true,
   canStroke: true,
-  type: 'polygon',
+  type: 'polygon' as 'polygon',
   getDefaultAttrs() {
     return {
       lineWidth: 1

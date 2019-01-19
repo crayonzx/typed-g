@@ -22,7 +22,7 @@ const Path1 = Util.extend(Path0, Shape);
 const Path2 = Util.augment(Path1, {
   canFill: true,
   canStroke: true,
-  type: 'path',
+  type: 'path' as 'path',
   getDefaultAttrs() {
     return {
       lineWidth: 1,

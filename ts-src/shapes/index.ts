@@ -29,3 +29,21 @@ const Shape1: typeof import('../core/shape') & {
   Text: typeof import('./text');
 } = Shape;
 export = Shape1;
+
+namespace Shape1 {
+  type Shape = typeof Shape1;
+
+  type GetClassType<T> = T extends new (...args: any[]) => any ? T : never;
+  type Union<T extends keyof Shape> = T extends keyof Shape ? Shape[T] : never;
+  type Shapes = GetClassType<Union<keyof Shape>>;
+
+  type GetAttrs<
+    T extends new (...args: any[]) => { type: string }
+  > = T extends { ATTRS: any }
+    ? { [x in InstanceType<T>['type']]: T['ATTRS'] }
+    : { [x in InstanceType<T>['type']]: {} };
+
+  export type ShapeType = UnionPick<InstanceType<Shapes>, 'type'>;
+  export type AttrsMap = UnionToIntersection<GetAttrs<Shapes>>;
+}
+

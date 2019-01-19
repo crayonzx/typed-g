@@ -20,7 +20,7 @@ const Rect1 = Util.extend(Rect0, Shape);
 const Rect2 = Util.augment(Rect1, {
   canFill: true,
   canStroke: true,
-  type: 'rect',
+  type: 'rect' as 'rect',
   getDefaultAttrs() {
     return {
       lineWidth: 1,

@@ -20,7 +20,7 @@ CImage0.ATTRS = {
 const CImage1 = Util.extend(CImage0, Shape);
 
 const CImage2 = Util.augment(CImage1, {
-  type: 'image',
+  type: 'image' as 'image',
   isHitBox() {
     return false;
   },

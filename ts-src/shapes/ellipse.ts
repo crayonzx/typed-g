@@ -18,7 +18,7 @@ const Ellipse1 = Util.extend(Ellipse0, Shape);
 const Ellipse2 = Util.augment(Ellipse1, {
   canFill: true,
   canStroke: true,
-  type: 'ellipse',
+  type: 'ellipse' as 'ellipse',
   getDefaultAttrs() {
     return {
       lineWidth: 1

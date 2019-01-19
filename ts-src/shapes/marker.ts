@@ -67,7 +67,7 @@ Marker0.ATTRS = {
 const Marker1 = Util.extend(Marker0, Shape);
 
 const Marker2 = Util.augment(Marker1, {
-  type: 'marker',
+  type: 'marker' as 'marker',
   canFill: true,
   canStroke: true,
   getDefaultAttrs() {

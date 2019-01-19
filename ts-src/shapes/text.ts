@@ -25,7 +25,7 @@ const CText1 = Util.extend(CText0, Shape);
 const CText2 = Util.augment(CText1, {
   canFill: true,
   canStroke: true,
-  type: 'text',
+  type: 'text' as 'text',
   getDefaultAttrs() {
     return {
       lineWidth: 1,

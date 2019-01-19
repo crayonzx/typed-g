@@ -10,7 +10,7 @@ const Dom1 = Util.extend(Dom0, Shape);
 const Dom2 = Util.augment(Dom1, {
   canFill: true,
   canStroke: true,
-  type: 'dom',
+  type: 'dom' as 'dom',
   calculateBox() {
     const self = this;
     const attrs = self._attrs;

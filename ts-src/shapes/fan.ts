@@ -22,7 +22,7 @@ const Fan1 = Util.extend(Fan0, Shape);
 const Fan2 = Util.augment(Fan1, {
   canFill: true,
   canStroke: true,
-  type: 'fan',
+  type: 'fan' as 'fan',
   getDefaultAttrs() {
     return {
       clockwise: false,

@@ -30,7 +30,7 @@ const Arc1 = Util.extend(Arc0, Shape);
 
 const Arc2 = Util.augment(Arc1, {
   canStroke: true,
-  type: 'arc',
+  type: 'arc' as 'arc',
   getDefaultAttrs() {
     return {
       x: 0,
