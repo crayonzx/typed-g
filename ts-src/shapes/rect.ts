@@ -74,5 +74,7 @@ const Rect2 = Util.augment(Rect1, {
   }
 });
 
-class Rect extends Rect2 {}
+class Rect extends Rect2 {
+  _attr: typeof Rect.ATTRS;
+}
 export = Rect;

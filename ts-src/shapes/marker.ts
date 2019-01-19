@@ -130,5 +130,7 @@ const Marker2 = Util.augment(Marker1, {
   }
 });
 
-class Marker extends Marker2 {}
+class Marker extends Marker2 {
+  _attr: typeof Marker.ATTRS;
+}
 export = Marker;

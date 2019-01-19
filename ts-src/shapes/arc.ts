@@ -113,5 +113,7 @@ const Arc2 = Util.augment(Arc1, {
   }
 });
 
-class Arc extends Arc2 {}
+class Arc extends Arc2 {
+  _attr: typeof Arc.ATTRS;
+}
 export = Arc;

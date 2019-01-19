@@ -1,6 +1,6 @@
 import Util = require('../../util/index');
 
-export = {
+const Attr = {
   canFill: false,
   canStroke: false,
   initAttrs(attrs) {
@@ -93,3 +93,11 @@ export = {
     item.hasFill = function() { return true; };
   }
 };
+export = Attr as Overwrite<typeof Attr, {
+  attr: {
+    <T extends { _attr: {} }>(this: T): T['_attr'];
+    <T extends { _attr: {} }, K extends keyof T['_attr']>(this: T, name: K): T['_attr'][K];
+    <T extends { _attr: {} }>(this: T, name: Partial<T['_attr']>): void;
+    <T extends { _attr: {} }, K extends keyof T['_attr']>(this: T, name: K, value: T['_attr'][K]): void;
+  }
+}>;

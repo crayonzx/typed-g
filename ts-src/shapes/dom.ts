@@ -30,5 +30,7 @@ const Dom2 = Util.augment(Dom1, {
   }
 });
 
-class Dom extends Dom2 {}
+class Dom extends Dom2 {
+  _attr: {};
+}
 export = Dom;

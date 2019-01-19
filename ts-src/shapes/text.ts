@@ -8,7 +8,7 @@ const CText0 = function(cfg) {
 CText0.ATTRS = {
   x: 0,
   y: 0,
-  text: null,
+  text: '',
   fontSize: 12,
   fontFamily: 'sans-serif',
   fontStyle: 'normal',
@@ -240,5 +240,7 @@ const CText2 = Util.augment(CText1, {
   }
 });
 
-class CText extends CText2 {}
+class CText extends CText2 {
+  _attr: typeof CText.ATTRS;
+}
 export = CText;

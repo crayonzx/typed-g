@@ -63,5 +63,7 @@ const Line2 = Util.augment(Line1, {
   }
 });
 
-class Line extends Line2 {}
+class Line extends Line2 {
+  _attr: typeof Line.ATTRS;
+}
 export = Line;

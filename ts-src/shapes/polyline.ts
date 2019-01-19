@@ -172,5 +172,7 @@ const Polyline2 = Util.augment(Polyline1, {
   }
 });
 
-class Polyline extends Polyline2 {}
+class Polyline extends Polyline2 {
+  _attr: typeof Polyline.ATTRS;
+}
 export = Polyline;

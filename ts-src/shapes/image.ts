@@ -153,5 +153,7 @@ const CImage2 = Util.augment(CImage1, {
   }
 });
 
-class CImage extends CImage2 {}
+class CImage extends CImage2 {
+  _attr: typeof CImage.ATTRS;
+}
 export = CImage;

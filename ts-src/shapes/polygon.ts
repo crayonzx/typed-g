@@ -81,5 +81,7 @@ const Polygon2 = Util.augment(Polygon1, {
   }
 });
 
-class Polygon extends Polygon2 {}
+class Polygon extends Polygon2 {
+  _attr: typeof Polygon.ATTRS;
+}
 export = Polygon;

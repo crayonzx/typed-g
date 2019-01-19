@@ -92,5 +92,7 @@ const Fan2 = Util.augment(Fan1, {
   }
 });
 
-class Fan extends Fan2 {}
+class Fan extends Fan2 {
+  _attr: typeof Fan.ATTRS;
+}
 export = Fan;
