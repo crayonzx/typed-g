@@ -30,12 +30,13 @@ const Shape1: typeof import('../core/shape') & {
 } = Shape;
 export = Shape1;
 
+import '../../types/global';
 namespace Shape1 {
-  type Shape = typeof Shape1;
+  type ShapeObj = typeof Shape1;
 
   type GetClassType<T> = T extends new (...args: any[]) => any ? T : never;
-  type Union<T extends keyof Shape> = T extends keyof Shape ? Shape[T] : never;
-  type ShapesType = GetClassType<Union<keyof Shape>>;
+  type Union<T extends keyof ShapeObj> = T extends keyof ShapeObj ? ShapeObj[T] : never;
+  type ShapesType = GetClassType<Union<keyof ShapeObj>>;
   type GetAttrs<T extends new (...args: any[]) => { type: string }> = T extends { ATTRS: any }
     ? { [x in InstanceType<T>['type']]: T['ATTRS'] }
     : { [x in InstanceType<T>['type']]: {} };
@@ -44,6 +45,8 @@ namespace Shape1 {
      : { [x in InstanceType<T>['type']]: never };
 
   export type ShapeType = UnionPick<InstanceType<ShapesType>, 'type'>;
-  export type AttrsMap = UnionToIntersection<GetAttrs<ShapesType>>;
-  export type ShapeMap = UnionToIntersection<GetShapeMap<ShapesType>>;
+  type AttrsMap = UnionToIntersection<GetAttrs<ShapesType>>;
+  export type Attrs<T extends ShapeType = ShapeType> = T extends ShapeType ? AttrsMap[T] : never;
+  type ShapeMap = UnionToIntersection<GetShapeMap<ShapesType>>;
+  export type Shape<T extends ShapeType = ShapeType> = T extends ShapeType ? ShapeMap[T] : never;
 }
