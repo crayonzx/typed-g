@@ -5,6 +5,8 @@ const SHAPE_MAP = {}; // 缓存图形类型
 const INDEX = '_INDEX';
 
 import GShape from './shape';
+import GShapes from '../shapes';
+import Common from '../common';
 
 function getComparer(compare) {
   return function(left, right) {
@@ -69,8 +71,8 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape(type: string, cfg: {
-    attrs: any;
+  addShape<T extends GShapes.ShapeType>(type: T, cfg: {
+    attrs: Partial<GShapes.AttrsMap[T] & Common.Style>;
     zIndex?: number;
     capture?: boolean;
   }): GShape {
