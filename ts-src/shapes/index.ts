@@ -35,15 +35,15 @@ namespace Shape1 {
 
   type GetClassType<T> = T extends new (...args: any[]) => any ? T : never;
   type Union<T extends keyof Shape> = T extends keyof Shape ? Shape[T] : never;
-  type Shapes = GetClassType<Union<keyof Shape>>;
-
-  type GetAttrs<
-    T extends new (...args: any[]) => { type: string }
-  > = T extends { ATTRS: any }
+  type ShapesType = GetClassType<Union<keyof Shape>>;
+  type GetAttrs<T extends new (...args: any[]) => { type: string }> = T extends { ATTRS: any }
     ? { [x in InstanceType<T>['type']]: T['ATTRS'] }
     : { [x in InstanceType<T>['type']]: {} };
+  type GetShapeMap<T extends new (...args: any[]) => { type: string }> = T extends {}
+     ? { [x in InstanceType<T>['type']]: InstanceType<T> }
+     : { [x in InstanceType<T>['type']]: never };
 
-  export type ShapeType = UnionPick<InstanceType<Shapes>, 'type'>;
-  export type AttrsMap = UnionToIntersection<GetAttrs<Shapes>>;
+  export type ShapeType = UnionPick<InstanceType<ShapesType>, 'type'>;
+  export type AttrsMap = UnionToIntersection<GetAttrs<ShapesType>>;
+  export type ShapeMap = UnionToIntersection<GetShapeMap<ShapesType>>;
 }
-

@@ -4,7 +4,6 @@ import Shape = require('../shapes/index');
 const SHAPE_MAP = {}; // 缓存图形类型
 const INDEX = '_INDEX';
 
-import GShape from './shape';
 import GShapes from '../shapes';
 import Common from '../common';
 
@@ -71,11 +70,7 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape<T extends GShapes.ShapeType>(type: T, cfg: {
-    attrs: Partial<GShapes.AttrsMap[T] & Common.Style>;
-    zIndex?: number;
-    capture?: boolean;
-  }): GShape {
+  addShape(type, cfg) {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
@@ -464,5 +459,11 @@ const Group2 = Util.augment(Group1, {
   }
 });
 
-class Group extends Group2 {}
+class Group extends Group2 {
+  addShape: <T extends GShapes.ShapeType>(type: T, cfg: {
+    attrs: Partial<GShapes.AttrsMap[T] & Common.Style>;
+    zIndex?: number;
+    capture?: boolean;
+  }) => GShapes.ShapeMap[T];
+}
 export = Group;

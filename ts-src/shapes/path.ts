@@ -6,7 +6,7 @@ import Arrow = require('./util/arrow');
 import PathUtil = require('../util/path');
 import CubicMath = require('./math/cubic');
 
-import Common, { Common } from '../common';
+import Common from '../common';
 
 const Path0 = function(cfg) {
   Path.superclass.constructor.call(this, cfg);
