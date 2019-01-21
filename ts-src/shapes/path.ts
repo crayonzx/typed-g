@@ -6,12 +6,14 @@ import Arrow = require('./util/arrow');
 import PathUtil = require('../util/path');
 import CubicMath = require('./math/cubic');
 
+import Common, { Common } from '../common';
+
 const Path0 = function(cfg) {
   Path.superclass.constructor.call(this, cfg);
 };
 
 Path0.ATTRS = {
-  path: null,
+  path: null as any as Common.SVGPath | string,
   lineWidth: 1,
   startArrow: false,
   endArrow: false
