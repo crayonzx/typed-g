@@ -63,7 +63,11 @@ Marker0.Symbols = {
 
 Marker0.ATTRS = {
   path: null,
-  lineWidth: 1
+  lineWidth: 1,
+  x: 0,
+  y: 0,
+  r: 1,
+  symbol: '' as any as 'circle' | 'square' | 'diamond' | 'triangle' | 'triangle-down' | ((x: number, y: number, r: number) => Common.SVGPath),
 };
 
 const Marker1 = Util.extend(Marker0, Shape);
@@ -133,11 +137,6 @@ const Marker2 = Util.augment(Marker1, {
 });
 
 class Marker extends Marker2 {
-  _attr: typeof Marker.ATTRS & {
-    x: number,
-    y: number,
-    r: number,
-    symbol: 'circle' | 'square' | 'diamond' | 'triangle' | 'triangle-down' | ((x: number, y: number, r: number) => Common.SVGPath);
-  };
+  _attr: typeof Marker.ATTRS;
 }
 export = Marker;
