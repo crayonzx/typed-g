@@ -109,7 +109,7 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
     this._cfg.visible = false;
     return this;
   },
-  remove(destroy, delayRemove) {
+  remove(destroy?, delayRemove?) {
     const cfg = this._cfg;
     const parent = cfg.parent;
     const el = cfg.el;

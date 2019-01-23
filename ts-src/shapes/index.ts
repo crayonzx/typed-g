@@ -1,4 +1,4 @@
-const Shape = require('../core/shape');
+﻿const Shape = require('../core/shape');
 Shape.Arc = require('./arc');
 Shape.Circle = require('./circle');
 Shape.Dom = require('./dom');
@@ -44,6 +44,7 @@ namespace Shape1 {
     ? { [x in InstanceType<T>['type']]: InstanceType<T> }
     : { [x in InstanceType<T>['type']]: never };
 
+  export type Base = import('../core/shape');
   export type ShapeType = GUtil.UnionPick<InstanceType<ShapesType>, 'type'>;
   type AttrsMap = GUtil.UnionToIntersection<GetAttrs<ShapesType>>;
   export type Attrs<T extends ShapeType = ShapeType> = T extends ShapeType ? AttrsMap[T] : never;
