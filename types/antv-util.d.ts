@@ -61,22 +61,12 @@ declare module '@antv/util/lib/extend' {
   export = extend;
 }
 declare module '@antv/util/lib/augment' {
-  const augment: <T extends Util.TwoFunctionTypes, U1, U2, U3, U4, U5, U6>(
+  const augment: <T extends Util.TwoFunctionTypes, U extends any[]>(
     dist: T,
-    src1: U1,
-    src2?: U2,
-    src3?: U3,
-    src4?: U4,
-    src5?: U5,
-    src6?: U6
+    ...src: U
   ) => (new (...args: Util.ArgsType<Util.ToClassType<T>>) => Util.Overwrite<
     Util.ProtoType<Util.ToClassType<T>>,
-    Util.ProtoType<U1>,
-    Util.ProtoType<U2>,
-    Util.ProtoType<U3>,
-    Util.ProtoType<U4>,
-    Util.ProtoType<U5>,
-    Util.ProtoType<U6>
+    Util.UnionToIntersection<Util.ProtoType<U extends Array<infer V> ? V : never>>
   >) &
     Util.ExcludeFunctionType<Util.ToClassType<T>>;
   export = augment;

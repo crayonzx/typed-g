@@ -26,9 +26,7 @@ declare namespace GUtil {
   /** 获取 prototype */
   type ProtoType<T> = T extends NewFunctionType ? NewReturnType<T> : T;
 
-  type _Overwrite<T, U> = U extends null | undefined
-    ? T
-    : { [P in Exclude<keyof T, keyof U>]: T[P] } & U;
+  type _Overwrite<T, U> = U extends null | undefined ? T : Pick<T, Exclude<keyof T, keyof U>> & U;
 
   type _Overwrite2<T, U1, U2> = _Overwrite<_Overwrite<T, U1>, U2>;
   type _Overwrite3<T, U1, U2, U3> = _Overwrite<_Overwrite2<T, U1, U2>, U3>;
@@ -58,7 +56,9 @@ declare namespace GUtil {
   type UnionPick<T, K extends string> = T extends {} ? (K extends keyof T ? T[K] : {}) : never;
 
   /** 混合数组中每个元素的类型或者每个元素的某个属性的类型 */
-  type MixArray<T extends any[], K extends string | undefined = undefined> = T extends Array<infer U>
+  type MixArray<T extends any[], K extends string | undefined = undefined> = T extends Array<
+    infer U
+  >
     ? UnionToIntersection<K extends undefined ? U : UnionPick<U, K>>
     : never;
 }
