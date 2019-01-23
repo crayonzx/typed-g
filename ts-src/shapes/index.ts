@@ -31,6 +31,7 @@ const Shape1: typeof import('../core/shape') & {
 export = Shape1;
 
 import '../../types/global';
+import Common from '../common';
 namespace Shape1 {
   type ShapeObj = typeof Shape1;
 
@@ -38,11 +39,11 @@ namespace Shape1 {
   type Union<T extends keyof ShapeObj> = T extends keyof ShapeObj ? ShapeObj[T] : never;
   type ShapesType = GetClassType<Union<keyof ShapeObj>>;
   type GetAttrs<T extends new (...args: any[]) => { type: string }> = T extends { ATTRS: any }
-    ? { [x in InstanceType<T>['type']]: T['ATTRS'] }
+    ? { [x in InstanceType<T>['type']]: T['ATTRS'] & Common.Style }
     : { [x in InstanceType<T>['type']]: {} };
   type GetShapeMap<T extends new (...args: any[]) => { type: string }> = T extends {}
-     ? { [x in InstanceType<T>['type']]: InstanceType<T> }
-     : { [x in InstanceType<T>['type']]: never };
+    ? { [x in InstanceType<T>['type']]: InstanceType<T> }
+    : { [x in InstanceType<T>['type']]: never };
 
   export type ShapeType = UnionPick<InstanceType<ShapesType>, 'type'>;
   type AttrsMap = UnionToIntersection<GetAttrs<ShapesType>>;

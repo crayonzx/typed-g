@@ -1,4 +1,6 @@
 import Util = require('../../util/index');
+import Common from '../../common';
+type AttrsMixStyle<T extends { _attr: {} }> = T['_attr'] & Common.Style;
 
 const Attr = {
   canFill: false,
@@ -95,9 +97,9 @@ const Attr = {
 };
 export = Attr as Overwrite<typeof Attr, {
   attr: {
-    <T extends { _attr: {} }>(this: T): T['_attr'];
-    <T extends { _attr: {} }, K extends keyof T['_attr']>(this: T, name: K): T['_attr'][K];
-    <T extends { _attr: {} }>(this: T, name: Partial<T['_attr']>): void;
-    <T extends { _attr: {} }, K extends keyof T['_attr']>(this: T, name: K, value: T['_attr'][K]): void;
+    <T extends { _attr: {} }>(this: T): AttrsMixStyle<T>;
+    <T extends { _attr: {} }, K extends keyof AttrsMixStyle<T>>(this: T, name: K): AttrsMixStyle<T>[K];
+    <T extends { _attr: {} }>(this: T, name: Partial<AttrsMixStyle<T>>): void;
+    <T extends { _attr: {} }, K extends keyof AttrsMixStyle<T>>(this: T, name: K, value: AttrsMixStyle<T>[K]): void;
   }
 }>;
