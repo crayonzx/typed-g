@@ -1,12 +1,12 @@
-import './antv-util-array';
-import './antv-util-dom';
-import './antv-util-event';
-import './antv-util-format';
-import './antv-util-math';
-import './antv-util-matrix';
-import './antv-util-object';
-import './antv-util-path';
-import './antv-util-string';
-import './antv-util-type';
-import './antv-util';
-import './global';
+/// <reference path='./antv-util-array.d.ts' />
+/// <reference path='./antv-util-dom.d.ts' />
+/// <reference path='./antv-util-event.d.ts' />
+/// <reference path='./antv-util-format.d.ts' />
+/// <reference path='./antv-util-math.d.ts' />
+/// <reference path='./antv-util-matrix.d.ts' />
+/// <reference path='./antv-util-object.d.ts' />
+/// <reference path='./antv-util-path.d.ts' />
+/// <reference path='./antv-util-string.d.ts' />
+/// <reference path='./antv-util-type.d.ts' />
+/// <reference path='./antv-util.d.ts' />
+/// <reference path='./G-global.d.ts' />

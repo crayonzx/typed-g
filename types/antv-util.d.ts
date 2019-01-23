@@ -1,4 +1,10 @@
-// @antv/util/lib
+/**
+ * @antv/util/lib
+ */
+/// <reference path='./G-global.d.ts' />
+
+import Util = GUtil;
+
 declare module '@antv/util/lib/is-empty' {
   const isEmpty: (value: any) => boolean;
   export = isEmpty;
@@ -12,12 +18,7 @@ declare module '@antv/util/lib/clone' {
   export = clone;
 }
 declare module '@antv/util/lib/deep-mix' {
-  const deepMix: <T, U1, U2, U3>(
-    dist: T,
-    src1: U1,
-    src2?: U2,
-    src3?: U3
-  ) => Overwrite<T, U1, U2, U3>;
+  const deepMix: <T, U extends any[]>(dist: T, ...src: U) => T & Util.MixArray<U>;
   export = deepMix;
 }
 declare module '@antv/util/lib/mix' {
@@ -44,23 +45,23 @@ declare module '@antv/util/lib/to-array' {
   export = toArray;
 }
 declare module '@antv/util/lib/extend' {
-  const extend: <T extends TwoFunctionTypes, U extends NewFunctionType, V, W>(
+  const extend: <T extends Util.TwoFunctionTypes, U extends Util.NewFunctionType, V, W>(
     subclass: T,
     superclass: U,
     overrides?: V,
     staticOverrides?: W
-  ) => ExcludeFunctionType<ToClassType<T>> & {
-    new (...args: ArgsType<ToClassType<T>>): Overwrite<
-      NewReturnType<U>,
-      NewReturnType<ToClassType<T>>,
+  ) => Util.ExcludeFunctionType<Util.ToClassType<T>> & {
+    new (...args: Util.ArgsType<Util.ToClassType<T>>): Util.Overwrite<
+      Util.NewReturnType<U>,
+      Util.NewReturnType<Util.ToClassType<T>>,
       V
     >;
-    superclass: ProtoType<U>;
-  } & ExcludeFunctionType<W extends null | undefined ? {} : W>;
+    superclass: Util.ProtoType<U>;
+  } & Util.ExcludeFunctionType<W extends null | undefined ? {} : W>;
   export = extend;
 }
 declare module '@antv/util/lib/augment' {
-  const augment: <T extends TwoFunctionTypes, U1, U2, U3, U4, U5, U6>(
+  const augment: <T extends Util.TwoFunctionTypes, U1, U2, U3, U4, U5, U6>(
     dist: T,
     src1: U1,
     src2?: U2,
@@ -68,20 +69,20 @@ declare module '@antv/util/lib/augment' {
     src4?: U4,
     src5?: U5,
     src6?: U6
-  ) => (new (...args: ArgsType<ToClassType<T>>) => Overwrite<
-    ProtoType<ToClassType<T>>,
-    ProtoType<U1>,
-    ProtoType<U2>,
-    ProtoType<U3>,
-    ProtoType<U4>,
-    ProtoType<U5>,
-    ProtoType<U6>
+  ) => (new (...args: Util.ArgsType<Util.ToClassType<T>>) => Util.Overwrite<
+    Util.ProtoType<Util.ToClassType<T>>,
+    Util.ProtoType<U1>,
+    Util.ProtoType<U2>,
+    Util.ProtoType<U3>,
+    Util.ProtoType<U4>,
+    Util.ProtoType<U5>,
+    Util.ProtoType<U6>
   >) &
-    ExcludeFunctionType<ToClassType<T>>;
+    Util.ExcludeFunctionType<Util.ToClassType<T>>;
   export = augment;
 }
 declare module '@antv/util/lib/debounce' {
-  const debounce: (func: any, wait: any, immediate: any) => ((...args: any[]) => void);
+  const debounce: (func: any, wait: any, immediate: any) => (...args: any[]) => void;
   export = debounce;
 }
 declare module '@antv/util/lib/filter' {

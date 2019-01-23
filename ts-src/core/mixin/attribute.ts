@@ -93,7 +93,7 @@ const Attr = {
     item.hasFill = function() { return true; };
   }
 };
-export = Attr as Overwrite<typeof Attr, {
+export = Attr as GUtil.Overwrite<typeof Attr, {
   attr: {
     <T extends { _attr: {} }>(this: T): T['_attr'];
     <T extends { _attr: {} }, K extends keyof T['_attr']>(this: T, name: K): T['_attr'][K];

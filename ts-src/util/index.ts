@@ -1,9 +1,9 @@
-import '../../types';
-
 import CommonUtil = require('./common');
 const Util = {} as typeof CommonUtil;
 
-export = CommonUtil.merge(Util, CommonUtil, {
+const Util1: typeof import('./common') & {
+  mixin(c: any, mixins: any[]): void
+} = CommonUtil.merge(Util, CommonUtil, {
   mixin(c, mixins) {
     const Param = c.CFG ? 'CFG' : 'ATTRS';
     if (c && mixins) {
@@ -22,4 +22,4 @@ export = CommonUtil.merge(Util, CommonUtil, {
   }
 });
 
-// export = Util;
+export = Util1;

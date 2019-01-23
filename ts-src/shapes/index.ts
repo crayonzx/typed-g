@@ -1,3 +1,5 @@
+/// <reference path='../../types/index.d.ts' />
+
 const Shape = require('../core/shape');
 Shape.Arc = require('./arc');
 Shape.Circle = require('./circle');
@@ -30,7 +32,6 @@ const Shape1: typeof import('../core/shape') & {
 } = Shape;
 export = Shape1;
 
-import '../../types/global';
 namespace Shape1 {
   type ShapeObj = typeof Shape1;
 
@@ -44,9 +45,9 @@ namespace Shape1 {
      ? { [x in InstanceType<T>['type']]: InstanceType<T> }
      : { [x in InstanceType<T>['type']]: never };
 
-  export type ShapeType = UnionPick<InstanceType<ShapesType>, 'type'>;
-  type AttrsMap = UnionToIntersection<GetAttrs<ShapesType>>;
+  export type ShapeType = GUtil.UnionPick<InstanceType<ShapesType>, 'type'>;
+  type AttrsMap = GUtil.UnionToIntersection<GetAttrs<ShapesType>>;
   export type Attrs<T extends ShapeType = ShapeType> = T extends ShapeType ? AttrsMap[T] : never;
-  type ShapeMap = UnionToIntersection<GetShapeMap<ShapesType>>;
+  type ShapeMap = GUtil.UnionToIntersection<GetShapeMap<ShapesType>>;
   export type Shape<T extends ShapeType = ShapeType> = T extends ShapeType ? ShapeMap[T] : never;
 }

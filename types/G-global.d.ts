@@ -1,4 +1,4 @@
-declare global {
+declare namespace GUtil {
   /** 转成类似 class 的接口类型，可使用 new 方法创建对象 */
   type ToClassType<T extends TwoFunctionTypes> = T extends NewFunctionType
     ? T
@@ -58,9 +58,7 @@ declare global {
   type UnionPick<T, K extends string> = T extends {} ? (K extends keyof T ? T[K] : {}) : never;
 
   /** 混合数组中每个元素的类型或者每个元素的某个属性的类型 */
-  type MixArray<T extends any[], K extends string = '__undefined__'> = T extends Array<infer U>
-    ? UnionToIntersection<K extends '__undefined__' ? U : UnionPick<U, K>>
+  type MixArray<T extends any[], K extends string | undefined = undefined> = T extends Array<infer U>
+    ? UnionToIntersection<K extends undefined ? U : UnionPick<U, K>>
     : never;
 }
-
-export {};
