@@ -1,5 +1,5 @@
 import CommonUtil = require('./common');
-const Util = {} as typeof CommonUtil;
+const Util = {};
 
 const Util1: typeof import('./common') & {
   mixin(c: any, mixins: any[]): void

@@ -1,4 +1,4 @@
-/// <reference path='../../types/index.d.ts' />
+﻿/// <reference path='../../types/index.d.ts' />
 
 const Shape = require('../core/shape');
 Shape.Arc = require('./arc');
@@ -32,6 +32,7 @@ const Shape1: typeof import('../core/shape') & {
 } = Shape;
 export = Shape1;
 
+import Common from '../common';
 namespace Shape1 {
   type ShapeObj = typeof Shape1;
 
@@ -39,11 +40,11 @@ namespace Shape1 {
   type Union<T extends keyof ShapeObj> = T extends keyof ShapeObj ? ShapeObj[T] : never;
   type ShapesType = GetClassType<Union<keyof ShapeObj>>;
   type GetAttrs<T extends new (...args: any[]) => { type: string }> = T extends { ATTRS: any }
-    ? { [x in InstanceType<T>['type']]: T['ATTRS'] }
+    ? { [x in InstanceType<T>['type']]: Partial<T['ATTRS']> & Common.Style }
     : { [x in InstanceType<T>['type']]: {} };
   type GetShapeMap<T extends new (...args: any[]) => { type: string }> = T extends {}
-     ? { [x in InstanceType<T>['type']]: InstanceType<T> }
-     : { [x in InstanceType<T>['type']]: never };
+    ? { [x in InstanceType<T>['type']]: InstanceType<T> }
+    : { [x in InstanceType<T>['type']]: never };
 
   export type ShapeType = GUtil.UnionPick<InstanceType<ShapesType>, 'type'>;
   type AttrsMap = GUtil.UnionToIntersection<GetAttrs<ShapesType>>;

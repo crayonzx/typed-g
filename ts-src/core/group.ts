@@ -461,7 +461,7 @@ const Group2 = Util.augment(Group1, {
 
 class Group extends Group2 {
   addShape: <T extends GShapes.ShapeType>(type: T, cfg: {
-    attrs: Partial<GShapes.Attrs<T> & Common.Style>;
+    attrs: Partial<GShapes.Attrs<T>>;
     zIndex?: number;
     capture?: boolean;
   }) => GShapes.Shape<T>;
