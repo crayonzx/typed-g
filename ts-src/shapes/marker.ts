@@ -3,6 +3,8 @@ import Shape = require('../core/shape');
 import Format = require('../util/format');
 import PathSegment = require('./util/path-segment');
 
+import Common from '../common';
+
 const Marker0 = function(cfg) {
   Marker.superclass.constructor.call(this, cfg);
 };
@@ -131,6 +133,11 @@ const Marker2 = Util.augment(Marker1, {
 });
 
 class Marker extends Marker2 {
-  _attr: typeof Marker.ATTRS;
+  _attr: typeof Marker.ATTRS & {
+    x: number,
+    y: number,
+    r: number,
+    symbol: 'circle' | 'square' | 'diamond' | 'triangle' | 'triangle-down' | ((x: number, y: number, r: number) => Common.SVGPath);
+  };
 }
 export = Marker;
