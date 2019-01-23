@@ -1,4 +1,3 @@
-/// <reference path='../types/index.d.ts' />
 import Common from './common';
 namespace G {
   export type Style = Common.Style;

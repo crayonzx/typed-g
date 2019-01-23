@@ -1,5 +1,3 @@
-﻿/// <reference path='../../types/index.d.ts' />
-
 const Shape = require('../core/shape');
 Shape.Arc = require('./arc');
 Shape.Circle = require('./circle');
