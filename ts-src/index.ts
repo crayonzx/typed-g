@@ -1,8 +1,3 @@
-import Common from './common';
-namespace G {
-  export type Style = Common.Style;
-}
-
 const G: {
   Canvas: typeof import('./canvas');
   Group: typeof import('./core/group');
