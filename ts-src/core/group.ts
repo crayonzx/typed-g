@@ -5,7 +5,6 @@ const SHAPE_MAP = {}; // 缓存图形类型
 const INDEX = '_INDEX';
 
 import GShapes from '../shapes';
-import Common from '../common';
 
 function getComparer(compare) {
   return function(left, right) {

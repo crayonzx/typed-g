@@ -1,5 +1,4 @@
 import Util = require('../../util/index');
-import Common from '../../common';
 type AttrsMixStyle<T extends { _attr: {} }> = T['_attr'] & Common.Style;
 
 const Attr = {

@@ -3,8 +3,6 @@ import Shape = require('../core/shape');
 import Format = require('../util/format');
 import PathSegment = require('./util/path-segment');
 
-import Common from '../common';
-
 const Marker0 = function(cfg) {
   Marker.superclass.constructor.call(this, cfg);
 };

@@ -30,7 +30,6 @@ const Shape1: typeof import('../core/shape') & {
 } = Shape;
 export = Shape1;
 
-import Common from '../common';
 namespace Shape1 {
   type ShapeObj = typeof Shape1;
 
@@ -49,5 +48,5 @@ namespace Shape1 {
   type AttrsMap = GUtil.UnionToIntersection<GetAttrs<ShapesType>>;
   export type Attrs<T extends ShapeType = ShapeType> = T extends ShapeType ? AttrsMap[T] : never;
   type ShapeMap = GUtil.UnionToIntersection<GetShapeMap<ShapesType>>;
-  export type Shape<T extends ShapeType = ShapeType> = T extends ShapeType ? ShapeMap[T] : never;
+  export type Shape<T extends ShapeType> = T extends ShapeType ? ShapeMap[T] : never;
 }

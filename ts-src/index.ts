@@ -1,3 +1,5 @@
+import Shapes_ from './shapes';
+
 const G: {
   Canvas: typeof import('./canvas');
   Group: typeof import('./core/group');
@@ -20,6 +22,8 @@ const G: {
   Event: typeof import('./event');
   EventEmitter: typeof import('./core/event-emitter');
   version: string;
+
+  // Shapes: typeof Shapes_;
 } = {
   Canvas: require('./canvas'),
   Group: require('./core/group'),
@@ -45,3 +49,13 @@ const G: {
   version: '3.4.0-beta.3'
 };
 export = G;
+
+namespace G {
+  // export import Shapes = Shapes_;
+  export namespace Shapes {
+    export type Base = Shapes_.Base;
+    export type ShapeType = Shapes_.ShapeType;
+    export type Attrs<T extends ShapeType = ShapeType> = Shapes_.Attrs<T>;
+    export type Shape<T extends ShapeType> = Shapes_.Shape<T>;
+  }
+}
