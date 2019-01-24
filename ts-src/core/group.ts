@@ -69,7 +69,11 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape(type, cfg) {
+  addShape: <T extends GShapes.ShapeType>(type: T, cfg: {
+    attrs: Partial<GShapes.Attrs<T>>;
+    zIndex?: number;
+    capture?: boolean;
+  }): GShapes.Shape<T> => {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
@@ -458,11 +462,5 @@ const Group2 = Util.augment(Group1, {
   }
 });
 
-class Group extends Group2 {
-  addShape: <T extends GShapes.ShapeType>(type: T, cfg: {
-    attrs: Partial<GShapes.Attrs<T>>;
-    zIndex?: number;
-    capture?: boolean;
-  }) => GShapes.Shape<T>;
-}
+class Group extends Group2 {}
 export = Group;

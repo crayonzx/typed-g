@@ -1,4 +1,5 @@
 import Shapes_ from './shapes';
+import Group_ from './core/group';
 
 const G: {
   Canvas: typeof import('./canvas');
@@ -58,4 +59,6 @@ namespace G {
     export type Attrs<T extends ShapeType = ShapeType> = Shapes_.Attrs<T>;
     export type Shape<T extends ShapeType> = Shapes_.Shape<T>;
   }
+
+  export type Group = Group_;
 }
