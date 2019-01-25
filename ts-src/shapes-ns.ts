@@ -1,10 +1,9 @@
-import Shape_ from './core/shape';
 import Shapes from './shapes';
 
 namespace Shape {
   type ShapeObj = typeof Shapes;
 
-  type GetClassType<T> = T extends new (...args: any[]) => any ? T : never;
+  type GetClassType<T> = T extends new (...args: any[]) => { type: string } ? T : never;
   type Union<T extends keyof ShapeObj> = T extends keyof ShapeObj ? ShapeObj[T] : never;
   type ShapesType = GetClassType<Union<keyof ShapeObj>>;
   type GetAttrs<T extends new (...args: any[]) => { type: string }> = T extends { ATTRS: any }
@@ -22,6 +21,6 @@ namespace Shape {
   export type Shape<T extends ShapeType> = T extends ShapeType ? ShapeMap[T] : never;
 }
 
-type Shape = Shape_;
+type Shape = Shape.Base;
 
 export default Shape;

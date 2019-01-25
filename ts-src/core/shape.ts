@@ -158,3 +158,6 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
 
 class Shape extends Shape2 {}
 export = Shape;
+
+import ShapeEx from './shape-ex';
+interface Shape extends ShapeEx {}
