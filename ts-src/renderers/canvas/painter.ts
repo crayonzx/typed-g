@@ -21,12 +21,17 @@ const SHAPE_ATTRS = [
 ];
 
 class Painter {
+  type: 'canvas';
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+  toDraw: boolean;
+
   constructor(dom) {
     if (!dom) {
       return null;
     }
     const canvasId = Util.uniqueId('canvas_');
-    const canvasDom = Util.createDom('<canvas id="' + canvasId + '"></canvas>');
+    const canvasDom = Util.createDom<'canvas'>('<canvas id="' + canvasId + '"></canvas>');
     dom.appendChild(canvasDom);
     this.type = 'canvas';
     this.canvas = canvasDom;

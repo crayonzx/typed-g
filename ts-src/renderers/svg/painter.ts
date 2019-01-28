@@ -73,6 +73,11 @@ const ANCHOR_MAP = {
 };
 
 class Painter {
+  type: 'svg';
+  canvas: HTMLElement;
+  context: Defs;
+  toDraw: boolean;
+
   constructor(dom) {
     if (!dom) {
       return null;

@@ -44,12 +44,12 @@ const CFG = {
    * 容器DOM
    * @type {Object}
    */
-  containerDOM: null as any as object,
+  containerDOM: null as any as HTMLElement,
   /**
    * 当前Canvas的DOM
    * @type {Object}
    */
-  canvasDOM: null as any as object,
+  canvasDOM: null as any as HTMLElement,
   /**
    * 屏幕像素比
    * @type {Number}
@@ -66,7 +66,7 @@ Canvas0.CFG = CFG;
 const Canvas1 = Util.extend(Canvas0, Group);
 
 const Canvas2 = Util.augment(Canvas1, Event, {
-  init() {
+  init(this: Canvas) {
     Canvas1.superclass.init.call(this);
     this._setGlobalParam();
     this._setContainer();
@@ -76,13 +76,13 @@ const Canvas2 = Util.augment(Canvas1, Event, {
       this.registerEvent(this);
     }
   },
-  _scale() {
+  _scale(this: Canvas) {
     if (this._cfg.renderType !== 'svg') {
       const pixelRatio = this.get('pixelRatio');
       this.scale(pixelRatio, pixelRatio);
     }
   },
-  _setGlobalParam() {
+  _setGlobalParam(this: Canvas) {
     const renderType = this.get('renderer') || 'canvas';
     if (renderType === 'svg') {
       this.set('pixelRatio', 1);
@@ -96,7 +96,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
     const timeline = new Timeline(this);
     this._cfg.timeline = timeline;
   },
-  _setContainer() {
+  _setContainer(this: Canvas) {
     const containerId = this.get('containerId');
     let containerDOM = this.get('containerDOM');
     if (!containerDOM) {
@@ -107,14 +107,14 @@ const Canvas2 = Util.augment(Canvas1, Event, {
       position: 'relative'
     });
   },
-  _initPainter() {
+  _initPainter(this: Canvas) {
     const containerDOM = this.get('containerDOM');
     const painter = new this._cfg.renderer.painter(containerDOM);
     this._cfg.painter = painter;
     this._cfg.canvasDOM = this._cfg.el = painter.canvas;
     this.changeSize(this.get('width'), this.get('height'));
   },
-  _resize() {
+  _resize(this: Canvas) {
     const canvasDOM = this.get('canvasDOM');
     const widthCanvas = this.get('widthCanvas');
     const heightCanvas = this.get('heightCanvas');
@@ -126,17 +126,17 @@ const Canvas2 = Util.augment(Canvas1, Event, {
     canvasDOM.setAttribute('width', widthCanvas);
     canvasDOM.setAttribute('height', heightCanvas);
   },
-  getWidth() {
+  getWidth(this: Canvas) {
     const pixelRatio = this.get('pixelRatio');
     const width = this.get('width');
     return width * pixelRatio;
   },
-  getHeight() {
+  getHeight(this: Canvas) {
     const pixelRatio = this.get('pixelRatio');
     const height = this.get('height');
     return height * pixelRatio;
   },
-  changeSize(width:number, height:number) {
+  changeSize(this: Canvas, width:number, height:number) {
     const pixelRatio = this.get('pixelRatio');
     const widthCanvas = width * pixelRatio;
     const heightCanvas = height * pixelRatio;
@@ -155,7 +155,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
    * @param  {Number} clientY 窗口y坐标
    * @return {Object} canvas坐标
    */
-  getPointByClient(clientX:number, clientY:number) {
+  getPointByClient(this: Canvas, clientX:number, clientY:number) {
     const el = this.get('el');
     const pixelRatio = this.get('pixelRatio') || 1;
     const bbox = el.getBoundingClientRect();
@@ -164,7 +164,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
       y: (clientY - bbox.top) * pixelRatio
     };
   },
-  getClientByPoint(x:number, y:number) {
+  getClientByPoint(this: Canvas, x:number, y:number) {
     const el = this.get('el');
     const bbox = el.getBoundingClientRect();
     const pixelRatio = this.get('pixelRatio') || 1;
@@ -173,22 +173,22 @@ const Canvas2 = Util.augment(Canvas1, Event, {
       clientY: y / pixelRatio + bbox.top
     };
   },
-  draw() {
+  draw(this: Canvas) {
     this._cfg.painter.draw(this);
   },
-  getShape(x:number, y:number, e) {
+  getShape(this: Canvas, x:number, y:number, e) {
     if (arguments.length === 3 && this._cfg.renderer.getShape) {
       return this._cfg.renderer.getShape.call(this, x, y, e);
     }
     return Canvas.superclass.getShape.call(this, x, y);
   },
-  getRenderer() {
+  getRenderer(this: Canvas) {
     return this._cfg.renderType;
   },
-  _drawSync() {
+  _drawSync(this: Canvas) {
     this._cfg.painter.drawSync(this);
   },
-  destroy() {
+  destroy(this: Canvas) {
     const cfg = this._cfg;
     const containerDOM = cfg.containerDOM;
     const canvasDOM = cfg.canvasDOM;
@@ -201,6 +201,16 @@ const Canvas2 = Util.augment(Canvas1, Event, {
 });
 
 import Event_ from './event'; // Fix: 'Event' from external module but cannot be named
-import GShape from './core/shape'; // Fix: Same as above
-class Canvas extends Canvas2 {}
+class Canvas extends Canvas2 {
+  _cfg: GUtil.Overwrite<typeof Canvas['CFG'], {
+    canvas: Canvas;
+    renderType: keyof typeof renderers;
+    renderer: typeof renderers['canvas'] | typeof renderers['svg'];
+    containerId: string;
+    /** or HTMLCanvasElement if renderType is 'canvas'. */
+    el: HTMLElement;
+    painter: InstanceType<typeof renderers['canvas']['painter'] | typeof renderers['svg']['painter']>;
+    timeline: Timeline;
+  }>;
+}
 export = Canvas;

@@ -84,7 +84,10 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
   getDefaultCfg() {
     return {};
   },
-  set(name: string, value) {
+  set<
+    T extends { _cfg: any, _beforeSetZIndex?: any, _beforeSetLoading?: any },
+    K extends keyof T['_cfg']
+  >(this: T, name: K, value: T['_cfg'][K]): T {
     if (name === 'zIndex' && this._beforeSetZIndex) {
       this._beforeSetZIndex(value);
     }
@@ -98,7 +101,7 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
   setSilent(name: string, value) {
     this._cfg[name] = value;
   },
-  get(name: string) {
+  get<T extends { _cfg: any }, K extends keyof T['_cfg']>(this: T, name: K): T['_cfg'][K] {
     return this._cfg[name];
   },
   show() {
