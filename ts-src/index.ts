@@ -1,5 +1,5 @@
-import CommonNS from './common-ns';
-import ShapesNS from './shapes-ns';
+import Common_ from './common';
+import Shape_ from './shape';
 namespace G {
   export const Canvas: typeof import('./canvas') = require('./canvas');
   export const Group: typeof import('./core/group') = require('./core/group');
@@ -24,8 +24,8 @@ namespace G {
   // version, etc.
   export const version = '3.4.0-beta.3';
 
-  export import Common = CommonNS;
-  export import Shapes = ShapesNS;
+  export import Common = Common_;
+  export import Shapes = Shape_;
 
   export namespace Shape {}
   export type Shape = import('./core/shape');
