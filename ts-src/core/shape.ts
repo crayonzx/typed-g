@@ -59,7 +59,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
     }
     self.afterPath(context);
   },
-  afterPath() {},
+  afterPath(...args: any[]): any {},
   /**
    * 击中图形时是否进行包围盒判断
    * @return {Boolean} [description]
@@ -101,10 +101,10 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
    * @return {Object} 包围盒
    */
   calculateBox() {
-    return null;
+    return null as any;
   },
   // 获取拾取时线的宽度，需要考虑附加的线的宽度
-  getHitLineWidth():number {
+  getHitLineWidth(): number {
     const attrs = this._attrs;
     // if (!attrs.stroke) {
     //   return 0;

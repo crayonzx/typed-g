@@ -30,10 +30,10 @@ const Rect2 = Util.augment(Rect1, {
   calculateBox() {
     const self = this;
     const attrs = self._attrs;
-    const x = attrs.x;
-    const y = attrs.y;
-    const width = attrs.width;
-    const height = attrs.height;
+    const x: number = attrs.x;
+    const y: number = attrs.y;
+    const width: number = attrs.width;
+    const height: number = attrs.height;
     const lineWidth = this.getHitLineWidth();
 
     const halfWidth = lineWidth / 2;
