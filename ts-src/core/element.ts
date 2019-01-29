@@ -4,7 +4,7 @@ import Transform = require('./mixin/transform');
 import Animate = require('./mixin/animation');
 import EventEmitter = require('./advanced-event-emitter');
 
-const Element0 = function(cfg:Partial<typeof CFG>) {
+const Element0 = function(cfg: Partial<typeof CFG>) {
   this._cfg = {
     zIndex: 0,
     capture: true,
@@ -85,7 +85,7 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
     return {};
   },
   set<
-    T extends { _cfg: any, _beforeSetZIndex?: any, _beforeSetLoading?: any },
+    T extends { _cfg: any; _beforeSetZIndex?: any; _beforeSetLoading?: any },
     K extends keyof T['_cfg']
   >(this: T, name: K, value: T['_cfg'][K]): T {
     if (name === 'zIndex' && this._beforeSetZIndex) {
@@ -209,5 +209,12 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
   getBBox() {}
 });
 
-class Element extends Element1 {}
+class Element extends Element1 {
+  _cfg: {
+    zIndex: number;
+    capture: boolean;
+    visible: boolean;
+    destroyed: boolean;
+  };
+}
 export = Element;
