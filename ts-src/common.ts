@@ -64,5 +64,7 @@ namespace Common {
 
   export type Point = { x: number; y: number; index?: number };
   export type Points = Array<[number, number]>;
+
+  export type Matrix = [number, number, number, number, number, number, number, number, number];
 }
 export default Common;
