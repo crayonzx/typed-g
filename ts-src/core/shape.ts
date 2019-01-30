@@ -15,7 +15,7 @@ const ARRAY_ATTRS = {
   matrix: 'matrix',
   path: 'path',
   points: 'points',
-  lineDash: 'lineDash'
+  lineDash: 'lineDash',
 };
 
 function _cloneArrayAttr(arr) {
@@ -73,7 +73,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
    * @param {Number} y y坐标
    * @return {Boolean} 是否在图形中
    */
-  isHit(x:number, y:number):boolean {
+  isHit(x: number, y: number): boolean {
     const self = this;
     const v = [ x, y, 1 ];
     self.invert(v); // canvas
@@ -156,7 +156,9 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
   }
 });
 
-class Shape extends Shape2 {}
+class Shape extends Shape2 {
+  _attr: {};
+}
 export = Shape;
 
 import Common from '../common';
