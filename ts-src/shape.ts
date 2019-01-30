@@ -1,4 +1,5 @@
 import Shapes from './shapes';
+import Common from './common';
 
 namespace Shape {
   type ShapeObj = typeof Shapes;

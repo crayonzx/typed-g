@@ -64,7 +64,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
    * 击中图形时是否进行包围盒判断
    * @return {Boolean} [description]
    */
-  isHitBox() {
+  isHitBox(this: Shape) {
     return true;
   },
   /**
@@ -100,7 +100,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
    * 计算包围盒
    * @return {Object} 包围盒
    */
-  calculateBox() {
+  calculateBox(this: Shape) {
     return null as any;
   },
   // 获取拾取时线的宽度，需要考虑附加的线的宽度
@@ -114,15 +114,15 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
     return lineWidth + lineAppendWidth;
   },
   // 清除当前的矩阵
-  clearTotalMatrix() {
+  clearTotalMatrix(this: Shape) {
     this._cfg.totalMatrix = null;
     this._cfg.region = null;
   },
-  clearBBox() {
+  clearBBox(this: Shape) {
     this._cfg.box = null;
     this._cfg.region = null;
   },
-  getBBox() {
+  getBBox(this: Shape) {
     let box = this._cfg.box;
     // 延迟计算
     if (!box) {
@@ -137,7 +137,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
     }
     return box;
   },
-  clone() {
+  clone(this: Shape) {
     const self = this;
     let clone = null;
     const _attrs = self._attrs;
@@ -159,5 +159,10 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
 class Shape extends Shape2 {}
 export = Shape;
 
+import Common from '../common';
 import ShapeEx from './shape-ex';
-interface Shape extends ShapeEx {}
+interface Shape extends ShapeEx {
+  _cfg: Element['_cfg'] & {
+    box: Common.BBox;
+  };
+}

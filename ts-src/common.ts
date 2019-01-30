@@ -66,5 +66,18 @@ namespace Common {
   export type Points = Array<[number, number]>;
 
   export type Matrix = [number, number, number, number, number, number, number, number, number];
+
+  export type BBox = {
+    minX: number;
+    minY: number;
+    maxX: number;
+    maxY: number;
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+    centerX?: number;
+    centerY?: number;
+  };
 }
 export default Common;

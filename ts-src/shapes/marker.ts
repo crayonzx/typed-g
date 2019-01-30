@@ -1,3 +1,5 @@
+import Common from '../common';
+
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 import Format = require('../util/format');

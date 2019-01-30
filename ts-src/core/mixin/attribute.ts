@@ -1,5 +1,4 @@
 import Util = require('../../util/index');
-type AttrsMixStyle<T extends { _attr: {} }> = T['_attr'] & Common.Style;
 
 const Attr = {
   canFill: false,
@@ -102,3 +101,6 @@ export = Attr as GUtil.Overwrite<typeof Attr, {
     <T extends { _attr: {} }, K extends keyof AttrsMixStyle<T>>(this: T, name: K, value: AttrsMixStyle<T>[K]): void;
   }
 }>;
+
+import Common from '../../common';
+type AttrsMixStyle<T extends { _attr: {} }> = T['_attr'] & Common.Style;
