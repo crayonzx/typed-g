@@ -27,10 +27,8 @@ namespace G {
   export import Common = Common_;
   export import Shapes = Shape_;
 
-  export namespace Shape {}
+  export type Canvas = import('./canvas');
   export type Shape = import('./core/shape');
-
-  export namespace Group {}
   export type Group = import('./core/group');
 }
 export = G;
