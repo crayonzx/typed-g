@@ -162,9 +162,12 @@ class Shape extends Shape2 {
 export = Shape;
 
 import Common from '../common';
-import ShapeEx from './shape-ex';
-interface Shape extends ShapeEx {
+import ShapeEx_ from './shape-ex';
+interface Shape extends ShapeEx_ {
   _cfg: Element['_cfg'] & {
     box: Common.BBox;
   };
+}
+namespace Shape {
+  export type ShapeEx = ShapeEx_;
 }

@@ -51,4 +51,5 @@ const Circle2 = Util.augment(Circle1, {
 class Circle extends Circle2 {
   _attr: typeof Circle.ATTRS;
 }
+interface Circle extends Shape.ShapeEx {}
 export = Circle;

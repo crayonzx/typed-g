@@ -139,4 +139,5 @@ const Marker2 = Util.augment(Marker1, {
 class Marker extends Marker2 {
   _attr: typeof Marker.ATTRS;
 }
+interface Marker extends Shape.ShapeEx {}
 export = Marker;

@@ -68,4 +68,5 @@ const Ellipse2 = Util.augment(Ellipse1, {
 class Ellipse extends Ellipse2 {
   _attr: typeof Ellipse.ATTRS;
 }
+interface Ellipse extends Shape.ShapeEx {}
 export = Ellipse;

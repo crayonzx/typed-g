@@ -175,4 +175,5 @@ const Polyline2 = Util.augment(Polyline1, {
 class Polyline extends Polyline2 {
   _attr: typeof Polyline.ATTRS;
 }
+interface Polyline extends Shape.ShapeEx {}
 export = Polyline;

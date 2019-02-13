@@ -280,4 +280,5 @@ const Path2 = Util.augment(Path1, {
 class Path extends Path2 {
   _attr: typeof Path.ATTRS;
 }
+interface Path extends Shape.ShapeEx {}
 export = Path;
