@@ -27,7 +27,7 @@ const Attr = {
    * @param  {*} value 属性值
    * @return {*} 属性值
    */
-  attr(name:string|object, value) {
+  attr: function (name, value) {
     const self = this;
     if (arguments.length === 0) {
       return self._attrs;
@@ -48,7 +48,7 @@ const Attr = {
       return self;
     }
     return self._attrs[name];
-  },
+  } as Attr.IAttr,
   _setAttr(name:string, value) {
     const self = this;
     const attrs = this._attrs;
@@ -93,14 +93,17 @@ const Attr = {
     item.hasFill = function() { return true; };
   }
 };
-export = Attr as GUtil.Overwrite<typeof Attr, {
-  attr: {
+export = Attr;
+
+import Common from '../../common';
+
+namespace Attr {
+  export type AttrsMixStyle<T extends { _attr: {} }> = T['_attr'] & Common.Style;
+
+  export interface IAttr {
     <T extends { _attr: {} }>(this: T): AttrsMixStyle<T>;
     <T extends { _attr: {} }, K extends keyof AttrsMixStyle<T>>(this: T, name: K): AttrsMixStyle<T>[K];
     <T extends { _attr: {} }>(this: T, name: Partial<AttrsMixStyle<T>>): void;
     <T extends { _attr: {} }, K extends keyof AttrsMixStyle<T>>(this: T, name: K, value: AttrsMixStyle<T>[K]): void;
   }
-}>;
-
-import Common from '../../common';
-type AttrsMixStyle<T extends { _attr: {} }> = T['_attr'] & Common.Style;
+}
