@@ -200,10 +200,11 @@ const Canvas2 = Util.augment(Canvas1, Event, {
   }
 });
 
-import Event_ from './event'; // Fix: 'Event' from external module but cannot be named
+// Fix: 'Event' from external module but cannot be named
+import Event_ from './event';
+
 class Canvas extends Canvas2 {
-  // @ts-ignore
-  _cfg: GUtil.Overwrite<typeof Canvas['CFG'], {
+  _cfg: InstanceType<typeof Canvas2>['_cfg'] & GUtil.Overwrite<typeof Canvas['CFG'], {
     canvas: Canvas;
     renderType: keyof typeof renderers;
     renderer: typeof renderers['canvas'] | typeof renderers['svg'];
