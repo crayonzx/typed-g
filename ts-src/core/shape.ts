@@ -157,7 +157,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
 });
 
 class Shape extends Shape2 {
-  _attr: {};
+  _attrs: Shape.BaseAttr;
 }
 export = Shape;
 
@@ -170,4 +170,5 @@ interface Shape extends ShapeEx_ {
 }
 namespace Shape {
   export type ShapeEx = ShapeEx_;
+  export type BaseAttr = Common.Style;
 }

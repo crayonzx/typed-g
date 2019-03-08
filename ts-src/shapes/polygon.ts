@@ -82,7 +82,7 @@ const Polygon2 = Util.augment(Polygon1, {
 });
 
 class Polygon extends Polygon2 {
-  _attr: typeof Polygon.ATTRS;
+  _attrs: typeof Polygon.ATTRS & Shape['_attrs'];
 }
 interface Polygon extends Shape.ShapeEx {}
 export = Polygon;

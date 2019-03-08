@@ -75,7 +75,7 @@ const Rect2 = Util.augment(Rect1, {
 });
 
 class Rect extends Rect2 {
-  _attr: typeof Rect.ATTRS;
+  _attrs: typeof Rect.ATTRS & Shape['_attrs'];
 }
 interface Rect extends Shape.ShapeEx {}
 export = Rect;

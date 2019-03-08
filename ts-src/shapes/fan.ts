@@ -93,7 +93,7 @@ const Fan2 = Util.augment(Fan1, {
 });
 
 class Fan extends Fan2 {
-  _attr: typeof Fan.ATTRS;
+  _attrs: typeof Fan.ATTRS & Shape['_attrs'];
 }
 interface Fan extends Shape.ShapeEx {}
 export = Fan;

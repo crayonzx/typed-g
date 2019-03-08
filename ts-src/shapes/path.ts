@@ -278,7 +278,7 @@ const Path2 = Util.augment(Path1, {
 });
 
 class Path extends Path2 {
-  _attr: typeof Path.ATTRS;
+  _attrs: typeof Path.ATTRS & Shape['_attrs'];
 }
 interface Path extends Shape.ShapeEx {}
 export = Path;

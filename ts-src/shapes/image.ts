@@ -154,7 +154,7 @@ const CImage2 = Util.augment(CImage1, {
 });
 
 class CImage extends CImage2 {
-  _attr: typeof CImage.ATTRS;
+  _attrs: typeof CImage.ATTRS & Shape['_attrs'];
 }
 interface CImage extends Shape.ShapeEx {}
 export = CImage;

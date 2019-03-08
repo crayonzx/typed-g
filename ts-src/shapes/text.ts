@@ -241,7 +241,7 @@ const CText2 = Util.augment(CText1, {
 });
 
 class CText extends CText2 {
-  _attr: typeof CText.ATTRS;
+  _attrs: typeof CText.ATTRS & Shape['_attrs'];
 }
 interface CText extends Shape.ShapeEx {}
 export = CText;

@@ -95,15 +95,17 @@ const Attr = {
 };
 export = Attr;
 
-import Common from '../../common';
-
 namespace Attr {
-  export type AttrsMixStyle<T extends { _attr: {} }> = T['_attr'] & Common.Style;
+  export type Attrs<T extends { _attrs: {} }> = T['_attrs'];
 
   export interface IAttr {
-    <T extends { _attr: {} }>(this: T): AttrsMixStyle<T>;
-    <T extends { _attr: {} }, K extends keyof AttrsMixStyle<T>>(this: T, name: K): AttrsMixStyle<T>[K];
-    <T extends { _attr: {} }>(this: T, name: Partial<AttrsMixStyle<T>>): void;
-    <T extends { _attr: {} }, K extends keyof AttrsMixStyle<T>>(this: T, name: K, value: AttrsMixStyle<T>[K]): void;
+    /** Get all attrs */
+    <T extends { _attrs: {} }>(this: T): Attrs<T>;
+    /** Get attr by name  */
+    <T extends { _attrs: {} }, K extends keyof Attrs<T>>(this: T, name: K): Attrs<T>[K];
+    /** Set partial of attrs */
+    <T extends { _attrs: {} }>(this: T, values: Partial<Attrs<T>>): void;
+    /** Set attr by name and value */
+    <T extends { _attrs: {} }, K extends keyof Attrs<T>>(this: T, name: K, value: Attrs<T>[K]): void;
   }
 }

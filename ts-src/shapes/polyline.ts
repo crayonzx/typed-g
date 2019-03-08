@@ -173,7 +173,7 @@ const Polyline2 = Util.augment(Polyline1, {
 });
 
 class Polyline extends Polyline2 {
-  _attr: typeof Polyline.ATTRS;
+  _attrs: typeof Polyline.ATTRS & Shape['_attrs'];
 }
 interface Polyline extends Shape.ShapeEx {}
 export = Polyline;

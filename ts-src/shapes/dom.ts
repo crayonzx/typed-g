@@ -31,7 +31,7 @@ const Dom2 = Util.augment(Dom1, {
 });
 
 class Dom extends Dom2 {
-  _attr: {};
+  // _attrs: Shape['_attrs'];
 }
 interface Dom extends Shape.ShapeEx {}
 export = Dom;

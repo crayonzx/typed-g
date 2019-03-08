@@ -66,7 +66,7 @@ const Ellipse2 = Util.augment(Ellipse1, {
 });
 
 class Ellipse extends Ellipse2 {
-  _attr: typeof Ellipse.ATTRS;
+  _attrs: typeof Ellipse.ATTRS & Shape['_attrs'];
 }
 interface Ellipse extends Shape.ShapeEx {}
 export = Ellipse;
