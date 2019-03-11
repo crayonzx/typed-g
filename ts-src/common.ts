@@ -27,26 +27,31 @@ namespace Common {
     lineDash?: number | number[];
   };
 
+  /** [SVG Path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) */
   namespace SVGPath {
-    /** moveto */
+    /** move to: "M x y" or "m dx dy" */
     export type M = ['M' | 'm', number, number];
-    /** lineto */
+    /** line to: "L x y" or "l dx dy" */
     export type L = ['L' | 'l', number, number];
-    /** horizontal lineto */
-    export type H = ['H' | 'h'];
-    /** vertical lineto */
-    export type V = ['V' | 'v'];
-    /** curveto */
-    export type C = ['C' | 'c'];
-    /** smooth curveto */
-    export type S = ['S' | 's'];
-    /** quadratic Belzier curve */
+    /** horizontal line to: "H x" or "h dx" */
+    export type H = ['H' | 'h', number];
+    /** vertical line to: "V x" or "v dx" */
+    export type V = ['V' | 'v', number];
+    /** curve to: "C x1 y1, x2 y2, x y" or "c dx1 dy1, dx2 dy2, dx dy" */
+    export type C = ['C' | 'c', number, number, number, number, number, number];
+    /** smooth curve to: "S x2 y2, x y" or "s dx2 dy2, dx dy" */
+    export type S = ['S' | 's', number, number, number, number];
+    /** quadratic Belzier curve: "Q x1 y1, x y" or "q dx1 dy1, dx dy" */
     export type Q = ['Q' | 'q', number, number, number, number];
-    /** smooth quadratic Belzier curveto */
-    export type T = ['T' | 't', number, number, number, number];
-    /** elliptical Arc */
+    /** smooth quadratic Belzier curve to: "T x y" or "t dx dy" */
+    export type T = ['T' | 't', number, number];
+    /**
+     * elliptical Arc:
+     * "A rx ry x-axis-rotation large-arc-flag sweep-flag x y"
+     * or "a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy"
+     */
     export type A = ['A' | 'a', number, number, number, number, number, number, number];
-    /** closepath */
+    /** closepath: "Z" or "z" */
     export type Z = ['Z' | 'z'];
   }
   export type SVGPath = Array<
