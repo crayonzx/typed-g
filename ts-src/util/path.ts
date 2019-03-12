@@ -3,10 +3,8 @@ const SPACES = '\x09\x0a\x0b\x0c\x0d\x20\xa0\u1680\u180e\u2000\u2001\u2002\u2003
 const PATH_COMMAND = new RegExp('([a-z])[' + SPACES + ',]*((-?\\d*\\.?\\d*(?:e[\\-+]?\\d+)?[' + SPACES + ']*,?[' + SPACES + ']*)+)', 'ig');
 const PATH_VALUES = new RegExp('(-?\\d*\\.?\\d*(?:e[\\-+]?\\d+)?)[' + SPACES + ']*,?[' + SPACES + ']*', 'ig');
 
-type NumStr = number | string;
-
 // Parses given path string into an array of arrays of path segments
-const parsePathString = function(pathString: string | any[]) {
+const parsePathString = function(pathString: Common.SVGPathOrStr): Common.SVGPath {
   if (!pathString) {
     return null;
   }
@@ -29,7 +27,7 @@ const parsePathString = function(pathString: string | any[]) {
     u: 3,
     z: 0
   };
-  const data: any[] = [];
+  const data = [];
 
   String(pathString).replace(PATH_COMMAND, function(a, b, c) {
     const params = [];
@@ -61,8 +59,8 @@ const parsePathString = function(pathString: string | any[]) {
 };
 
 // http://schepers.cc/getting-to-the-point
-const catmullRom2bezier = function(crp: NumStr[], z: boolean) {
-  const d: any[] = [];
+const catmullRom2bezier = function(crp: number[], z: boolean): Common.SVGPath {
+  const d = [];
   for (let i = 0, iLen = crp.length; iLen - 2 * !z > i; i += 2) {
     const p = [{
       x: +crp[i - 2],
@@ -121,8 +119,8 @@ const catmullRom2bezier = function(crp: NumStr[], z: boolean) {
   return d;
 };
 
-const ellipsePath = function(x: NumStr, y: NumStr, rx: NumStr, ry: NumStr, a?: NumStr) {
-  let res: any[] = [];
+const ellipsePath = function(x: number, y: number, rx: number, ry: number, a?: number): Common.SVGPath {
+  let res = [];
   if (a == null && ry == null) {
     ry = rx;
   }
@@ -152,7 +150,7 @@ const ellipsePath = function(x: NumStr, y: NumStr, rx: NumStr, ry: NumStr, a?: N
   return res;
 };
 
-const pathToAbsolute = function(pathArray: string | any[]) {
+const pathToAbsolute = function(pathArray: Common.SVGPathOrStr): Common.SVGPath {
   pathArray = parsePathString(pathArray);
 
   if (!pathArray || !pathArray.length) {
@@ -160,7 +158,7 @@ const pathToAbsolute = function(pathArray: string | any[]) {
       [ 'M', 0, 0 ]
     ];
   }
-  let res: any[] = [];
+  let res = [];
   let x = 0;
   let y = 0;
   let mx = 0;
@@ -399,7 +397,7 @@ const a2c = function(x1, y1, rx, ry, angle, large_arc_flag, sweep_flag, x2, y2, 
 
 };
 
-const pathTocurve = function(path: string | any[], path2?: string | any[]) {
+const pathTocurve = function(path: Common.SVGPathOrStr, path2?: Common.SVGPathOrStr): Common.SVGPath {
   const p = pathToAbsolute(path);
   const p2 = path2 && pathToAbsolute(path2);
   const attrs = {
@@ -560,7 +558,7 @@ const pathTocurve = function(path: string | any[], path2?: string | any[]) {
 };
 
 const p2s = /,?([a-z]),?/gi;
-const parsePathArray = function(path: []) {
+const parsePathArray = function(path: []): string {
   return path.join(',').replace(p2s, '$1');
 };
 
@@ -710,7 +708,7 @@ const isPointInsideBBox = function(bbox, x, y) {
     y <= bbox.y + bbox.height;
 };
 
-const rectPath = function(x: NumStr, y: NumStr, w: NumStr, h: NumStr, r?: NumStr) {
+const rectPath = function(x: number, y: number, w: number, h: number, r?: number): Common.SVGPath {
   if (r) {
     return [
       [ 'M', +x + (+r), y ],
@@ -723,7 +721,7 @@ const rectPath = function(x: NumStr, y: NumStr, w: NumStr, h: NumStr, r?: NumStr
       [ 'l', 0, r * 2 - h ],
       [ 'a', r, r, 0, 0, 1, r, -r ],
       [ 'z' ]
-    ] as any[];
+    ];
   }
   const res = [
     [ 'M', x, y ],
@@ -731,7 +729,7 @@ const rectPath = function(x: NumStr, y: NumStr, w: NumStr, h: NumStr, r?: NumStr
     [ 'l', 0, h ],
     [ 'l', -w, 0 ],
     [ 'z' ]
-  ] as any[] & { parsePathArray: typeof parsePathArray };
+  ];
   res.parsePathArray = parsePathArray;
   return res;
 };
@@ -889,7 +887,7 @@ const interHelper = function(bez1, bez2, justCount) {
   return res;
 };
 
-const interPathHelper = function(path1, path2, justCount) {
+const interPathHelper: PathIntersection = function(path1, path2, justCount) {
   path1 = pathTocurve(path1);
   path2 = pathTocurve(path2);
   let x1;
@@ -952,7 +950,7 @@ const interPathHelper = function(path1, path2, justCount) {
   return res;
 };
 
-const pathIntersection = function(path1, path2) {
+const pathIntersection = function(path1: Path, path2: Path) {
   return interPathHelper(path1, path2);
 };
 
@@ -1052,14 +1050,14 @@ const splitSegment = function(start, end, count) {
   return segments;
 };
 
-const fillPath = function(source: any[], target: any[]) {
+const fillPath = function(source, target) {
   if (source.length === 1) {
     return source;
   }
   const sourceLen = source.length - 1;
   const targetLen = target.length - 1;
   const ratio = sourceLen / targetLen;
-  const segmentsToFill = [] as any[];
+  const segmentsToFill = [];
   if (source.length === 1 && source[0][0] === 'M') {
     for (let i = 0; i < targetLen - sourceLen; i++) {
       source.push(source[0]);
@@ -1070,7 +1068,7 @@ const fillPath = function(source: any[], target: any[]) {
     const index = Math.floor(ratio * i);
     segmentsToFill[index] = (segmentsToFill[index] || 0) + 1;
   }
-  const filled: any[] = segmentsToFill.reduce((filled, count, i) => {
+  const filled = segmentsToFill.reduce((filled, count, i) => {
     if (i === sourceLen) {
       return filled.concat(source[sourceLen]);
     }
@@ -1117,7 +1115,7 @@ function getMinDiff(del, add, modify) {
  * https://en.wikipedia.org/wiki/Levenshtein_distance
  * 计算两条path的编辑距离
  */
-const levenshteinDistance = function(source: any[], target: any[]) {
+const levenshteinDistance = function(source, target) {
   const sourceLen = source.length;
   const targetLen = target.length;
   let sourceSegment,
@@ -1344,3 +1342,11 @@ export = {
   formatPath,
   intersection: pathIntersection
 };
+
+import Common from '../common';
+type Path = string | Common.SVGPath;
+
+interface PathIntersection {
+  (path1: Path, path2: Path): Common.Point[];
+  (path1: Path, path2: Path, justCount: true): number;
+}
