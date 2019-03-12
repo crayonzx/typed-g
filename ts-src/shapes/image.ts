@@ -21,7 +21,7 @@ const CImage1 = Util.extend(CImage0, Shape);
 
 const CImage2 = Util.augment(CImage1, {
   type: 'image' as 'image',
-  isHitBox() {
+  isHitBox(): boolean {
     return false;
   },
   calculateBox() {

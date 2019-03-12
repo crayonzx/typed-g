@@ -64,7 +64,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
    * 击中图形时是否进行包围盒判断
    * @return {Boolean} [description]
    */
-  isHitBox(this: Shape) {
+  isHitBox(this: Shape): boolean {
     return true;
   },
   /**
@@ -164,6 +164,7 @@ export = Shape;
 import Common from '../common';
 import ShapeEx_ from './shape-ex';
 interface Shape extends ShapeEx_ {
+  type: string;
   _cfg: Element['_cfg'] & {
     box: Common.BBox;
   };

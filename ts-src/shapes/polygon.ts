@@ -6,7 +6,7 @@ const Polygon0 = function(cfg) {
 };
 
 Polygon0.ATTRS = {
-  points: null,
+  points: null as Array<[number, number]>,
   lineWidth: 1
 };
 

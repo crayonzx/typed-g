@@ -81,7 +81,7 @@ const CText2 = Util.augment(CText1, {
     }
     return fontSize;
   },
-  isHitBox() {
+  isHitBox(): boolean {
     return false;
   },
   calculateBox() {

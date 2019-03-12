@@ -97,7 +97,7 @@ const Marker2 = Util.augment(Marker1, {
       maxY: cy + halfWidth
     };
   },
-  _getPath() {
+  _getPath(): Common.SVGPath {
     const attrs = this._attrs;
     const x = attrs.x;
     const y = attrs.y;
