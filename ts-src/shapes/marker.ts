@@ -67,6 +67,7 @@ Marker0.ATTRS = {
   x: 0,
   y: 0,
   r: 1,
+  radius: 1,
   symbol: '' as any as 'circle' | 'square' | 'diamond' | 'triangle' | 'triangle-down' | ((x: number, y: number, r: number) => Common.SVGPath),
 };
 
