@@ -221,8 +221,8 @@ const pathToAbsolute = function(pathArray) {
           r = [ 'U' ].concat(res[res.length - 1].slice(-2));
           break;
         case 'M':
-          mx = +pa[1] + x;
-          my = +pa[2] + y;
+          r[1] = (mx = +pa[1] + x);
+          r[2] = (my = +pa[2] + y);
           break; // for lint
         default:
           for (let j = 1, jj = pa.length; j < jj; j++) {
