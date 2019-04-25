@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 const G = require('../../../../src/index');
+const Util = require('../../../../src/util');
 
 describe('animate', function() {
   const div = document.createElement('div');
@@ -291,4 +292,49 @@ describe('animate', function() {
     }
     canvas.draw();
   });*/
+  it('onFrame rotate Math.PI * 2', done => {
+    let count = 0;
+    const shape = canvas.addShape('rect', {
+      attrs: {
+        x: 200,
+        y: 100,
+        width: 20,
+        height: 20,
+        fill: 'red'
+      }
+    });
+    let matrix = shape.getMatrix();
+    let end = false;
+    shape.animate({
+      onFrame(ratio) {
+        count++;
+        if (ratio === 1) {
+          end = true;
+        }
+        const rad = ratio * Math.PI * 2;
+        const toMatrix = Util.transform(matrix, [
+          [ 't', -210, -110 ],
+          [ 'r', rad ],
+          [ 't', 210, 110 ]
+        ]);
+        return {
+          matrix: toMatrix
+        };
+      }, repeat: false }, 1000, function() {
+        expect(count > 50).to.be.true;
+        matrix = shape.getMatrix();
+        console.log(matrix);
+        expect(matrix[0]).to.equal(1);
+        expect(Util.isNumberEqual(matrix[1], 0)).to.be.true;
+        expect(matrix[2]).to.equal(0);
+        expect(Util.isNumberEqual(matrix[3], 0)).to.be.true;
+        expect(matrix[4]).to.equal(1);
+        expect(matrix[5]).to.equal(0);
+        expect(Util.isNumberEqual(matrix[6], 0)).to.be.true;
+        expect(Util.isNumberEqual(matrix[7], 0)).to.be.true;
+        expect(matrix[8]).to.equal(1);
+        expect(end).to.be.true;
+        done();
+      });
+  });
 });

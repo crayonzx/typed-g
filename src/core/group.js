@@ -3,6 +3,7 @@ const Element = require('./element');
 const Shape = require('../shapes/index');
 const SHAPE_MAP = {}; // 缓存图形类型
 const INDEX = '_INDEX';
+const CLONE_CFGS = [ 'zIndex', 'capture', 'visible' ];
 
 function getComparer(compare) {
   return function(left, right) {
@@ -27,6 +28,14 @@ function find(children, x, y) {
     }
   }
   return rst;
+}
+
+function _cloneArrayAttr(arr) {
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    result.push(arr[i]);
+  }
+  return result;
 }
 
 const Group = function(cfg) {
@@ -448,9 +457,22 @@ Util.augment(Group, {
   clone() {
     const self = this;
     const children = self._cfg.children;
-    const clone = new Group();
+    const _attrs = self._attrs;
+    const attrs = {};
+    Util.each(_attrs, (i, k) => {
+      if (k === 'matrix') {
+        attrs[k] = _cloneArrayAttr(_attrs[k]);
+      } else {
+        attrs[k] = _attrs[k];
+      }
+    });
+    const clone = new Group({ attrs, canvas: self.get('canvas') });
     Util.each(children, child => {
       clone.add(child.clone());
+    });
+    // 对于一些在 cfg 中的特殊属性做 clone
+    Util.each(CLONE_CFGS, cfg => {
+      clone._cfg[cfg] = self._cfg[cfg];
     });
     return clone;
   }

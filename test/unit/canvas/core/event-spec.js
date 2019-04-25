@@ -7,8 +7,8 @@ div.id = 'canvas-event';
 document.body.appendChild(div);
 const canvas = new G.Canvas({
   containerId: 'canvas-event',
-  width: 1000,
-  height: 1000,
+  width: 200,
+  height: 200,
   pixelRatio: 2
 });
 const group = canvas.addGroup();
@@ -36,7 +36,7 @@ describe('event emitter', () => {
     expect(path._cfg._events.event.length).to.equal(1);
     expect(path._cfg._events.event[0].callback).to.equal(fn1);
     expect(!!path._cfg._events.event[0].one).to.be.false;
-    path.on('event', fn2, true);
+    path.one('event', fn2);
     expect(path._cfg._events.event.length).to.equal(2);
     expect(path._cfg._events.event[1].callback).to.equal(fn2);
     expect(!!path._cfg._events.event[1].one).to.be.true;
@@ -59,34 +59,36 @@ describe('event emitter', () => {
 describe('event dispatcher', () => {
   it('single event of a type', () => {
     const bbox = canvas._cfg.el.getBoundingClientRect();
-    let clicked = false;
-    let evt = null;
-    rect.on('click', function(event) {
+    /* rect.on('click', function(event) {
       clicked = true;
       evt = event;
-    });
-    Simulate.simulate(canvas._cfg.el, 'click', {
+      expect(event.x).to.equal(6);
+      expect(event.y).to.equal(6);
+    });*/
+    Simulate.simulate(canvas._cfg.el, 'mousedown', {
       clientY: bbox.top + 5,
       clientX: bbox.left + 5
     });
-    expect(clicked).to.be.true;
-    expect(evt).not.to.be.null;
+    Simulate.simulate(canvas._cfg.el, 'mouseup', {
+      clientY: bbox.top + 6,
+      clientX: bbox.left + 6
+    });
   });
   it('multiple event of the same type', () => {
     const bbox = canvas._cfg.el.getBoundingClientRect();
     let clicked1 = false;
     let clicked2 = false;
-    rect.on('click', function() {
+    rect.on('mousedown', function() {
       clicked1 = true;
     });
-    rect.on('click', function() {
+    rect.on('mousedown', function() {
       clicked2 = true;
     });
-    Simulate.simulate(canvas._cfg.el, 'click', {
+    Simulate.simulate(canvas._cfg.el, 'mousedown', {
       clientY: bbox.top + 5,
       clientX: bbox.left + 5
     });
-    rect.removeEvent('click');
+    rect.removeEvent('mousedown');
     expect(clicked1).to.be.true;
     expect(clicked2).to.be.true;
   });
@@ -228,7 +230,9 @@ describe('event dispatcher', () => {
     let groupDrag = false;
     let rectEnd = false;
     let groupEnd = false;
+    let clicked = false;
     let count = 0;
+    let mousemove = 0;
     rect.on('dragstart', () => {
       rectDrag = true;
     });
@@ -244,6 +248,12 @@ describe('event dispatcher', () => {
     rect.on('drag', () => {
       ++count;
     });
+    rect.on('mousemove', () => {
+      ++mousemove;
+    });
+    rect.on('click', () => {
+      clicked = true;
+    });
     Simulate.simulate(canvas._cfg.el, 'mousedown', {
       clientY: bbox.top + 5,
       clientX: bbox.left + 5
@@ -252,19 +262,22 @@ describe('event dispatcher', () => {
     expect(groupDrag).to.be.false;
     expect(rectEnd).to.be.false;
     expect(groupEnd).to.be.false;
+    expect(clicked).to.be.false;
     Simulate.simulate(canvas._cfg.el, 'mousemove', {
-      clientY: bbox.top + 5,
-      clientX: bbox.left + 5
+      clientY: bbox.top + 15,
+      clientX: bbox.left + 15
     });
     expect(rectDrag).to.be.true;
     expect(groupDrag).to.be.true;
     expect(rectEnd).to.be.false;
     expect(groupEnd).to.be.false;
+    expect(clicked).to.be.false;
     Simulate.simulate(canvas._cfg.el, 'mousemove', {
       clientY: bbox.top + 10,
       clientX: bbox.left + 10
     });
     expect(count).to.equal(1);
+    expect(mousemove).to.equal(1);
     Simulate.simulate(canvas._cfg.el, 'mouseup', {
       clientY: bbox.top + 12,
       clientX: bbox.left + 12
@@ -273,6 +286,7 @@ describe('event dispatcher', () => {
     group.removeEvent();
     expect(rectEnd).to.be.true;
     expect(groupEnd).to.be.true;
+    expect(clicked).to.be.false;
   });
   it('dragenter & dragleave', () => {
     const bbox = canvas._cfg.el.getBoundingClientRect();
@@ -350,5 +364,91 @@ describe('event dispatcher', () => {
     expect(target).not.to.be.undefined;
     expect(target).to.equal(circle);
     circle.removeEvent('drop');
+  });
+  it('destroyed shape event', () => {
+    let count = 0;
+    const bbox = canvas._cfg.el.getBoundingClientRect();
+    const circle = canvas.addShape('circle', {
+      attrs: {
+        x: 50,
+        y: 50,
+        r: 30,
+        fill: '#ccc',
+        cursor: 'pointer'
+      }
+    });
+    canvas.draw();
+    circle.on('mousedown', () => {
+      count += 1;
+    });
+    Simulate.simulate(canvas._cfg.el, 'mousedown', {
+      clientX: bbox.left + 30,
+      clientY: bbox.top + 30
+    });
+    expect(canvas._cfg.el.style.cursor).to.equal('pointer');
+    expect(count).to.equal(1);
+    circle.destroy();
+    circle.emit('mousedown', { target: circle });
+  });
+  it('click & contextmenu', () => {
+    let clicked = false;
+    let contextmenu = false;
+    const bbox = canvas._cfg.el.getBoundingClientRect();
+    const circle = canvas.addShape('circle', {
+      attrs: {
+        x: 50,
+        y: 50,
+        r: 30,
+        fill: '#ccc',
+        cursor: 'pointer'
+      }
+    });
+    canvas.draw();
+    circle.on('click', () => {
+      clicked = true;
+    });
+    circle.on('contextmenu', () => {
+      contextmenu = true;
+    });
+    Simulate.simulate(canvas._cfg.el, 'mousedown', {
+      clientX: bbox.left + 30,
+      clientY: bbox.top + 30
+    });
+    Simulate.simulate(canvas._cfg.el, 'mouseup', {
+      clientX: bbox.left + 30,
+      clientY: bbox.top + 30
+    });
+    expect(clicked).to.be.true;
+    clicked = false;
+    const event = new window.MouseEvent('contextmenu', {
+      clientX: bbox.left + 30,
+      clientY: bbox.top + 30
+    });
+    canvas._cfg.el.dispatchEvent(event);
+    expect(clicked).to.be.false;
+    expect(contextmenu).to.be.true;
+  });
+  it('cursor style', () => {
+    canvas.addShape('circle', {
+      attrs: {
+        x: 100,
+        y: 100,
+        r: 30,
+        fill: '#ccc',
+        cursor: 'pointer'
+      }
+    });
+    const el = canvas._cfg.el;
+    const bbox = el.getBoundingClientRect();
+    Simulate.simulate(canvas._cfg.el, 'mousemove', {
+      clientX: bbox.left + 80,
+      clientY: bbox.top + 80
+    });
+    expect(el.style.cursor).to.equal('pointer');
+    Simulate.simulate(canvas._cfg.el, 'mousemove', {
+      clientX: bbox.left + 160,
+      clientY: bbox.top + 160
+    });
+    expect(el.style.cursor).to.equal('default');
   });
 });
