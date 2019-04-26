@@ -142,7 +142,7 @@ const Group2 = Util.augment(Group1, {
    * @param  {Shape} backShape 背景图形
    * @return {Object} 背景层对象
    */
-  renderBack(padding:number[], attrs) {
+  renderBack(padding: number[], attrs) {
     let backShape = this.get('backShape');
     const innerBox = this.getBBox();
     // const parent = this.get('parent'); // getParent
@@ -228,7 +228,7 @@ const Group2 = Util.augment(Group1, {
     const children = this.get('children');
     return children.indexOf(item) > -1;
   },
-  getChildByIndex(index:number) {
+  getChildByIndex(index: number) {
     const children = this.get('children');
     return children[index];
   },
@@ -239,7 +239,7 @@ const Group2 = Util.augment(Group1, {
     const lastIndex = this.get('children').length - 1;
     return this.getChildByIndex(lastIndex);
   },
-  getBBox(): { minX: number, minY: number, maxX: number, maxY: number, x: number, y: number, width: number, height: number } {
+  getBBox(): Required<Common.BBox> {
     const self = this;
     let minX = Infinity;
     let maxX = -Infinity;
@@ -307,7 +307,7 @@ const Group2 = Util.augment(Group1, {
     box.height = box.maxY - box.minY;
     return box;
   },
-  getCount():number {
+  getCount(): number {
     return this.get('children').length;
   },
   sort() {
@@ -413,7 +413,7 @@ const Group2 = Util.augment(Group1, {
     });
     return rst;
   },
-  getShape(x:number, y:number) {
+  getShape(x: number, y: number) {
     const self = this;
     const clip = self._attrs.clip;
     const children = self._cfg.children;

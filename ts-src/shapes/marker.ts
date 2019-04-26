@@ -68,7 +68,7 @@ Marker0.ATTRS = {
   y: 0,
   r: 1,
   radius: 1,
-  symbol: '' as any as 'circle' | 'square' | 'diamond' | 'triangle' | 'triangle-down' | ((x: number, y: number, r: number) => Common.SVGPath),
+  symbol: '' as keyof typeof Marker0.Symbols | ((x: number, y: number, r: number) => Common.SVGPath),
 };
 
 const Marker1 = Util.extend(Marker0, Shape);

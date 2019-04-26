@@ -8,7 +8,7 @@ const CText0 = function(cfg) {
 CText0.ATTRS = {
   x: 0,
   y: 0,
-  text: '',
+  text: null as string,
   fontSize: 12,
   fontFamily: 'sans-serif',
   fontStyle: 'normal',

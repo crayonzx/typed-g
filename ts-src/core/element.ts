@@ -24,7 +24,7 @@ const CFG = {
    * 唯一标示
    * @type {Number}
    */
-  id: null as any as number,
+  id: null as number,
   /**
    * Z轴的层叠关系，Z值越大离用户越近
    * @type {Number}
@@ -34,7 +34,7 @@ const CFG = {
    * Canvas对象
    * @type: {Object}
    */
-  canvas: null,
+  canvas: null as any,
   /**
    * 父元素指针
    * @type {Object}
@@ -112,7 +112,7 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
     this._cfg.visible = false;
     return this;
   },
-  remove(destroy?, delayRemove?) {
+  remove(destroy?: boolean, delayRemove?: boolean) {
     const cfg = this._cfg;
     const parent = cfg.parent;
     const el = cfg.el;

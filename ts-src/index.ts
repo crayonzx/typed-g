@@ -1,5 +1,6 @@
 import Common_ from './common';
 import Shape_ from './shape';
+
 namespace G {
   export const Canvas: typeof import('./canvas') = require('./canvas');
   export const Group: typeof import('./core/group') = require('./core/group');
@@ -23,7 +24,9 @@ namespace G {
   export const EventEmitter: typeof import('./core/event-emitter') = require('./core/event-emitter');
   // version, etc.
   export const version = '3.4.3';
+}
 
+namespace G {
   export import Common = Common_;
   export import Shapes = Shape_;
 
@@ -31,4 +34,5 @@ namespace G {
   export type Shape = import('./core/shape');
   export type Group = import('./core/group');
 }
+
 export = G;

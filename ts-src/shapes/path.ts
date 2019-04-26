@@ -13,7 +13,7 @@ const Path0 = function(cfg) {
 };
 
 Path0.ATTRS = {
-  path: null as any as Common.SVGPath | string,
+  path: null as Common.SVGPath | string,
   lineWidth: 1,
   startArrow: false,
   endArrow: false

@@ -155,7 +155,7 @@ const Timeline1 = Util.augment(Timeline0, {
   removeAnimator(index) {
     this._animators.splice(index, 1);
   },
-  isAnimating():boolean {
+  isAnimating(): boolean {
     return !!this._animators.length;
   },
   stop() {

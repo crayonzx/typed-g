@@ -26,7 +26,7 @@ function angleNearTo(angle: number, min: number, max: number, out?: boolean) {
   return v1 > v2 ? max : min;
 }
 
-function nearAngle(angle: number, startAngle: number, endAngle: number, clockwise) {
+function nearAngle(angle: number, startAngle: number, endAngle: number, clockwise?: boolean) {
   let plus = 0;
   if (endAngle - startAngle >= Math.PI * 2) {
     plus = Math.PI * 2;
@@ -58,7 +58,7 @@ function nearAngle(angle: number, startAngle: number, endAngle: number, clockwis
   return angleNearTo(angle, endAngle, startAngle);
 }
 
-function arcProjectPoint(cx: number, cy: number, r: number, startAngle: number, endAngle: number, clockwise, x, y, out) {
+function arcProjectPoint(cx: number, cy: number, r: number, startAngle: number, endAngle: number, clockwise: boolean, x: number, y: number, out) {
   const v = [ x, y ];
   const v0 = [ cx, cy ];
   const v1 = [ 1, 0 ];
@@ -132,7 +132,7 @@ function arcBox(cx, cy, r, startAngle, endAngle, clockwise) {
 
 export = {
   nearAngle,
-  projectPoint(cx: number, cy: number, r: number, startAngle: number, endAngle: number, clockwise, x, y): any {
+  projectPoint(cx: number, cy: number, r: number, startAngle: number, endAngle: number, clockwise: boolean, x: number, y: number): any {
     const rst = {};
     arcProjectPoint(cx, cy, r, startAngle, endAngle, clockwise, x, y, rst);
     return rst;
