@@ -4,7 +4,7 @@ import Transform = require('./mixin/transform');
 import Animate = require('./mixin/animation');
 import EventEmitter = require('./advanced-event-emitter');
 
-const Element0 = function(cfg: Partial<typeof CFG>) {
+const Element0 = function(cfg?: Partial<Element.CFG>) {
   this._cfg = {
     zIndex: 0,
     capture: true,
@@ -84,10 +84,7 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
   getDefaultCfg() {
     return {};
   },
-  set<
-    T extends { _cfg: any; _beforeSetZIndex?: any; _beforeSetLoading?: any },
-    K extends keyof T['_cfg']
-  >(this: T, name: K, value: T['_cfg'][K]): T {
+  set: function(name, value) {
     if (name === 'zIndex' && this._beforeSetZIndex) {
       this._beforeSetZIndex(value);
     }
@@ -96,14 +93,14 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
     }
     this._cfg[name] = value;
     return this;
-  },
+  } as Element.ISet,
   // deprecated
-  setSilent(name: string, value) {
+  setSilent(name, value) {
     this._cfg[name] = value;
   },
-  get<T extends { _cfg: any }, K extends keyof T['_cfg']>(this: T, name: K): T['_cfg'][K] {
+  get: function(name) {
     return this._cfg[name];
-  },
+  } as Element.IGet,
   show() {
     this._cfg.visible = true;
     return this;
@@ -210,11 +207,24 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
 });
 
 class Element extends Element1 {
-  _cfg: {
-    zIndex: number;
-    capture: boolean;
-    visible: boolean;
-    destroyed: boolean;
-  };
+  _cfg: Element.CFG;
+
+  get: Element.IGet;
+  set: Element.ISet;
 }
 export = Element;
+
+namespace Element {
+  export type CFG = typeof CFG;
+
+  export type IGet = <T extends { _cfg: any }, K extends keyof T['_cfg']>(
+    this: T,
+    name: K
+  ) => T['_cfg'][K];
+
+  export type ISet = <T extends { _cfg: any }, K extends keyof T['_cfg']>(
+    this: T,
+    name: K,
+    value: T['_cfg'][K]
+  ) => T;
+}

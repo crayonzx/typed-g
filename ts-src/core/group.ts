@@ -76,11 +76,7 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape: <T extends GShapes.ShapeType>(type: T, cfg: {
-    attrs: Partial<GShapes.Attrs<T>>;
-    zIndex?: number;
-    capture?: boolean;
-  }): GShapes.Shape<T> => {
+  addShape: function(type, cfg) {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
@@ -102,13 +98,13 @@ const Group2 = Util.augment(Group1, {
     const rst = new Shape[shapeType](cfg);
     this.add(rst);
     return rst;
-  },
+  } as Group.IAddShape,
   /** 添加图组
    * @param  {Function|Object|undefined} param 图组类
    * @param  {Object} cfg 配置项
    * @return {Object} rst 图组
    */
-  addGroup(param?: (...args: any[]) => any | object, cfg?: object): Group {
+  addGroup: function(param, cfg) {
     const canvas = this.get('canvas');
     let rst;
     cfg = Util.merge({}, cfg);
@@ -135,7 +131,7 @@ const Group2 = Util.augment(Group1, {
       return false;
     }
     return rst;
-  },
+  } as Group.IAddGroup,
   /** 绘制背景
    * @param  {Array} padding 内边距
    * @param  {Attrs} attrs 图形属性
@@ -482,7 +478,25 @@ const Group2 = Util.augment(Group1, {
   }
 });
 
-class Group extends Group2 {}
+class Group extends Group2 {
+  addShape: Group.IAddShape;
+  addGroup: Group.IAddGroup;
+}
 export = Group;
 
 import GShapes from '../shape';
+import Common from '../common';
+
+namespace Group {
+  export type CFG = Element.CFG;
+
+  export type IAddShape = <T extends GShapes.ShapeType>(
+    type: T,
+    cfg: { attrs: Partial<GShapes.Attrs<T>> } & Partial<Group.CFG>
+  ) => GShapes.Shape<T>;
+
+  export interface IAddGroup {
+    (cfg?: Partial<Group.CFG>): Group;
+    (param: new (...args: any[]) => any, cfg?: Partial<Group.CFG>): Group;
+  }
+}

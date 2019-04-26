@@ -4,7 +4,7 @@ import Group = require('./core/group');
 import Timeline = require('./core/mixin/timeline');
 import renderers = require('./renderers/index');
 
-const Canvas0 = function(cfg: Partial<typeof CFG>) {
+const Canvas0 = function(cfg?: Partial<Canvas.CFG>) {
   Canvas.superclass.constructor.call(this, cfg);
 };
 
@@ -204,7 +204,7 @@ const Canvas2 = Util.augment(Canvas1, Event, {
 import Event_ from './event';
 
 class Canvas extends Canvas2 {
-  _cfg: InstanceType<typeof Canvas2>['_cfg'] & GUtil.Overwrite<typeof Canvas['CFG'], {
+  _cfg: Group.CFG & GUtil.Overwrite<Canvas.CFG, {
     canvas: Canvas;
     renderType: keyof typeof renderers;
     renderer: typeof renderers['canvas'] | typeof renderers['svg'];
@@ -216,3 +216,7 @@ class Canvas extends Canvas2 {
   }>;
 }
 export = Canvas;
+
+namespace Canvas {
+  export type CFG = typeof CFG;
+}
