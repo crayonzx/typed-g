@@ -49,7 +49,7 @@ const Attr = {
     }
     return self._attrs[name];
   } as Attr.IAttr,
-  _setAttr(name:string, value) {
+  _setAttr(name, value) {
     const self = this;
     const attrs = this._attrs;
     attrs[name] = value;

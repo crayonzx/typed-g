@@ -3,6 +3,8 @@ import isPointInPath = require('./mixin/isPointInPath');
 import Element = require('./element');
 import Inside = require('../shapes/util/inside');
 
+const CLONE_CFGS = [ 'zIndex', 'capture', 'visible' ];
+
 const Shape0 = function(cfg) {
   Shape1.superclass.constructor.call(this, cfg);
 };
@@ -15,7 +17,7 @@ const ARRAY_ATTRS = {
   matrix: 'matrix',
   path: 'path',
   points: 'points',
-  lineDash: 'lineDash',
+  lineDash: 'lineDash'
 };
 
 function _cloneArrayAttr(arr) {
@@ -150,8 +152,10 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
       }
     });
     clone = new self.constructor({ attrs });
-    // zIndex也是绘图属性，但是在cfg中，特殊处理
-    clone._cfg.zIndex = self._cfg.zIndex;
+    // 对于一些在 cfg 中的特殊属性做 clone
+    Util.each(CLONE_CFGS, cfg => {
+      clone._cfg[cfg] = self._cfg[cfg];
+    });
     return clone;
   }
 });

@@ -1,11 +1,9 @@
 import Util = require('../../util/index');
 import Event = require('../../event');
 const EVENTS = [
-  'click',
   'mousedown',
   'mouseup',
   'dblclick',
-  'contextmenu',
   'mouseenter',
   'mouseout',
   'mouseover',
@@ -13,9 +11,14 @@ const EVENTS = [
   'mouseleave'
 ];
 
+const CLICK_OFFSET = 40;
+const LEFT_BTN_CODE = 0;
+
 let preShape = null;
-let mousedown = null;
+let mousedownShape = null;
+let mousedownOffset = {};
 let dragging = null;
+let dragTimer = null;
 
 export = {
   registerEvent() {
@@ -45,6 +48,10 @@ export = {
         self._triggerEvent('touchend', e.changedTouches[0]);
       }
     }, false);
+    el.addEventListener('contextmenu', e => {
+      self._triggerEvent('contextmenu', e);
+      e.preventDefault();
+    }, false);
   },
   _getEmitter(element, event) {
     if (element) {
@@ -58,8 +65,9 @@ export = {
       }
     }
   },
-  _getEventObj(type:string, e, point, target) {
+  _getEventObj(type, e, point, target) {
     const event = new Event(type, e, true, true);
+    // 事件的x,y应该是基于画布左上角的，与canvas的matrix无关
     event.x = point.x;
     event.y = point.y;
     event.clientX = e.clientX;
@@ -68,74 +76,92 @@ export = {
     event.target = target;
     return event;
   },
-  _triggerEvent(type:string, e) {
-    const point = this.getPointByClient(e.clientX, e.clientY);
-    let shape = this.getShape(point.x, point.y, e);
-    const el = this.get('el');
+  _triggerEvent(type, e) {
+    const self = this;
+    const point = self.getPointByClient(e.clientX, e.clientY);
+    let shape = self.getShape(point.x, point.y, e);
+    const el = self.get('el');
     // svg原生事件取不到dragover, dragout, drop等事件的对象。这边需要走数学拾取。
-    if (dragging && this.getRenderer() === 'svg') {
-      shape = this.getShape(point.x, point.y);
+    if (dragging && self.getRenderer() === 'svg') {
+      shape = self.getShape(point.x, point.y);
     }
     if (type === 'mousemove') {
       if (preShape && preShape !== shape) {
-        this._emitEvent('mouseout', e, point, preShape);
-        this._emitEvent('mouseleave', e, point, preShape);
+        self._emitEvent('mouseout', e, point, preShape);
+        self._emitEvent('mouseleave', e, point, preShape);
         if (dragging) {
-          this._emitEvent('dragleave', e, point, preShape);
+          self._emitEvent('dragleave', e, point, preShape);
         }
-        if (!preShape.destroyed && !preShape.removed) {
-          el.style.cursor = preShape.attr('cursor') || 'default';
+        // 当 mouseleave 触发时，如果拾取到其他 shape 的 mouseenter ，鼠标样式会正常
+        // 当鼠标移出 shape 但是移动到画布上时，没有shape，就不恢复样式。这里判断一下，直接重置
+        if (!shape || shape.destroyed) {
+          el.style.cursor = 'default';
         }
       }
-      // 拖拽过程中不会触发mousemove事件
       if (dragging) {
-        this._emitEvent('drag', e, point, dragging);
+        self._emitEvent('drag', e, point, dragging);
+        /**
+         * H5原生事件中drag同时不会触发mousemove
+         * 但是在上层具有嵌套关系的item事件计算中需要用到drag时的mousemove
+         * 才能计算dragenter etc.
+         */
+        self._emitEvent('mousemove', e, point, shape);
       }
       if (shape) {
         if (!dragging) {
-          if (mousedown === shape) {
+          if (mousedownShape === shape) {
             dragging = shape;
-            mousedown = null;
+            mousedownShape = null;
             this._emitEvent('dragstart', e, point, shape);
           } else {
-            this._emitEvent('mousemove', e, point, shape);
+            self._emitEvent('mousemove', e, point, shape);
           }
         }
         if (preShape !== shape) {
-          this._emitEvent('mouseenter', e, point, shape);
-          this._emitEvent('mouseover', e, point, shape);
+          self._emitEvent('mouseenter', e, point, shape);
+          self._emitEvent('mouseover', e, point, shape);
           if (dragging) {
-            this._emitEvent('dragenter', e, point, shape);
+            self._emitEvent('dragenter', e, point, shape);
           }
         }
       } else {
-        const canvasmousemove = this._getEventObj('mousemove', e, point, this);
-        this.emit('mousemove', canvasmousemove);
+        const canvasmousemove = self._getEventObj('mousemove', e, point, self);
+        self.emit('mousemove', canvasmousemove);
       }
       preShape = shape;
     } else {
       this._emitEvent(type, e, point, shape || this);
-      if (!dragging && type === 'mousedown') {
-        mousedown = shape;
+      // e.button === 0 保证按下左键，防止点击右键触发click
+      if (!dragging && type === 'mousedown' && e.button === LEFT_BTN_CODE) {
+        mousedownShape = shape;
+        mousedownOffset = { x: e.clientX, y: e.clientY };
       }
-      if (type === 'mouseup') {
-        mousedown = null;
+      if (type === 'mouseup' && e.button === LEFT_BTN_CODE) {
+        const dx = mousedownOffset.x - e.clientX;
+        const dy = mousedownOffset.y - e.clientY;
+        const dist = dx * dx + dy * dy;
+        if (dist < CLICK_OFFSET) {
+          clearTimeout(dragTimer);
+          dragTimer = null;
+          this._emitEvent('click', e, point, mousedownShape || this);
+        }
         if (dragging) {
           dragging._cfg.capture = true;
           this._emitEvent('dragend', e, point, dragging);
           dragging = null;
           this._emitEvent('drop', e, point, shape || this);
         }
+        mousedownShape = null;
       }
     }
-    if (shape && !shape.destroyed) {
+    if (shape && !shape.get('destroyed')) {
       el.style.cursor = shape.attr('cursor') || 'default';
     }
   },
-  _emitEvent(type:string, evt, point, shape) {
+  _emitEvent(type, evt, point, shape) {
     const event = this._getEventObj(type, evt, point, shape);
     const emitShape = this._getEmitter(shape, evt);
-    emitShape && emitShape.emit(type, event);
+    emitShape && !emitShape.get('destroyed') && emitShape.emit(type, event);
     return emitShape;
   }
 };

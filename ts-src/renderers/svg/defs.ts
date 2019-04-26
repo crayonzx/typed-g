@@ -46,7 +46,7 @@ class Defs {
     item.canvas = this.canvas;
     item.parent = this;
   }
-  getDefaultArrow(attrs, name:string) {
+  getDefaultArrow(attrs, name) {
     const stroke = attrs.stroke || attrs.strokeStyle;
     if (this.defaultArrow[stroke]) {
       return this.defaultArrow[stroke].id;
@@ -62,7 +62,7 @@ class Defs {
     this.add(gradient);
     return gradient.id;
   }
-  addArrow(attrs, name:string) {
+  addArrow(attrs, name) {
     const arrow = new Arrow(attrs, name);
     this.el.appendChild(arrow.el);
     return arrow.id;

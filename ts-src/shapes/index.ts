@@ -28,4 +28,5 @@ const Shape1: typeof import('../core/shape') & {
   Rect: typeof import('./rect');
   Text: typeof import('./text');
 } = Shape;
+
 export = Shape1;

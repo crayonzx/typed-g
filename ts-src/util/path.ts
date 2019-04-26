@@ -9,7 +9,7 @@ const parsePathString = function(pathString: Common.SVGPathOrStr): Common.SVGPat
     return null;
   }
 
-  if (typeof pathString === 'object' /** typeof [] */) {
+  if (typeof pathString === typeof []) {
     return pathString;
   }
   const paramCounts = {

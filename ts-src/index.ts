@@ -22,7 +22,7 @@ namespace G {
   export const Event: typeof import('./event') = require('./event');
   export const EventEmitter: typeof import('./core/event-emitter') = require('./core/event-emitter');
   // version, etc.
-  export const version = '3.4.0-beta.3';
+  export const version = '3.4.3';
 
   export import Common = Common_;
   export import Shapes = Shape_;

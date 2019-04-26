@@ -34,7 +34,7 @@ const EventEmitter1 = Util.augment(EventEmitter0, {
     return this;
   },
   emit(evt) {
-    if (this.removed || this.destroyed) {
+    if (this.get('destroyed')) {
       return;
     }
     if (!this._cfg._events || Util.isEmpty(this._cfg._events)) {

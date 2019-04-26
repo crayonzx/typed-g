@@ -152,7 +152,7 @@ export = {
   at: cubicAt,
   derivativeAt: cubicDerivativeAt,
   projectPoint(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number, x: number, y: number) {
-    const rst = {} as any;
+    const rst = {};
     cubicProjectPoint(x1, y1, x2, y2, x3, y3, x4, y4, x, y, rst);
     return rst;
   },

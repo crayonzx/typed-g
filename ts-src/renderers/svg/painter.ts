@@ -29,6 +29,8 @@ const SVG_ATTR_MAP = {
   x: 'x',
   y: 'y',
   r: 'r',
+  rx: 'rx',
+  ry: 'ry',
   width: 'width',
   height: 'height',
   x1: 'x1',
@@ -228,7 +230,7 @@ class Painter {
     model._cfg.attrs = Util.deepMix({}, model._attrs);
     model._cfg.hasUpdate = false;
   }
-  _setAttribute(model, name:string, value) {
+  _setAttribute(model, name, value) {
     const type = model.type;
     const attrs = model._attrs;
     const el = model._cfg.el;
@@ -322,7 +324,7 @@ class Painter {
       el.setAttribute(SVG_ATTR_MAP[name], value);
     }
   }
-  _createDom(model, index:number) {
+  _createDom(model, index) {
     const type = SHAPE_TO_TAGS[model.type];
     const attrs = model._attrs;
     const parent = model._cfg.parent;
@@ -574,7 +576,7 @@ class Painter {
       ]);
     }
   }
-  _setText(model, text:string) {
+  _setText(model, text) {
     const el = model._cfg.el;
     const baseline = model._attrs.textBaseline || 'bottom';
     if (!text) {
@@ -621,7 +623,7 @@ class Painter {
       this._updateShape(value);
     }
   }
-  _setColor(model, name:string, value) {
+  _setColor(model, name, value) {
     const el = model._cfg.el;
     const defs = this.context;
     if (!value) {

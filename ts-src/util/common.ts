@@ -6,13 +6,13 @@ export = {
   isString: require('@antv/util/lib/type/is-string') as typeof import ('@antv/util/lib/type/is-string'),
   isArray: require('@antv/util/lib/type/is-array') as typeof import ('@antv/util/lib/type/is-array'),
   isNumber: require('@antv/util/lib/type/is-number') as typeof import ('@antv/util/lib/type/is-number'),
-  isEmpty: require('@antv/util/lib/is-empty') as typeof import ('@antv/util/lib/is-empty'),// isBlank
+  isEmpty: require('@antv/util/lib/is-empty') as typeof import ('@antv/util/lib/is-empty'), // isBlank
   uniqueId: require('@antv/util/lib/unique-id') as typeof import ('@antv/util/lib/unique-id'),
   clone: require('@antv/util/lib/clone') as typeof import ('@antv/util/lib/clone'),
   deepMix: require('@antv/util/lib/deep-mix') as typeof import ('@antv/util/lib/deep-mix'),
-  assign: require('@antv/util/lib/mix') as typeof import ('@antv/util/lib/mix'),// simpleMix
-  merge: require('@antv/util/lib/deep-mix') as typeof import ('@antv/util/lib/deep-mix'),// mix
-  upperFirst: require('@antv/util/lib/string/upper-first') as typeof import ('@antv/util/lib/string/upper-first'),// ucfirst
+  assign: require('@antv/util/lib/mix') as typeof import ('@antv/util/lib/mix'), // simpleMix
+  merge: require('@antv/util/lib/deep-mix') as typeof import ('@antv/util/lib/deep-mix'), // mix
+  upperFirst: require('@antv/util/lib/string/upper-first') as typeof import ('@antv/util/lib/string/upper-first'), // ucfirst
   each: require('@antv/util/lib/each') as typeof import ('@antv/util/lib/each'),
   isEqual: require('@antv/util/lib/is-equal') as typeof import ('@antv/util/lib/is-equal'),
   toArray: require('@antv/util/lib/to-array') as typeof import ('@antv/util/lib/to-array'),

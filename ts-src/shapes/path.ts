@@ -130,6 +130,7 @@ const Path2 = Util.augment(Path1, {
         totalLength += CubicMath.len(segment[l - 2], segment[l - 1], segmentN[1], segmentN[2], segmentN[3], segmentN[4], segmentN[5], segmentN[6]);
       }
     });
+    this._cfg.totalLength = totalLength;
 
     Util.each(curve, function(segment, i) {
       segmentN = curve[i + 1];
@@ -145,6 +146,15 @@ const Path2 = Util.augment(Path1, {
     });
 
     this._cfg.tCache = tCache;
+  },
+  getTotalLength() {
+    const totalLength = this.get('totalLength');
+    if (!Util.isNil(totalLength)) {
+      return totalLength;
+    }
+    this._calculateCurve();
+    this._setTcache();
+    return this.get('totalLength');
   },
   _calculateCurve() {
     const self = this;

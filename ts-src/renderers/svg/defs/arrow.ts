@@ -4,7 +4,7 @@
 import Util = require('../../../util/index');
 
 class Arrow {
-  constructor(attrs, type:string) {
+  constructor(attrs, type) {
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
     const id = Util.uniqueId('marker_');
     el.setAttribute('id', id);
@@ -29,7 +29,7 @@ class Arrow {
   match() {
     return false;
   }
-  _setDefaultPath(type:string, el) {
+  _setDefaultPath(type, el) {
     const parent = this.el;
     el.setAttribute('d', 'M0,0 L6,3 L0,6 L3,3Z');
     parent.setAttribute('refX', 3);

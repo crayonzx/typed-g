@@ -8,7 +8,7 @@ const CImage0 = function(cfg) {
 CImage0.ATTRS = {
   x: 0,
   y: 0,
-  img: '',
+  img: undefined as string,
   width: 0,
   height: 0,
   sx: null,

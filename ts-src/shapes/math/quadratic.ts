@@ -92,7 +92,7 @@ function quadraticExtrema(p0: number, p1: number, p2: number) {
 export = {
   at: quadraticAt,
   projectPoint(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x, y) {
-    const rst = {} as any;
+    const rst = {};
     quadraticProjectPoint(x1, y1, x2, y2, x3, y3, x, y, rst);
     return rst;
   },
