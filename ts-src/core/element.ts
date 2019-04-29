@@ -84,7 +84,7 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
   getDefaultCfg() {
     return {};
   },
-  set: function(name, value) {
+  set(name, value) {
     if (name === 'zIndex' && this._beforeSetZIndex) {
       this._beforeSetZIndex(value);
     }
@@ -93,14 +93,14 @@ const Element1 = Util.augment(Element0, Attribute, Transform, EventEmitter, Anim
     }
     this._cfg[name] = value;
     return this;
-  } as Element.ISet,
+  },
   // deprecated
   setSilent(name, value) {
     this._cfg[name] = value;
   },
-  get: function(name) {
+  get(name) {
     return this._cfg[name];
-  } as Element.IGet,
+  },
   show() {
     this._cfg.visible = true;
     return this;

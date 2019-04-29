@@ -76,7 +76,7 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape: function(type, cfg) {
+  addShape(type, cfg) {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
@@ -98,13 +98,13 @@ const Group2 = Util.augment(Group1, {
     const rst = new Shape[shapeType](cfg);
     this.add(rst);
     return rst;
-  } as Group.IAddShape,
+  },
   /** 添加图组
    * @param  {Function|Object|undefined} param 图组类
    * @param  {Object} cfg 配置项
    * @return {Object} rst 图组
    */
-  addGroup: function(param, cfg) {
+  addGroup(param, cfg) {
     const canvas = this.get('canvas');
     let rst;
     cfg = Util.merge({}, cfg);
@@ -131,7 +131,7 @@ const Group2 = Util.augment(Group1, {
       return false;
     }
     return rst;
-  } as Group.IAddGroup,
+  },
   /** 绘制背景
    * @param  {Array} padding 内边距
    * @param  {Attrs} attrs 图形属性
