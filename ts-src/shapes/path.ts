@@ -13,7 +13,7 @@ const Path0 = function(cfg) {
 };
 
 Path0.ATTRS = {
-  path: null as Common.SVGPath | string,
+  path: null as Common.SVGPathOrStr,
   lineWidth: 1,
   startArrow: false,
   endArrow: false
@@ -207,7 +207,7 @@ const Path2 = Util.augment(Path1, {
     }
     return result;
   },
-  getPoint(t) {
+  getPoint(t: number) {
     let tCache = this._cfg.tCache;
     let subt;
     let index;
@@ -289,6 +289,11 @@ const Path2 = Util.augment(Path1, {
 
 class Path extends Path2 {
   _attrs: typeof Path.ATTRS & Shape['_attrs'];
+  _cfg: InstanceType<typeof Path2>['_cfg'] & {
+    segments: PathSegment[];
+    totalLength: number;
+    curve: Common.SVGPath;
+  };
 }
 interface Path extends Shape.ShapeEx {}
 export = Path;

@@ -14,10 +14,10 @@ CText0.ATTRS = {
   fontStyle: 'normal',
   fontWeight: 'normal',
   fontVariant: 'normal',
-  textAlign: 'start',
-  textBaseline: 'bottom',
-  lineHeight: null,
-  textArr: null
+  textAlign: 'start' as 'start' | 'end' | 'left' | 'right' | 'center',
+  textBaseline: 'bottom' as 'top' | 'middle' | 'bottom',
+  lineHeight: null as number,
+  textArr: null as string[]
 };
 
 const CText1 = Util.extend(CText0, Shape);

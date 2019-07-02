@@ -372,7 +372,7 @@ const PathSegment1 = Util.augment(PathSegment0, {
       }
     }
   },
-  isInside(x, y, lineWidth) {
+  isInside(x: number, y: number, lineWidth: number) {
     const self = this;
     const command = self.command;
     const params = self.params;
@@ -496,7 +496,7 @@ const PathSegment1 = Util.augment(PathSegment0, {
         break;
     }
   },
-  getBBox(lineWidth) {
+  getBBox(lineWidth: number) {
     const halfWidth = lineWidth / 2;
     const params = this.params;
     let yDims;

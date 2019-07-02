@@ -4,7 +4,7 @@ const PATH_COMMAND = new RegExp('([a-z])[' + SPACES + ',]*((-?\\d*\\.?\\d*(?:e[\
 const PATH_VALUES = new RegExp('(-?\\d*\\.?\\d*(?:e[\\-+]?\\d+)?)[' + SPACES + ']*,?[' + SPACES + ']*', 'ig');
 
 // Parses given path string into an array of arrays of path segments
-const parsePathString = function(pathString: Common.SVGPathOrStr): Common.SVGPath {
+function parsePathString(pathString: Common.SVGPathOrStr): Common.SVGPath {
   if (!pathString) {
     return null;
   }
@@ -56,10 +56,10 @@ const parsePathString = function(pathString: Common.SVGPathOrStr): Common.SVGPat
   });
 
   return data;
-};
+}
 
 // http://schepers.cc/getting-to-the-point
-const catmullRom2bezier = function(crp: number[], z: boolean): Common.SVGPath {
+function catmullRom2bezier(crp: number[], z: boolean): Common.SVGPath {
   const d = [];
   for (let i = 0, iLen = crp.length; iLen - 2 * !z > i; i += 2) {
     const p = [{
@@ -117,7 +117,7 @@ const catmullRom2bezier = function(crp: number[], z: boolean): Common.SVGPath {
   }
 
   return d;
-};
+}
 
 const ellipsePath = function(x: number, y: number, rx: number, ry: number, a?: number): Common.SVGPath {
   let res = [];
@@ -150,7 +150,7 @@ const ellipsePath = function(x: number, y: number, rx: number, ry: number, a?: n
   return res;
 };
 
-const pathToAbsolute = function(pathArray: Common.SVGPathOrStr): Common.SVGPath {
+function pathToAbsolute(pathArray: Common.SVGPathOrStr): Common.SVGPath {
   pathArray = parsePathString(pathArray);
 
   if (!pathArray || !pathArray.length) {
@@ -273,7 +273,7 @@ const pathToAbsolute = function(pathArray: Common.SVGPathOrStr): Common.SVGPath 
   }
 
   return res;
-};
+}
 
 const l2c = function(x1, y1, x2, y2) {
   return [ x1, y1, x2, y2, x2, y2 ];
@@ -397,7 +397,7 @@ const a2c = function(x1, y1, rx, ry, angle, large_arc_flag, sweep_flag, x2, y2, 
 
 };
 
-const pathTocurve = function(path: Common.SVGPathOrStr, path2?: Common.SVGPathOrStr): Common.SVGPath {
+function pathTocurve(path: Common.SVGPathOrStr, path2?: Common.SVGPathOrStr): Common.SVGPath {
   const p = pathToAbsolute(path);
   const p2 = path2 && pathToAbsolute(path2);
   const attrs = {
@@ -555,7 +555,7 @@ const pathTocurve = function(path: Common.SVGPathOrStr, path2?: Common.SVGPathOr
   }
 
   return p2 ? [ p, p2 ] : p;
-};
+}
 
 const p2s = /,?([a-z]),?/gi;
 const parsePathArray = function(path: []): string {
@@ -708,7 +708,7 @@ const isPointInsideBBox = function(bbox, x, y) {
     y <= bbox.y + bbox.height;
 };
 
-const rectPath = function(x: number, y: number, w: number, h: number, r?: number): Common.SVGPath {
+function rectPath(x: number, y: number, w: number, h: number, r?: number): Common.SVGPath {
   if (r) {
     return [
       [ 'M', +x + (+r), y ],
@@ -732,7 +732,7 @@ const rectPath = function(x: number, y: number, w: number, h: number, r?: number
   ];
   res.parsePathArray = parsePathArray;
   return res;
-};
+}
 
 const box = function(x, y, width, height) {
   if (x == null) {
@@ -950,7 +950,7 @@ const interPathHelper: PathIntersection = function(path1, path2, justCount) {
   return res;
 };
 
-const pathIntersection = function(path1: Path, path2: Path) {
+const pathIntersection = function(path1: Common.SVGPathOrStr, path2: Common.SVGPathOrStr) {
   return interPathHelper(path1, path2);
 };
 
@@ -1344,9 +1344,8 @@ export = {
 };
 
 import Common from '../common';
-type Path = string | Common.SVGPath;
 
 interface PathIntersection {
-  (path1: Path, path2: Path): Common.Point[];
-  (path1: Path, path2: Path, justCount: true): number;
+  (path1: Common.SVGPathOrStr, path2: Common.SVGPathOrStr): Common.Point[];
+  (path1: Common.SVGPathOrStr, path2: Common.SVGPathOrStr, justCount: true): number;
 }

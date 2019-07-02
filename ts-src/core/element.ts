@@ -217,14 +217,20 @@ export = Element;
 namespace Element {
   export type CFG = typeof CFG;
 
-  export type IGet = <T extends { _cfg: any }, K extends keyof T['_cfg']>(
-    this: T,
-    name: K
-  ) => T['_cfg'][K];
+  export interface IGet {
+    <T extends { _cfg: any }, K extends keyof T['_cfg']>(
+      this: T,
+      name: K
+    ): T['_cfg'][K];
+    <T>(name: string): T;
+  }
 
-  export type ISet = <T extends { _cfg: any }, K extends keyof T['_cfg']>(
-    this: T,
-    name: K,
-    value: T['_cfg'][K]
-  ) => T;
+  export interface ISet {
+    <T extends { _cfg: any }, K extends keyof T['_cfg']>(
+      this: T,
+      name: K,
+      value: T['_cfg'][K]
+    ): T;
+    <T>(this: T, name: string, value: any): T;
+  }
 }
