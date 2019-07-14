@@ -413,7 +413,7 @@ static superclass = GUtil.extendSuperclass(Element);
     });
     return rst;
   },
-  getShape(x: number, y: number): GShape {
+  getShape(x: number, y: number): Shapes.Base {
     const self = this;
     const clip = self._attrs.clip;
     const children = self._cfg.children;
@@ -484,20 +484,19 @@ static superclass = GUtil.extendSuperclass(Element);
 
 export = Group;
 
-import GShape from './shape';
-import GShapes from '../shape';
+import Shapes from '../shapes';
 import Common from '../common';
 import Rect from '../shapes/rect';
 
 namespace Group {
   export type CFG = Element.CFG;
 
-  export type Child = Group | GShape;
+  export type Child = Group | Shapes.Base;
 
-  export type IAddShape = <T extends GShapes.ShapeType>(
+  export type IAddShape = <T extends Shapes.ShapeType>(
     type: T,
-    cfg?: { attrs?: Partial<GShapes.Attrs<T>> } & Partial<Group.CFG>
-  ) => GShapes.Shape<T>;
+    cfg?: { attrs?: Partial<Shapes.Attrs<T>> } & Partial<Group.CFG>
+  ) => Shapes.Shape<T>;
 
   export interface IAddGroup {
     (cfg?: Partial<Group.CFG>): Group;

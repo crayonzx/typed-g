@@ -176,7 +176,7 @@ static superclass = GUtil.extendSuperclass(Group);
   draw() {
     this._cfg.painter.draw(this);
   },
-  getShape<T extends GShapes.ShapeType>(x: number, y: number, e?: Event): GShapes.Shape<T> {
+  getShape<T extends Shapes.ShapeType>(x: number, y: number, e?: Event): Shapes.Shape<T> {
     if (arguments.length === 3 && this._cfg.renderer.getShape) {
       return this._cfg.renderer.getShape.call(this, x, y, e);
     }
@@ -202,7 +202,7 @@ static superclass = GUtil.extendSuperclass(Group);
 
 export = Canvas;
 
-import GShapes from './shape';
+import Shapes from './shapes';
 
 interface Canvas extends Group, Event {
   _cfg: Group.CFG & GUtil.Overwrite<Canvas.CFG, {

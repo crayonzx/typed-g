@@ -1,7 +1,7 @@
 declare namespace G {
   const Canvas: typeof import('./canvas'),
   const Group: typeof import('./core/group'),
-  const Shape: typeof import('./core/shape'),
+  export import Shape = Shapes,
   const Arc: typeof import('./shapes/arc'),
   const Circle: typeof import('./shapes/circle'),
   const Dom: typeof import('./shapes/dom'),
@@ -24,14 +24,13 @@ declare namespace G {
 };
 
 import Common_ from './common';
-import Shape_ from './shape';
+import Shapes from './shapes';
 
 declare namespace G {
   export import Common = Common_;
-  export import Shapes = Shape_;
 
   export type Canvas = import('./canvas');
-  export type Shape = import('./core/shape');
+  // export type Shape = import('./core/shape');
   export type Group = import('./core/group');
 }
 

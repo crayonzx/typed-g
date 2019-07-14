@@ -96,7 +96,7 @@ const Mixin = {
 
 export = Mixin;
 
-import Shape from '../../shape';
+import Shapes from '../../shapes';
 
 type Mixin = typeof Mixin;
 
@@ -113,9 +113,9 @@ namespace Mixin {
     /** Set attr by name and value */
     <T extends { _attrs: {} }, K extends keyof Attrs<T>>(this: T, name: K, value: Attrs<T>[K]): void;
 
-    <T extends Shape.ShapeType>(): Shape.Attrs<T>;
-    <T extends Shape.ShapeType, K extends keyof Shape.Attrs<T>>(name: K): Shape.Attrs<T>[K];
-    <T extends Shape.ShapeType>(values: Partial<Shape.Attrs<T>>): void;
-    <T extends Shape.ShapeType, K extends keyof Shape.Attrs<T>>(name: K, value: Shape.Attrs<T>[K]): void;
+    <T extends Shapes.ShapeType>(): Shapes.Attrs<T>;
+    <T extends Shapes.ShapeType, K extends keyof Shapes.Attrs<T>>(name: K): Shapes.Attrs<T>[K];
+    <T extends Shapes.ShapeType>(values: Partial<Shapes.Attrs<T>>): void;
+    <T extends Shapes.ShapeType, K extends keyof Shapes.Attrs<T>>(name: K, value: Shapes.Attrs<T>[K]): void;
   }
 }

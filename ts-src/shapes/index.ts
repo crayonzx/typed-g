@@ -1,19 +1,6 @@
-﻿const Shape = require('../core/shape');
-Shape.Arc = require('./arc');
-Shape.Circle = require('./circle');
-Shape.Dom = require('./dom');
-Shape.Ellipse = require('./ellipse');
-Shape.Fan = require('./fan');
-Shape.Image = require('./image');
-Shape.Line = require('./line');
-Shape.Marker = require('./marker');
-Shape.Path = require('./path');
-Shape.Polygon = require('./polygon');
-Shape.Polyline = require('./polyline');
-Shape.Rect = require('./rect');
-Shape.Text = require('./text');
+﻿/// <reference types='@antv/util' />
 
-const Shape1: typeof import('../core/shape') & {
+declare const Shape: typeof import('../core/shape') & {
   Arc: typeof import('./arc');
   Circle: typeof import('./circle');
   Dom: typeof import('./dom');
@@ -27,6 +14,37 @@ const Shape1: typeof import('../core/shape') & {
   Polyline: typeof import('./polyline');
   Rect: typeof import('./rect');
   Text: typeof import('./text');
-} = Shape;
+}
+export = Shape;
 
-export = Shape1;
+type Shapes = typeof Shape;
+
+/**
+ * Arc | Circle | CText | Dom | Ellipse | Fan | CImage | Line | Marker | ...
+ */
+type ShapeTypes<K = keyof Shapes> =
+  K extends Exclude<keyof Shapes, 'superclass' | 'prototype'>
+  ? (Shapes[K] extends new (...args: any) => infer R ? R : never)
+  : never;
+
+declare const ShapeTypes: ShapeTypes;
+
+/**
+ * { arc: Arc } & { circle: Circle } & { dom: Dom } & ...
+ */
+type ShapeTypesMap<T = ShapeTypes> =
+  GUtil.UnionToIntersection<T extends { type: any } ? { [x in T['type']]: T } : never>;
+
+declare const ShapeTypesMap: ShapeTypesMap;
+
+namespace Shape {
+  export type Base = import('../core/shape');
+  export type ShapeMap = ShapeTypesMap;
+  export type ShapeType = keyof ShapeMap;
+  export type Attrs<T extends ShapeType | 'base' = ShapeType> =
+    T extends ShapeType ? ShapeMap[T]['_attrs'] : Base['_attrs'];
+  export type Shape<T extends ShapeType | 'base' = ShapeType> =
+    T extends ShapeType ? ShapeMap[T] : Base;
+}
+
+type Shape = Shape.Base;
