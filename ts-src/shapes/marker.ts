@@ -9,7 +9,7 @@ class Marker extends Shape { constructor(cfg) {
   Marker.superclass.constructor.call(this, cfg);
 };
 
-static Symbols = {
+static Symbols: { [x in Marker.Symbols]: Marker.SymbolPathFunc } = {
   // 圆
   circle(x, y, r) {
     return [
@@ -68,7 +68,7 @@ static ATTRS = {
   y: 0,
   r: 1,
   radius: 1,
-  symbol: '' as keyof typeof Marker.Symbols | ((x: number, y: number, r: number) => Common.SVGPath),
+  symbol: '' as Marker.SymbolsAttr,
 };
 
 _attrs: typeof Marker.ATTRS & Shape['_attrs'];
@@ -147,3 +147,9 @@ static superclass = GUtil.extendSuperclass(Shape);
 };
 
 export = Marker;
+
+namespace Marker {
+  export type Symbols = 'circle' | 'square' | 'diamond' | 'triangle' | 'triangle-down';
+  export type SymbolPathFunc = (x: number, y: number, r: number) => Common.SVGPath;
+  export type SymbolsAttr = Symbols | SymbolPathFunc;
+}
