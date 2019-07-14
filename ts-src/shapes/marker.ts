@@ -9,18 +9,18 @@ class Marker extends Shape { constructor(cfg) {
   Marker.superclass.constructor.call(this, cfg);
 };
 
-static Symbols: { [x in Marker.Symbols]: Marker.SymbolPathFunc } = {
+static Symbols = {
   // 圆
-  circle(x, y, r) {
+  circle: function (x, y, r) {
     return [
       [ 'M', x, y ],
       [ 'm', -r, 0 ],
       [ 'a', r, r, 0, 1, 0, r * 2, 0 ],
       [ 'a', r, r, 0, 1, 0, -r * 2, 0 ]
     ];
-  },
+  } as Marker.SymbolPathFunc,
   // 正方形
-  square(x, y, r) {
+  square: function (x, y, r) {
     return [
       [ 'M', x - r, y - r ],
       [ 'L', x + r, y - r ],
@@ -28,9 +28,9 @@ static Symbols: { [x in Marker.Symbols]: Marker.SymbolPathFunc } = {
       [ 'L', x - r, y + r ],
       [ 'Z' ]
     ];
-  },
+  } as Marker.SymbolPathFunc,
   // 菱形
-  diamond(x, y, r) {
+  diamond: function (x, y, r) {
     return [
       [ 'M', x - r, y ],
       [ 'L', x, y - r ],
@@ -38,9 +38,9 @@ static Symbols: { [x in Marker.Symbols]: Marker.SymbolPathFunc } = {
       [ 'L', x, y + r ],
       [ 'Z' ]
     ];
-  },
+  } as Marker.SymbolPathFunc,
   // 三角形
-  triangle(x, y, r) {
+  triangle: function (x, y, r) {
     const diffY = r * Math.sin((1 / 3) * Math.PI);
     return [
       [ 'M', x - r, y + diffY ],
@@ -48,7 +48,7 @@ static Symbols: { [x in Marker.Symbols]: Marker.SymbolPathFunc } = {
       [ 'L', x + r, y + diffY ],
       [ 'z' ]
     ];
-  },
+  } as Marker.SymbolPathFunc,
   // 倒三角形
   'triangle-down': function(x, y, r) {
     const diffY = r * Math.sin((1 / 3) * Math.PI);
@@ -58,7 +58,7 @@ static Symbols: { [x in Marker.Symbols]: Marker.SymbolPathFunc } = {
       [ 'L', x, y + diffY ],
       [ 'Z' ]
     ];
-  }
+  } as Marker.SymbolPathFunc
 };
 
 static ATTRS = {
@@ -149,7 +149,7 @@ static superclass = GUtil.extendSuperclass(Shape);
 export = Marker;
 
 namespace Marker {
-  export type Symbols = 'circle' | 'square' | 'diamond' | 'triangle' | 'triangle-down';
+  export type Symbols = keyof typeof Marker.Symbols;
   export type SymbolPathFunc = (x: number, y: number, r: number) => Common.SVGPath;
   export type SymbolsAttr = Symbols | SymbolPathFunc;
 }

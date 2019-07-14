@@ -4,7 +4,7 @@ const PATH_COMMAND = new RegExp('([a-z])[' + SPACES + ',]*((-?\\d*\\.?\\d*(?:e[\
 const PATH_VALUES = new RegExp('(-?\\d*\\.?\\d*(?:e[\\-+]?\\d+)?)[' + SPACES + ']*,?[' + SPACES + ']*', 'ig');
 
 // Parses given path string into an array of arrays of path segments
-function parsePathString(pathString: Common.SVGPathOrStr): Common.SVGPath {
+const parsePathString = function(pathString: Common.SVGPathOrStr): Common.SVGPath {
   if (!pathString) {
     return null;
   }
@@ -56,10 +56,10 @@ function parsePathString(pathString: Common.SVGPathOrStr): Common.SVGPath {
   });
 
   return data;
-}
+};
 
 // http://schepers.cc/getting-to-the-point
-function catmullRom2bezier(crp: number[], z: boolean): Common.SVGPath {
+const catmullRom2bezier = function(crp: number[], z: boolean): Common.SVGPath {
   const d = [];
   for (let i = 0, iLen = crp.length; iLen - 2 * !z > i; i += 2) {
     const p = [{
@@ -117,10 +117,11 @@ function catmullRom2bezier(crp: number[], z: boolean): Common.SVGPath {
   }
 
   return d;
-}
+};
 
 const ellipsePath = function(x: number, y: number, rx: number, ry: number, a?: number): Common.SVGPath {
   let res = [];
+  // Fix
   if (a == null && ry == null) {
     ry = rx;
   }
@@ -128,6 +129,7 @@ const ellipsePath = function(x: number, y: number, rx: number, ry: number, a?: n
   y = +y;
   rx = +rx;
   ry = +ry;
+  // Fix
   if (a != null) {
     const rad = Math.PI / 180;
     const x1 = x + rx * Math.cos(-ry * rad);
@@ -150,7 +152,7 @@ const ellipsePath = function(x: number, y: number, rx: number, ry: number, a?: n
   return res;
 };
 
-function pathToAbsolute(pathArray: Common.SVGPathOrStr): Common.SVGPath {
+const pathToAbsolute = function(pathArray: Common.SVGPathOrStr): Common.SVGPath {
   pathArray = parsePathString(pathArray);
 
   if (!pathArray || !pathArray.length) {
@@ -221,6 +223,7 @@ function pathToAbsolute(pathArray: Common.SVGPathOrStr): Common.SVGPath {
           r = [ 'U' ].concat(res[res.length - 1].slice(-2));
           break;
         case 'M':
+	  // Fix
           r[1] = (mx = +pa[1] + x);
           r[2] = (my = +pa[2] + y);
           break; // for lint
@@ -273,7 +276,7 @@ function pathToAbsolute(pathArray: Common.SVGPathOrStr): Common.SVGPath {
   }
 
   return res;
-}
+};
 
 const l2c = function(x1, y1, x2, y2) {
   return [ x1, y1, x2, y2, x2, y2 ];
@@ -397,7 +400,7 @@ const a2c = function(x1, y1, rx, ry, angle, large_arc_flag, sweep_flag, x2, y2, 
 
 };
 
-function pathTocurve(path: Common.SVGPathOrStr, path2?: Common.SVGPathOrStr): Common.SVGPath {
+const pathTocurve = function(path: Common.SVGPathOrStr, path2?: Common.SVGPathOrStr): Common.SVGPath {
   const p = pathToAbsolute(path);
   const p2 = path2 && pathToAbsolute(path2);
   const attrs = {
@@ -555,10 +558,10 @@ function pathTocurve(path: Common.SVGPathOrStr, path2?: Common.SVGPathOrStr): Co
   }
 
   return p2 ? [ p, p2 ] : p;
-}
+};
 
 const p2s = /,?([a-z]),?/gi;
-const parsePathArray = function(path: []): string {
+const parsePathArray = function(path: any[]): string {
   return path.join(',').replace(p2s, '$1');
 };
 
@@ -569,6 +572,7 @@ const base3 = function(t, p1, p2, p3, p4) {
 };
 
 const bezlen = function(x1, y1, x2, y2, x3, y3, x4, y4, z) {
+  // Fix
   if (z == null) {
     z = 1;
   }
@@ -708,7 +712,7 @@ const isPointInsideBBox = function(bbox, x, y) {
     y <= bbox.y + bbox.height;
 };
 
-function rectPath(x: number, y: number, w: number, h: number, r?: number): Common.SVGPath {
+const rectPath = function(x: number, y: number, w: number, h: number, r?: number): Common.SVGPath {
   if (r) {
     return [
       [ 'M', +x + (+r), y ],
@@ -732,12 +736,14 @@ function rectPath(x: number, y: number, w: number, h: number, r?: number): Commo
   ];
   res.parsePathArray = parsePathArray;
   return res;
-}
+};
 
 const box = function(x, y, width, height) {
+  // Fix
   if (x == null) {
     x = y = width = height = 0;
   }
+  // Fix
   if (y == null) {
     y = x.y;
     width = x.width;
@@ -764,8 +770,8 @@ const box = function(x, y, width, height) {
 };
 
 const isBBoxIntersect = function(bbox1, bbox2) {
-  // bbox1 = box(bbox1);
-  // bbox2 = box(bbox2);
+  bbox1 = box(bbox1);
+  bbox2 = box(bbox2);
   return isPointInsideBBox(bbox2, bbox1.x, bbox1.y) || isPointInsideBBox(bbox2, bbox1.x2, bbox1.y) || isPointInsideBBox(bbox2, bbox1.x, bbox1.y2) || isPointInsideBBox(bbox2, bbox1.x2, bbox1.y2) || isPointInsideBBox(bbox1, bbox2.x, bbox2.y) || isPointInsideBBox(bbox1, bbox2.x2, bbox2.y) || isPointInsideBBox(bbox1, bbox2.x, bbox2.y2) || isPointInsideBBox(bbox1, bbox2.x2, bbox2.y2) || (bbox1.x < bbox2.x2 && bbox1.x > bbox2.x || bbox2.x < bbox1.x2 && bbox2.x > bbox1.x) && (bbox1.y < bbox2.y2 && bbox1.y > bbox2.y || bbox2.y < bbox1.y2 && bbox2.y > bbox1.y);
 };
 
