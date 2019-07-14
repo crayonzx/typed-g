@@ -2,11 +2,11 @@ import Util = require('../util/index');
 import Shape = require('../core/shape');
 import ArcMath = require('./math/arc');
 
-const Fan0 = function(cfg) {
+class Fan extends Shape { constructor(cfg) {
   Fan.superclass.constructor.call(this, cfg);
 };
 
-Fan0.ATTRS = {
+static ATTRS = {
   x: 0,
   y: 0,
   rs: 0,
@@ -17,12 +17,15 @@ Fan0.ATTRS = {
   lineWidth: 1
 };
 
-const Fan1 = Util.extend(Fan0, Shape);
+_attrs: typeof Fan.ATTRS & Shape['_attrs'];
 
-const Fan2 = Util.augment(Fan1, {
+// Util.extend(Fan, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Fan, {
   canFill: true,
   canStroke: true,
-  type: 'fan' as 'fan',
+  type: 'fan',
   getDefaultAttrs() {
     return {
       clockwise: false,
@@ -90,10 +93,6 @@ const Fan2 = Util.augment(Fan1, {
     context.arc(cx, cy, rs, endAngle, startAngle, !clockwise);
     context.closePath();
   }
-});
+};
 
-class Fan extends Fan2 {
-  _attrs: typeof Fan.ATTRS & Shape['_attrs'];
-}
-interface Fan extends Shape.ShapeEx {}
 export = Fan;

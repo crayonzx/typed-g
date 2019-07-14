@@ -2,11 +2,11 @@ import Util = require('../util/index');
 const { parseRadius } = require('../util/format') as typeof import('../util/format');
 import Shape = require('../core/shape');
 
-const Rect0 = function(cfg) {
+class Rect extends Shape { constructor(cfg) {
   Rect.superclass.constructor.call(this, cfg);
 };
 
-Rect0.ATTRS = {
+static ATTRS = {
   x: 0,
   y: 0,
   width: 0,
@@ -15,12 +15,15 @@ Rect0.ATTRS = {
   lineWidth: 1
 };
 
-const Rect1 = Util.extend(Rect0, Shape);
+_attrs: typeof Rect.ATTRS & Shape['_attrs'];
 
-const Rect2 = Util.augment(Rect1, {
+// Util.extend(Rect, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Rect, {
   canFill: true,
   canStroke: true,
-  type: 'rect' as 'rect',
+  type: 'rect',
   getDefaultAttrs() {
     return {
       lineWidth: 1,
@@ -30,10 +33,10 @@ const Rect2 = Util.augment(Rect1, {
   calculateBox() {
     const self = this;
     const attrs = self._attrs;
-    const x: number = attrs.x;
-    const y: number = attrs.y;
-    const width: number = attrs.width;
-    const height: number = attrs.height;
+    const x = attrs.x;
+    const y = attrs.y;
+    const width = attrs.width;
+    const height = attrs.height;
     const lineWidth = this.getHitLineWidth();
 
     const halfWidth = lineWidth / 2;
@@ -72,10 +75,6 @@ const Rect2 = Util.augment(Rect1, {
       context.closePath();
     }
   }
-});
+};
 
-class Rect extends Rect2 {
-  _attrs: typeof Rect.ATTRS & Shape['_attrs'];
-}
-interface Rect extends Shape.ShapeEx {}
 export = Rect;

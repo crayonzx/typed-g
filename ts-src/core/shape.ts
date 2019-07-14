@@ -5,21 +5,25 @@ import Inside = require('../shapes/util/inside');
 
 const CLONE_CFGS = [ 'zIndex', 'capture', 'visible' ];
 
-const Shape0 = function(cfg) {
-  Shape1.superclass.constructor.call(this, cfg);
+class Shape extends Element { constructor(cfg) {
+  Shape.superclass.constructor.call(this, cfg);
 };
 
-Shape0.ATTRS = {};
+static ATTRS = {};
 
-const Shape1 = Util.extend(Shape0, Element);
+// Util.extend(Shape, Element);
+static superclass = GUtil.extendSuperclass(Element);
 
+/*
 const ARRAY_ATTRS = {
   matrix: 'matrix',
   path: 'path',
   points: 'points',
   lineDash: 'lineDash'
 };
+*/
 
+/*
 function _cloneArrayAttr(arr) {
   const result = [];
   for (let i = 0; i < arr.length; i++) {
@@ -31,8 +35,9 @@ function _cloneArrayAttr(arr) {
   }
   return result;
 }
+*/
 
-const Shape2 = Util.augment(Shape1, isPointInPath, {
+// Util.augment(Shape, isPointInPath, {
   isShape: true,
   drawInner(context) {
     const self = this;
@@ -61,12 +66,12 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
     }
     self.afterPath(context);
   },
-  afterPath(...args: any[]): any {},
+  afterPath(context) {},
   /**
    * 击中图形时是否进行包围盒判断
    * @return {Boolean} [description]
    */
-  isHitBox(this: Shape): boolean {
+  isHitBox(): boolean {
     return true;
   },
   /**
@@ -102,8 +107,8 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
    * 计算包围盒
    * @return {Object} 包围盒
    */
-  calculateBox(this: Shape) {
-    return null as any;
+  calculateBox(): Common.BBox {
+    return null;
   },
   // 获取拾取时线的宽度，需要考虑附加的线的宽度
   getHitLineWidth(): number {
@@ -116,15 +121,15 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
     return lineWidth + lineAppendWidth;
   },
   // 清除当前的矩阵
-  clearTotalMatrix(this: Shape) {
+  clearTotalMatrix() {
     this._cfg.totalMatrix = null;
     this._cfg.region = null;
   },
-  clearBBox(this: Shape) {
+  clearBBox() {
     this._cfg.box = null;
     this._cfg.region = null;
   },
-  getBBox(this: Shape) {
+  getBBox(): Common.BBox {
     let box = this._cfg.box;
     // 延迟计算
     if (!box) {
@@ -139,7 +144,7 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
     }
     return box;
   },
-  clone(this: Shape) {
+  clone<T>(this: T): T {
     const self = this;
     let clone = null;
     const _attrs = self._attrs;
@@ -158,22 +163,21 @@ const Shape2 = Util.augment(Shape1, isPointInPath, {
     });
     return clone;
   }
-});
+};
 
-class Shape extends Shape2 {
-  _attrs: Shape.BaseAttr;
-}
 export = Shape;
 
 import Common from '../common';
 import ShapeEx_ from './shape-ex';
-interface Shape extends ShapeEx_ {
+
+interface Shape extends Element, isPointInPath, Shape.ShapeEx {
   type: string;
-  _cfg: Element['_cfg'] & {
-    box: Common.BBox;
-  };
+  _attrs: Shape.BaseAttr;
+  _cfg: Element['_cfg'] & { box: Common.BBox; };
 }
+
 namespace Shape {
   export type ShapeEx = ShapeEx_;
   export type BaseAttr = Common.Style;
+  // export type Inherit<T> = Pick<T, Exclude<keyof T, 'getDefaultAttrs' | 'calculateBox' | 'afterPath'>>;
 }

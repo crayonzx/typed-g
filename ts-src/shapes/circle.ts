@@ -1,23 +1,26 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const Circle0 = function(cfg) {
+class Circle extends Shape { constructor(cfg) {
   Circle.superclass.constructor.call(this, cfg);
 };
 
-Circle0.ATTRS = {
+static ATTRS = {
   x: 0,
   y: 0,
   r: 0,
   lineWidth: 1
 };
 
-const Circle1 = Util.extend(Circle0, Shape);
+_attrs: typeof Circle.ATTRS & Shape['_attrs'];
 
-const Circle2 = Util.augment(Circle1, {
+// Util.extend(Circle, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Circle, {
   canFill: true,
   canStroke: true,
-  type: 'circle' as 'circle',
+  type: 'circle',
   getDefaultAttrs() {
     return {
       lineWidth: 1
@@ -46,10 +49,6 @@ const Circle2 = Util.augment(Circle1, {
     context.arc(cx, cy, r, 0, Math.PI * 2, false);
     context.closePath();
   }
-});
+};
 
-class Circle extends Circle2 {
-  _attrs: typeof Circle.ATTRS & Shape['_attrs'];
-}
-interface Circle extends Shape.ShapeEx {}
 export = Circle;

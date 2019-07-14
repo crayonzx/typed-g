@@ -1,11 +1,11 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const CImage0 = function(cfg) {
+class CImage extends Shape { constructor(cfg) {
   CImage.superclass.constructor.call(this, cfg);
 };
 
-CImage0.ATTRS = {
+static ATTRS = {
   x: 0,
   y: 0,
   img: undefined as string,
@@ -17,10 +17,13 @@ CImage0.ATTRS = {
   sheight: null
 };
 
-const CImage1 = Util.extend(CImage0, Shape);
+_attrs: typeof CImage.ATTRS & Shape['_attrs'];
 
-const CImage2 = Util.augment(CImage1, {
-  type: 'image' as 'image',
+// Util.extend(CImage, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(CImage, {
+  type: 'image',
   isHitBox(): boolean {
     return false;
   },
@@ -151,10 +154,6 @@ const CImage2 = Util.augment(CImage1, {
     }
     return;
   }
-});
+};
 
-class CImage extends CImage2 {
-  _attrs: typeof CImage.ATTRS & Shape['_attrs'];
-}
-interface CImage extends Shape.ShapeEx {}
 export = CImage;

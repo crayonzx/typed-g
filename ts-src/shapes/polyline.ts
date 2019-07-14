@@ -3,11 +3,11 @@ import Shape = require('../core/shape');
 import Arrow = require('./util/arrow');
 import LineMath = require('./math/line');
 
-const Polyline0 = function(cfg) {
+class Polyline extends Shape { constructor(cfg) {
   Polyline.superclass.constructor.call(this, cfg);
 };
 
-Polyline0.ATTRS = {
+static ATTRS = {
   points: null,
   lineWidth: 1,
   startArrow: false,
@@ -15,11 +15,14 @@ Polyline0.ATTRS = {
   tCache: null
 };
 
-const Polyline1 = Util.extend(Polyline0, Shape);
+_attrs: typeof Polyline.ATTRS & Shape['_attrs'];
 
-const Polyline2 = Util.augment(Polyline1, {
+// Util.extend(Polyline, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Polyline, {
   canStroke: true,
-  type: 'polyline' as 'polyline',
+  type: 'polyline',
   tCache: null, // 缓存各点的t
   getDefaultAttrs() {
     return {
@@ -149,7 +152,7 @@ const Polyline2 = Util.augment(Polyline1, {
       Arrow.addEndArrow(context, attrs, points[l - 1][0], points[l - 1][1], points[l][0], points[l][1]);
     }
   },
-  getPoint(t) {
+  getPoint(t: number) {
     const attrs = this._attrs;
     const points = attrs.points;
     let tCache = this.tCache;
@@ -170,10 +173,6 @@ const Polyline2 = Util.augment(Polyline1, {
       y: LineMath.at(points[index][1], points[index + 1][1], subt)
     };
   }
-});
+};
 
-class Polyline extends Polyline2 {
-  _attrs: typeof Polyline.ATTRS & Shape['_attrs'];
-}
-interface Polyline extends Shape.ShapeEx {}
 export = Polyline;

@@ -1,11 +1,11 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const CText0 = function(cfg) {
+class CText extends Shape { constructor(cfg) {
   CText.superclass.constructor.call(this, cfg);
 };
 
-CText0.ATTRS = {
+static ATTRS = {
   x: 0,
   y: 0,
   text: null as string,
@@ -20,12 +20,15 @@ CText0.ATTRS = {
   textArr: null as string[]
 };
 
-const CText1 = Util.extend(CText0, Shape);
+_attrs: typeof CText.ATTRS & Shape['_attrs'];
 
-const CText2 = Util.augment(CText1, {
+// Util.extend(CText, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(CText, {
   canFill: true,
   canStroke: true,
-  type: 'text' as 'text',
+  type: 'text',
   getDefaultAttrs() {
     return {
       lineWidth: 1,
@@ -81,7 +84,7 @@ const CText2 = Util.augment(CText1, {
     }
     return fontSize;
   },
-  isHitBox(): boolean {
+  isHitBox() {
     return false;
   },
   calculateBox() {
@@ -238,10 +241,6 @@ const CText2 = Util.augment(CText1, {
     }
     return width;
   }
-});
+};
 
-class CText extends CText2 {
-  _attrs: typeof CText.ATTRS & Shape['_attrs'];
-}
-interface CText extends Shape.ShapeEx {}
 export = CText;

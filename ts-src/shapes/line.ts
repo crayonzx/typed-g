@@ -3,11 +3,11 @@ import Shape = require('../core/shape');
 import Arrow = require('./util/arrow');
 import LineMath = require('./math/line');
 
-const Line0 = function(cfg) {
+class Line extends Shape { constructor(cfg) {
   Line.superclass.constructor.call(this, cfg);
 };
 
-Line0.ATTRS = {
+static ATTRS = {
   x1: 0,
   y1: 0,
   x2: 0,
@@ -17,11 +17,14 @@ Line0.ATTRS = {
   endArrow: false
 };
 
-const Line1 = Util.extend(Line0, Shape);
+_attrs: typeof Line.ATTRS & Shape['_attrs'];
 
-const Line2 = Util.augment(Line1, {
+// Util.extend(Line, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Line, {
   canStroke: true,
-  type: 'line' as 'line',
+  type: 'line',
   getDefaultAttrs() {
     return {
       lineWidth: 1,
@@ -61,10 +64,6 @@ const Line2 = Util.augment(Line1, {
       y: LineMath.at(attrs.y1, attrs.y2, t)
     };
   }
-});
+};
 
-class Line extends Line2 {
-  _attrs: typeof Line.ATTRS & Shape['_attrs'];
-}
-interface Line extends Shape.ShapeEx {}
 export = Line;

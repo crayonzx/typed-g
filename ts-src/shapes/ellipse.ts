@@ -1,11 +1,11 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const Ellipse0 = function(cfg) {
+class Ellipse extends Shape { constructor(cfg) {
   Ellipse.superclass.constructor.call(this, cfg);
 };
 
-Ellipse0.ATTRS = {
+static ATTRS = {
   x: 0,
   y: 0,
   rx: 1,
@@ -13,12 +13,15 @@ Ellipse0.ATTRS = {
   lineWidth: 1
 };
 
-const Ellipse1 = Util.extend(Ellipse0, Shape);
+_attrs: typeof Ellipse.ATTRS & Shape['_attrs'];
 
-const Ellipse2 = Util.augment(Ellipse1, {
+// Util.extend(Ellipse, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Ellipse, {
   canFill: true,
   canStroke: true,
-  type: 'ellipse' as 'ellipse',
+  type: 'ellipse',
   getDefaultAttrs() {
     return {
       lineWidth: 1
@@ -63,10 +66,6 @@ const Ellipse2 = Util.augment(Ellipse1, {
     context.restore();
     context.closePath();
   }
-});
+};
 
-class Ellipse extends Ellipse2 {
-  _attrs: typeof Ellipse.ATTRS & Shape['_attrs'];
-}
-interface Ellipse extends Shape.ShapeEx {}
 export = Ellipse;

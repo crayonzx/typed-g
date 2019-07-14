@@ -10,11 +10,11 @@ function _getArcY(y, radius, angle) {
   return y + (radius * Math.sin(angle));
 }
 
-const Arc0 = function(cfg) {
+class Arc extends Shape { constructor(cfg) {
   Arc.superclass.constructor.call(this, cfg);
 };
 
-Arc0.ATTRS = {
+static ATTRS = {
   x: 0,
   y: 0,
   r: 0,
@@ -26,11 +26,14 @@ Arc0.ATTRS = {
   endArrow: false
 };
 
-const Arc1 = Util.extend(Arc0, Shape);
+_attrs: typeof Arc.ATTRS & Shape['_attrs'];
 
-const Arc2 = Util.augment(Arc1, {
+// Util.extend(Arc, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Arc, {
   canStroke: true,
-  type: 'arc' as 'arc',
+  type: 'arc',
   getDefaultAttrs() {
     return {
       x: 0,
@@ -111,10 +114,6 @@ const Arc2 = Util.augment(Arc1, {
       Arrow.addEndArrow(context, attrs, endPoints[0][0], endPoints[0][1], endPoints[1][0], endPoints[1][1]);
     }
   }
-});
+};
 
-class Arc extends Arc2 {
-  _attrs: typeof Arc.ATTRS & Shape['_attrs'];
-}
-interface Arc extends Shape.ShapeEx {}
 export = Arc;

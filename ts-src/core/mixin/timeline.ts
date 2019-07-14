@@ -4,7 +4,7 @@ import d3Timer = require('d3-timer');
 import d3Ease = require('d3-ease');
 import { interpolate, interpolateArray } from 'd3-interpolate'; // 目前整体动画只需要数值和数组的差值计算
 
-const Timeline0 = function(canvas) {
+class Timeline { constructor(canvas) {
   // 待执行动画的队列
   this._animators = [];
   // 当前时间
@@ -15,6 +15,7 @@ const Timeline0 = function(canvas) {
   this.canvas = canvas;
 };
 
+/*
 function _update(self, animator, ratio) {
   const cProps = {}; // 此刻属性
   const toAttrs = animator.toAttrs;
@@ -109,8 +110,9 @@ function update(shape, animator, elapsed) {
   }
   return false;
 }
+*/
 
-const Timeline1 = Util.augment(Timeline0, {
+// Util.augment(Timeline, {
   initTimer() {
     const self = this;
     let isFinished = false;
@@ -173,7 +175,6 @@ const Timeline1 = Util.augment(Timeline0, {
   getTime() {
     return this._current;
   }
-});
+};
 
-class Timeline extends Timeline1 {}
 export = Timeline;

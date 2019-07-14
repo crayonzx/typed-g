@@ -5,11 +5,11 @@ import Shape = require('../core/shape');
 import Format = require('../util/format');
 import PathSegment = require('./util/path-segment');
 
-const Marker0 = function(cfg) {
+class Marker extends Shape { constructor(cfg) {
   Marker.superclass.constructor.call(this, cfg);
 };
 
-Marker0.Symbols = {
+static Symbols = {
   // 圆
   circle(x, y, r) {
     return [
@@ -61,20 +61,23 @@ Marker0.Symbols = {
   }
 };
 
-Marker0.ATTRS = {
+static ATTRS = {
   path: null,
   lineWidth: 1,
   x: 0,
   y: 0,
   r: 1,
   radius: 1,
-  symbol: '' as keyof typeof Marker0.Symbols | ((x: number, y: number, r: number) => Common.SVGPath),
+  symbol: '' as keyof typeof Marker.Symbols | ((x: number, y: number, r: number) => Common.SVGPath),
 };
 
-const Marker1 = Util.extend(Marker0, Shape);
+_attrs: typeof Marker.ATTRS & Shape['_attrs'];
 
-const Marker2 = Util.augment(Marker1, {
-  type: 'marker' as 'marker',
+// Util.extend(Marker, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Marker, {
+  type: 'marker',
   canFill: true,
   canStroke: true,
   getDefaultAttrs() {
@@ -141,10 +144,6 @@ const Marker2 = Util.augment(Marker1, {
     this._cfg.segments = segments;
     this._cfg.hasUpdate = false;
   }
-});
+};
 
-class Marker extends Marker2 {
-  _attrs: typeof Marker.ATTRS & Shape['_attrs'];
-}
-interface Marker extends Shape.ShapeEx {}
 export = Marker;

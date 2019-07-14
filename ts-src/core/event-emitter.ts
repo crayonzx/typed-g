@@ -12,10 +12,10 @@ function indexOfCallback(events, callback) {
   return -1;
 }
 
-const EventEmitter0 = function() {};
+class EventEmitter {
 
-const EventEmitter1 = Util.augment(EventEmitter0, {
-  on(evt, callback, one) {
+// Util.augment(EventEmitter, {
+  on(evt: string, callback: Callback, one?: boolean) {
     const self = this;
     if (!Util.isFunction(callback)) {
       throw new TypeError('listener should be a function');
@@ -29,11 +29,11 @@ const EventEmitter1 = Util.augment(EventEmitter0, {
     self._cfg._events[evt].push({ callback, one });
     return this;
   },
-  one(evt, callback) {
+  one(evt: string, callback: Callback) {
     this.on(evt, callback, true);
     return this;
   },
-  emit(evt) {
+  emit(evt: string) {
     if (this.get('destroyed')) {
       return;
     }
@@ -60,7 +60,7 @@ const EventEmitter1 = Util.augment(EventEmitter0, {
   trigger() {
     this.emit.apply(this, arguments);
   },
-  off(evt, callback) {
+  off(evt: string, callback: Callback) {
     const events = this._cfg._events;
     if (!events || Util.isEmpty(events)) {
       return;
@@ -79,7 +79,7 @@ const EventEmitter1 = Util.augment(EventEmitter0, {
       }
     }
   },
-  removeEvent(evt) {
+  removeEvent(evt: string) {
     if (typeof evt === 'undefined') {
       this._cfg._events = {};
     } else {
@@ -90,7 +90,8 @@ const EventEmitter1 = Util.augment(EventEmitter0, {
   _getEvents() {
     return this._cfg._events || {};
   }
-});
+};
 
-class EventEmitter extends EventEmitter1 {}
 export = EventEmitter;
+
+type Callback = (...args: any[]) => any;

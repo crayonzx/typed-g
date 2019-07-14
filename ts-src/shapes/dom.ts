@@ -1,16 +1,17 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const Dom0 = function(cfg) {
+class Dom extends Shape { constructor(cfg) {
   Dom.superclass.constructor.call(this, cfg);
 };
 
-const Dom1 = Util.extend(Dom0, Shape);
+// Util.extend(Dom, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
 
-const Dom2 = Util.augment(Dom1, {
+// Util.augment(Dom, {
   canFill: true,
   canStroke: true,
-  type: 'dom' as 'dom',
+  type: 'dom',
   calculateBox() {
     const self = this;
     const attrs = self._attrs;
@@ -28,10 +29,6 @@ const Dom2 = Util.augment(Dom1, {
       maxY: y + height + halfWidth
     };
   }
-});
+};
 
-class Dom extends Dom2 {
-  // _attrs: Shape['_attrs'];
-}
-interface Dom extends Shape.ShapeEx {}
 export = Dom;

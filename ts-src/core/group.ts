@@ -38,7 +38,8 @@ function _cloneArrayAttr(arr) {
   return result;
 }
 
-const Group0 = function(cfg?: Partial<Group.CFG>) {
+class Group extends Element { constructor(cfg?: Partial<Group.CFG>) {
+  super(cfg);
   Group.superclass.constructor.call(this, cfg);
   this.set('children', []);
   this.set('tobeRemoved', []);
@@ -48,6 +49,7 @@ const Group0 = function(cfg?: Partial<Group.CFG>) {
   this._bindUI();
 };
 
+/*
 function initClassCfgs(c) {
   if (c._cfg || c === Group) {
     return;
@@ -61,10 +63,12 @@ function initClassCfgs(c) {
   Util.merge(c._cfg, superCon._cfg);
   Util.merge(c._cfg, c.CFG);
 }
+*/
 
-const Group1 = Util.extend(Group0, Element);
+// Util.extend(Group, Element);
+static superclass = GUtil.extendSuperclass(Element);
 
-const Group2 = Util.augment(Group1, {
+// Util.augment(Group, {
   isGroup: true,
   type: 'group',
   canFill: true,
@@ -76,7 +80,7 @@ const Group2 = Util.augment(Group1, {
   _beforeRenderUI() {},
   _renderUI() {},
   _bindUI() {},
-  addShape(type, cfg) {
+  addShape = function (type, cfg) {
     const canvas = this.get('canvas');
     cfg = cfg || {};
     let shapeType = SHAPE_MAP[type];
@@ -98,13 +102,13 @@ const Group2 = Util.augment(Group1, {
     const rst = new Shape[shapeType](cfg);
     this.add(rst);
     return rst;
-  },
+  } as Group.IAddShape,
   /** 添加图组
    * @param  {Function|Object|undefined} param 图组类
    * @param  {Object} cfg 配置项
    * @return {Object} rst 图组
    */
-  addGroup(param, cfg) {
+  addGroup = function (param, cfg) {
     const canvas = this.get('canvas');
     let rst;
     cfg = Util.merge({}, cfg);
@@ -131,14 +135,14 @@ const Group2 = Util.augment(Group1, {
       return false;
     }
     return rst;
-  },
+  } as Group.IAddGroup,
   /** 绘制背景
    * @param  {Array} padding 内边距
    * @param  {Attrs} attrs 图形属性
    * @param  {Shape} backShape 背景图形
    * @return {Object} 背景层对象
    */
-  renderBack(padding: number[], attrs) {
+  renderBack(padding: number[], attrs ? : Partial<Rect['_attrs']>): Rect {
     let backShape = this.get('backShape');
     const innerBox = this.getBBox();
     // const parent = this.get('parent'); // getParent
@@ -160,8 +164,8 @@ const Group2 = Util.augment(Group1, {
     this.sort();
     return backShape;
   },
-  removeChild(item, destroy) {
-    if (arguments.length >= 2) {
+  removeChild(item ? : Group.Child | boolean, destroy ? : boolean) {
+    if (arguments .length >= 2) {
       if (this.contain(item)) {
         item.remove(destroy);
       }
@@ -189,7 +193,7 @@ const Group2 = Util.augment(Group1, {
    * @param {Object} items 图形或者分组
    * @return {Object} group 本尊
    */
-  add(items) {
+  add(items: Group.Child | Group.Child[]) {
     const self = this;
     const children = self.get('children');
     if (Util.isArray(items)) {
@@ -220,22 +224,22 @@ const Group2 = Util.augment(Group1, {
       item.set('timeline', cfg.timeline);
     }
   },
-  contain(item) {
+  contain(item: Group.Child | any): item is Group.Child {
     const children = this.get('children');
     return children.indexOf(item) > -1;
   },
-  getChildByIndex(index: number) {
+  getChildByIndex(index: number): Group.Child {
     const children = this.get('children');
     return children[index];
   },
-  getFirst() {
+  getFirst(): Group.Child {
     return this.getChildByIndex(0);
   },
-  getLast() {
+  getLast(): Group.Child {
     const lastIndex = this.get('children').length - 1;
     return this.getChildByIndex(lastIndex);
   },
-  getBBox(): Required<Common.BBox> {
+  getBBox(): Common.BBox {
     const self = this;
     let minX = Infinity;
     let maxX = -Infinity;
@@ -320,7 +324,7 @@ const Group2 = Util.augment(Group1, {
 
     return this;
   },
-  findById(id) {
+  findById(id: string): Group.Child | null {
     return this.find(function(item) {
       return item.get('id') === id;
     });
@@ -330,7 +334,7 @@ const Group2 = Util.augment(Group1, {
    * @param  {Function} fn 匹配函数
    * @return {Canvas.Base} 分组或者图形
    */
-  find(fn) {
+  find(fn: string | ((item: Group.Child) => unknown)): Group.Child | null {
     if (Util.isString(fn)) {
       return this.findById(fn);
     }
@@ -353,7 +357,7 @@ const Group2 = Util.augment(Group1, {
    * @param  {Function} fn filter mathod
    * @return {Array} all the matching shapes and groups
    */
-  findAll(fn) {
+  findAll(fn: (item: Group.Child) => unknown): Group.Child[] {
     const children = this.get('children');
     let rst = [];
     let childRst = [];
@@ -373,7 +377,7 @@ const Group2 = Util.augment(Group1, {
    * @param  {Function} fn filter method
    * @return {Object} found shape or group
    */
-  findBy(fn) {
+  findBy(fn: (item: Group.Child) => unknown): Group.Child | null {
     const children = this.get('children');
     let rst = null;
 
@@ -394,7 +398,7 @@ const Group2 = Util.augment(Group1, {
    * @param  {Function} fn filter mathod
    * @return {Array} all the matching shapes and groups
    */
-  findAllBy(fn) {
+  findAllBy(fn: (item: Group.Child) => unknown): Group.Child[] {
     const children = this.get('children');
     let rst = [];
     let childRst = [];
@@ -409,7 +413,7 @@ const Group2 = Util.augment(Group1, {
     });
     return rst;
   },
-  getShape(x: number, y: number) {
+  getShape(x: number, y: number): GShape {
     const self = this;
     const clip = self._attrs.clip;
     const children = self._cfg.children;
@@ -436,7 +440,7 @@ const Group2 = Util.augment(Group1, {
       }
     }
   },
-  clear(delayRemove) {
+  clear(delayRemove ? : boolean) {
     if (this.get('destroyed')) {
       return;
     }
@@ -476,23 +480,23 @@ const Group2 = Util.augment(Group1, {
     });
     return clone;
   }
-});
+};
 
-class Group extends Group2 {
-  addShape: Group.IAddShape;
-  addGroup: Group.IAddGroup;
-}
 export = Group;
 
+import GShape from './shape';
 import GShapes from '../shape';
 import Common from '../common';
+import Rect from '../shapes/rect';
 
 namespace Group {
   export type CFG = Element.CFG;
 
+  export type Child = Group | GShape;
+
   export type IAddShape = <T extends GShapes.ShapeType>(
     type: T,
-    cfg: { attrs: Partial<GShapes.Attrs<T>> } & Partial<Group.CFG>
+    cfg?: { attrs?: Partial<GShapes.Attrs<T>> } & Partial<Group.CFG>
   ) => GShapes.Shape<T>;
 
   export interface IAddGroup {

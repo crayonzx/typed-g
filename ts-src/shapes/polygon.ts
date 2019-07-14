@@ -1,21 +1,24 @@
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 
-const Polygon0 = function(cfg) {
+class Polygon extends Shape { constructor(cfg) {
   Polygon.superclass.constructor.call(this, cfg);
 };
 
-Polygon0.ATTRS = {
+static ATTRS = {
   points: null as Array<[number, number]>,
   lineWidth: 1
 };
 
-const Polygon1 = Util.extend(Polygon0, Shape);
+_attrs: typeof Polygon.ATTRS & Shape['_attrs'];
 
-const Polygon2 = Util.augment(Polygon1, {
+// Util.extend(Polygon, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Polygon, {
   canFill: true,
   canStroke: true,
-  type: 'polygon' as 'polygon',
+  type: 'polygon',
   getDefaultAttrs() {
     return {
       lineWidth: 1
@@ -79,10 +82,6 @@ const Polygon2 = Util.augment(Polygon1, {
     });
     context.closePath();
   }
-});
+};
 
-class Polygon extends Polygon2 {
-  _attrs: typeof Polygon.ATTRS & Shape['_attrs'];
-}
-interface Polygon extends Shape.ShapeEx {}
 export = Polygon;

@@ -84,13 +84,13 @@ function getArcParams(point1, point2, fa, fs, rx, ry, psiDeg) {
   return [ point1, cx, cy, rx, ry, theta, dTheta, psi, fs ];
 }
 
-const PathSegment0 = function(item, preSegment, isLast) {
+class PathSegment { constructor(item, preSegment, isLast) {
   this.preSegment = preSegment;
   this.isLast = isLast;
   this.init(item, preSegment);
 };
 
-const PathSegment1 = Util.augment(PathSegment0, {
+// Util.augment(PathSegment, {
   init(item, preSegment) {
     const command = item[0];
     preSegment = preSegment || {
@@ -632,7 +632,6 @@ const PathSegment1 = Util.augment(PathSegment0, {
       }
     }
   }
-});
+};
 
-class PathSegment extends PathSegment1 {}
 export = PathSegment;

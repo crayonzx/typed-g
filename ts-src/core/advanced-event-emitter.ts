@@ -20,10 +20,10 @@ const PROPOGATE_EVENTS = [
   'drop'
 ];
 
-const AdvancedEE0 = function() {};
+class AdvancedEE extends EventEmitter {
 
-const AdvancedEE1 = Util.augment(AdvancedEE0, EventEmitter, {
-  emit(evt, e) {
+// Util.augment(AdvancedEE, EventEmitter, {
+  emit(evt: string, e?: Event) {
     const args = arguments;
     EventEmitter.prototype.emit.apply(this, args);
     if (args.length >= 2 && args[1] instanceof Event && args[1].propagationStopped) {
@@ -37,7 +37,6 @@ const AdvancedEE1 = Util.augment(AdvancedEE0, EventEmitter, {
       }
     }
   }
-});
+};
 
-class AdvancedEE extends AdvancedEE1 {}
 export = AdvancedEE;

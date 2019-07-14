@@ -1,5 +1,3 @@
-import Common from '../common';
-
 import Util = require('../util/index');
 import Shape = require('../core/shape');
 import PathSegment = require('./util/path-segment');
@@ -8,23 +6,31 @@ import Arrow = require('./util/arrow');
 import PathUtil = require('../util/path');
 import CubicMath = require('./math/cubic');
 
-const Path0 = function(cfg) {
+class Path extends Shape { constructor(cfg) {
   Path.superclass.constructor.call(this, cfg);
 };
 
-Path0.ATTRS = {
+static ATTRS = {
   path: null as Common.SVGPathOrStr,
   lineWidth: 1,
   startArrow: false,
   endArrow: false
 };
 
-const Path1 = Util.extend(Path0, Shape);
+_attrs: typeof Path.ATTRS & Shape['_attrs'];
+_cfg: Shape['_cfg'] & {
+  segments: PathSegment[];
+  totalLength: number;
+  curve: Common.SVGPath;
+};
 
-const Path2 = Util.augment(Path1, {
+// Util.extend(Path, Shape);
+static superclass = GUtil.extendSuperclass(Shape);
+
+// Util.augment(Path, {
   canFill: true,
   canStroke: true,
-  type: 'path' as 'path',
+  type: 'path',
   getDefaultAttrs() {
     return {
       lineWidth: 1,
@@ -58,6 +64,7 @@ const Path2 = Util.augment(Path1, {
     }
     self.setSilent('segments', segments);
     self.setSilent('tCache', null);
+    self.setSilent('totalLength', null);
     self.setSilent('box', null);
   },
   calculateBox() {
@@ -147,7 +154,7 @@ const Path2 = Util.augment(Path1, {
 
     this._cfg.tCache = tCache;
   },
-  getTotalLength() {
+  getTotalLength(): number {
     const totalLength = this.get('totalLength');
     if (!Util.isNil(totalLength)) {
       return totalLength;
@@ -207,7 +214,7 @@ const Path2 = Util.augment(Path1, {
     }
     return result;
   },
-  getPoint(t: number) {
+  getPoint(t: number): Common.Point {
     let tCache = this._cfg.tCache;
     let subt;
     let index;
@@ -285,15 +292,8 @@ const Path2 = Util.augment(Path1, {
     const endPoints = self.getEndTangent();
     Arrow.addEndArrow(context, attrs, endPoints[0][0], endPoints[0][1], endPoints[1][0], endPoints[1][1]);
   }
-});
+};
 
-class Path extends Path2 {
-  _attrs: typeof Path.ATTRS & Shape['_attrs'];
-  _cfg: InstanceType<typeof Path2>['_cfg'] & {
-    segments: PathSegment[];
-    totalLength: number;
-    curve: Common.SVGPath;
-  };
-}
-interface Path extends Shape.ShapeEx {}
 export = Path;
+
+import Common from '../common';
