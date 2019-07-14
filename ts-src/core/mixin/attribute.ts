@@ -1,6 +1,6 @@
 import Util = require('../../util/index');
 
-const Attr = {
+const Mixin = {
   canFill: false,
   canStroke: false,
   initAttrs(attrs) {
@@ -13,7 +13,7 @@ const Attr = {
     this.attr(Util.assign(this.getDefaultAttrs(), attrs));
     return this;
   },
-  getDefaultAttrs() {
+  getDefaultAttrs<T extends { _attrs: any }>(this: T): T['_attrs'] {
     return {};
   },
   /**
@@ -48,7 +48,7 @@ const Attr = {
       return self;
     }
     return self._attrs[name];
-  } as Attr.IAttr,
+  } as Mixin.IAttr,
   _setAttr(name, value) {
     const self = this;
     const attrs = this._attrs;
@@ -93,11 +93,14 @@ const Attr = {
     item.hasFill = function() { return true; };
   }
 };
-export = Attr;
+
+export = Mixin;
 
 import Shape from '../../shape';
 
-namespace Attr {
+type Mixin = typeof Mixin;
+
+namespace Mixin {
   export type Attrs<T extends { _attrs: {} }> = T['_attrs'];
 
   export interface IAttr {

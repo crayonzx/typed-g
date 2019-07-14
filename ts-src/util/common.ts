@@ -1,3 +1,4 @@
+/// <reference types='@antv/util' />
 export = {
   isFunction: require('@antv/util/lib/type/is-function') as typeof import('@antv/util/lib/type/is-function'),
   isObject: require('@antv/util/lib/type/is-object') as typeof import ('@antv/util/lib/type/is-object'),

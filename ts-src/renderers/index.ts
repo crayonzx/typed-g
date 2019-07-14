@@ -7,3 +7,5 @@ const Renderers: {
 };
 
 export = Renderers;
+
+type Renderers = typeof Renderers;

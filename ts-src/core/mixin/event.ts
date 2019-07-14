@@ -20,7 +20,7 @@ let mousedownOffset = {};
 let dragging = null;
 let dragTimer = null;
 
-export = {
+const Mixin = {
   registerEvent() {
     const self = this;
     const el = this.get('el');
@@ -165,3 +165,7 @@ export = {
     return emitShape;
   }
 };
+
+export = Mixin;
+
+type Mixin = typeof Mixin;

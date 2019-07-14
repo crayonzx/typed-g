@@ -62,7 +62,7 @@ function checkExistedAttrs(animators, animator) {
   return animators;
 }
 
-const AnimateMixin = {
+const Mixin = {
   /**
    * 执行动画
    * @param  {Object}   toProps  动画最终状态
@@ -126,7 +126,7 @@ const AnimateMixin = {
     animators.push(animator);
     self.setSilent('animators', animators);
     self.setSilent('pause', { isPaused: false });
-  } as AnimateMixin.IAnimate,
+  } as Mixin.IAnimate,
   stopAnimate() {
     const animators = this.get('animators');
     // 将动画执行到最后一帧，执行回调
@@ -172,9 +172,11 @@ const AnimateMixin = {
   }
 };
 
-export = AnimateMixin;
+export = Mixin;
 
-namespace AnimateMixin {
+type Mixin = typeof Mixin;
+
+namespace Mixin {
   export interface IProps {
     transform: any;
     rotate: any;

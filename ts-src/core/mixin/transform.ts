@@ -21,19 +21,19 @@ function multiple(m1, m2) {
   }
 }
 
-export = {
+const Mixin = {
   initTransform() {},
   resetMatrix() {
     this.attr('matrix', [ 1, 0, 0, 0, 1, 0, 0, 0, 1 ]);
   },
-  translate(tx, ty) {
+  translate<T>(this: T, tx: number, ty: number): T {
     const matrix = this._attrs.matrix;
     Util.mat3.translate(matrix, matrix, [ tx, ty ]);
     this.clearTotalMatrix();
     this.attr('matrix', matrix);
     return this;
   },
-  rotate(radian) {
+  rotate<T>(this: T, radian: number): T {
     const matrix = this._attrs.matrix;
     Util.mat3.rotate(matrix, matrix, radian);
     this.clearTotalMatrix();
@@ -47,7 +47,7 @@ export = {
     this.attr('matrix', matrix);
     return this;
   },
-  rotateAtStart(rotate) {
+  rotateAtStart<T>(this: T, rotate: number): T {
     const x = this._attrs.x || this._cfg.attrs.x;
     const y = this._attrs.y || this._cfg.attrs.y;
     if (Math.abs(rotate) > Math.PI * 2) {
@@ -59,7 +59,7 @@ export = {
       [ 't', x, y ]
     ]);
   },
-  move(x: number, y: number) {
+  move<T>(this: T, x: number, y: number): T {
     const cx = this.get('x') || 0; // 当前的x
     const cy = this.get('y') || 0; // 当前的y
     this.translate(x - cx, y - cy);
@@ -178,3 +178,7 @@ export = {
     }
   }
 };
+
+export = Mixin;
+
+type Mixin = typeof Mixin;

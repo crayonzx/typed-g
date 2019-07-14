@@ -356,8 +356,8 @@ const shapes = {
   text
 };
 
-export = {
-  isPointInPath(x: number, y: number) {
+const Mixin = {
+  isPointInPath(x: number, y: number): boolean {
     const shape = shapes[this.type];
     if (shape) {
       return shape.call(this, x, y);
@@ -365,3 +365,7 @@ export = {
     return false;
   }
 };
+
+export = Mixin;
+
+type Mixin = typeof Mixin;
