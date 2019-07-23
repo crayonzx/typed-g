@@ -489,7 +489,7 @@ import Common from '../common';
 import Rect from '../shapes/rect';
 
 namespace Group {
-  export type CFG = Element.CFG;
+  export type CFG = Element.CFG & { children: Child[] };
 
   export type Child = Group | Shapes.Base;
 
