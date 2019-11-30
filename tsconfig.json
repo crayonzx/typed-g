@@ -14,12 +14,6 @@
     "strictNullChecks": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "importHelpers": true,
-    "plugins": [
-      {
-        "name": "typescript-tslint-plugin",
-        "configFile": "./tslint.json"
-      }
-    ]
+    "importHelpers": true
   }
 }
