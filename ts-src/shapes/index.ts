@@ -42,7 +42,7 @@ namespace Shape {
   export type ShapeMap = ShapeTypesMap;
   export type ShapeType = keyof ShapeMap;
   export type Attrs<T extends ShapeType | 'base' = ShapeType> =
-    T extends ShapeType ? ShapeMap[T]['_attrs'] : Base['_attrs'];
+    T extends ShapeType ? Partial<ShapeMap[T]['_attrs']> : Partial<Base['_attrs']>;
   export type Shape<T extends ShapeType | 'base' = ShapeType> =
     T extends ShapeType ? ShapeMap[T] : Base;
 }
